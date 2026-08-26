@@ -134,3 +134,50 @@ We standardize on:
 ### Consequences
 - **Positive:** Modern standard stack with maximum ecosystem support for payment analytics, ML explainability, and interactive UI graphs.
 - **Negative:** None.
+
+---
+
+## ADR-008: Phase 1 Repository Architecture, Packaging & Runtime Shell
+
+### Status
+**APPROVED** — 2026-08-26
+
+### Context
+Phase 1 requires establishing a production-grade repository architecture and application runtime shell without implementing premature business models or fake ML estimators.
+
+### Decision
+1. Standardize on `backend/pyproject.toml` with setuptools/hatchling standards for Python packaging.
+2. Structure domain packages as empty packages with `__init__.py` files under `backend/app/` (`core`, `digital_twin`, `threat_intel`, `red_team`, `blue_team`, `hardening`, `explainability`, `evaluation`).
+3. Implement `app/core/config.py` using `pydantic-settings` with environment variable overrides and safe local defaults.
+4. Implement `app/core/database.py` using SQLAlchemy 2.0 with safe offline initialization so `/health` endpoints run cleanly even if PostgreSQL is offline.
+5. Setup `frontend/` as a Vite + React 18 + TypeScript application with Tailwind CSS, Vitest, and an API health check service querying `/api/v1/health`.
+6. Configure Docker Compose, GitHub Actions CI, and comprehensive `.gitignore` rules.
+
+### Consequences
+- **Positive:** Clean modular monolithic structure, immediate testability, resilient offline startup capability, zero technical debt for Phase 2 onward.
+- **Negative:** None.
+
+---
+
+## ADR-009: Phase 2A Domain Entity Modeling & Pydantic v2 Schema Conventions
+
+### Status
+**APPROVED** — 2026-08-26
+
+### Context
+Phase 2A requires establishing database ORM models and Pydantic v2 validation schemas for foundational actors (`User`, `Account`, `Device`, `Merchant`) without implementing premature business execution logic or payment rail handlers.
+
+### Decision
+1. Use modern SQLAlchemy 2.0 typed declarative mappings (`Mapped[]`, `mapped_column()`, `relationship()`).
+2. Utilize `UUIDPrimaryKeyMixin` and timezone-aware UTC `TimestampMixin` across all domain entities.
+3. Separate SQLAlchemy ORM models (`app/models/`) completely from API/Pydantic schemas (`app/schemas/`).
+4. Centralize domain enums (`AccountStatus`, `AccountType`, `DeviceType`, `MerchantStatus`, `RiskTier`) in `app/core/enums.py`.
+5. Enforce unique synthetic identifiers (`synthetic_external_id`, `synthetic_account_reference`, `synthetic_device_id`, `synthetic_merchant_id`).
+6. Enforce strict Pydantic v2 field validation (`0.0 <= score <= 1.0`, non-blank strings, non-negative values).
+7. Create DDL database migration script `001_phase2a_domain_foundation.py` under Alembic.
+
+### Consequences
+- **Positive:** Strongly typed domain layer, strict train/test synthetic data boundary, 100% reproducible schemas, seamless readiness for Phase 2B.
+- **Negative:** None.
+
+

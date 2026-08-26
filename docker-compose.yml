@@ -1,0 +1,53 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: fraudoscope-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres_password_placeholder
+      POSTGRES_DB: fraudoscope
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ../docker/Dockerfile.backend
+    container_name: fraudoscope-backend
+    restart: always
+    environment:
+      APP_NAME: FRAUDOSCOPE
+      APP_ENV: development
+      DEBUG: "true"
+      DATABASE_URL: postgresql://postgres:postgres_password_placeholder@postgres:5432/fraudoscope
+      CORS_ORIGINS: '["http://localhost:5173", "http://localhost:3000"]'
+      RANDOM_SEED: "42"
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ../docker/Dockerfile.frontend
+    container_name: fraudoscope-frontend
+    restart: always
+    environment:
+      VITE_API_BASE_URL: http://localhost:8000
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:

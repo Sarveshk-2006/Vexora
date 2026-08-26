@@ -1,3 +1,8 @@
+# Environment Variables
+.env
+.env.*
+!.env.example
+
 # Python
 __pycache__/
 *.py[cod]
@@ -26,12 +31,11 @@ MANIFEST
 venv/
 .venv/
 env/
-.env
 ENV/
 env.bak/
 venv.bak/
 
-# Testing & Coverage
+# Testing, Linting & Coverage
 .pytest_cache/
 .coverage
 .coverage.*
@@ -45,19 +49,29 @@ coverage.xml
 .ruff_cache/
 .mypy_cache/
 
-# Data, Model Artifacts & Local Caches
+# Local/Generated Data & Model Artifacts
 data/raw/*
-data/processed/*
 !data/raw/.gitkeep
-!data/processed/.gitkeep
-models/artifacts/*
-!models/artifacts/.gitkeep
+data/generated/*
+!data/generated/.gitkeep
+data/splits/*
+!data/splits/.gitkeep
+models/active/*
+!models/active/.gitkeep
+models/candidates/*
+!models/candidates/.gitkeep
+models/registry/*
+!models/registry/.gitkeep
 *.joblib
 *.pkl
 *.onnx
 *.h5
 
 # Node / React / Vite Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+frontend/coverage/
 node_modules/
 npm-debug.log*
 yarn-debug.log*
@@ -65,10 +79,7 @@ yarn-error.log*
 pnpm-debug.log*
 .pnpm-debug.log*
 dist/
-dist-ssr/
-*.local
 .vite/
-.astro/
 
 # IDE & Editor Files
 .vscode/
@@ -80,22 +91,15 @@ dist-ssr/
 *.swp
 *.swo
 *~
+
+# OS Metadata
 .DS_Store
 Thumbs.db
 
-# Environment Variables
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# Docker & Logs
+# Logs & Temporary
 *.log
 docker/*.log
 logs/
-
-# Temporary / OS
 tmp/
 temp/
 *.tmp
