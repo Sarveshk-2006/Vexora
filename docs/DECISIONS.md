@@ -180,4 +180,98 @@ Phase 2A requires establishing database ORM models and Pydantic v2 validation sc
 - **Positive:** Strongly typed domain layer, strict train/test synthetic data boundary, 100% reproducible schemas, seamless readiness for Phase 2B.
 - **Negative:** None.
 
+---
+
+## ADR-010: Phase 2B Payment Activity Event Modeling & Indexing Conventions
+
+### Status
+**APPROVED** — 2026-08-26
+
+### Context
+Phase 2B requires implementing synthetic payment activity entities (`Session`, `PaymentRail`, `Transaction`, `PaymentAgent`) to act as the central event stream of the Payment Digital Twin, optimizing for future high-scale time-series analytics, behavioral feature extraction, and graph intelligence.
+
+### Decision
+1. Represent `PaymentRail` as a central string enum (`UPI`, `CARD`, `WALLET`) with indexed column mappings.
+2. Implement `Session` to capture synthetic interaction windows, RFC 5737 documentation IP addresses (`192.0.2.x`), location metadata, and user agents.
+3. Model `Transaction` as the primary event stream table with exact financial decimal representation (`Numeric(15, 2)`), currency defaulting to `INR`, and optional `metadata_json` JSON column for non-indexed simulation attributes.
+4. Enforce `ondelete="RESTRICT"` for core transaction relationships (`account_id`, `user_id`, `merchant_id`, `device_id`) to prevent accidental deletion of historical audit trails.
+5. Create composite indexes (`ix_transactions_user_timestamp`, `ix_transactions_account_timestamp`) to accelerate time-windowed feature aggregation and baseline windowing queries.
+6. Enforce denormalized user ownership consistency (`transaction.user_id == transaction.account.user_id`) in Pydantic schema validation layers.
+7. Create Alembic DDL migration script `002_phase2b_payment_activity.py`.
+
+### Consequences
+- **Positive:** High-performance event stream queries, referentially safe audit trails, zero PII/credential exposure, instant readiness for Phase 3 Digital Twin generation.
+- **Negative:** None.
+
+---
+
+## ADR-011: Phase 2C Hybrid Genome Representation, Schema Versioning & Immutability
+
+### Status
+**APPROVED** — 2026-08-26
+
+### Context
+Phase 2C requires establishing structured Threat Intelligence (`Threat`) and Fraud Genome domain models (`AttackGenome`, `AttackCampaign`, `AttackGeneration`) to represent synthetic payment fraud attacks across 15 explicit dimensions (ADR-003) while maintaining versioning, evolutionary lineage, and strict reproducibility.
+
+### Decision
+1. Represent `AttackGenome` using a hybrid model: strongly validated Pydantic v2 schemas (`FraudGenomePayload`) for all 15 dimensions stored in PostgreSQL JSONB (`structured_payload`).
+2. Treat `AttackGenome` definitions as **immutable records**. Evolutionary mutations generate new `AttackGenome` records and new `AttackGeneration` iterations rather than mutating historical genomes.
+3. Track attack lineage ($G_0 \rightarrow G_N$) in `AttackGeneration` using a self-referential `parent_generation_id` foreign key with `ondelete="RESTRICT"` to prevent accidental loss of historical campaign trees.
+4. Enforce strict `[0.0, 1.0]` bounds for normalized evaluation scores (`behavioral_similarity`, `novelty_rating`, `attack_difficulty`, `detection_rate`, `attack_success_rate`).
+5. Decouple `genome_schema_version` ("1.0") from Alembic migration versions for persistent contract stability.
+6. Create Alembic DDL migration script `003_phase2c_threat_genome.py`.
+
+### Consequences
+- **Positive:** Strongly validated 15-dimension genome contract, immutable campaign lineage, 100% reproducible simulation runs, clean readiness for Red Team evolution.
+- **Negative:** None.
+
+---
+
+## ADR-012: Phase 3 Synthetic Payment Digital Twin Architecture & Deterministic PRNG Seeding
+
+### Status
+**APPROVED** — 2026-08-26
+
+### Context
+Phase 3 requires building a synthetic payment environment generator (`DigitalTwinGenerator`) producing 100% benign baseline payment activity across Users, Accounts, Devices, Merchants, PaymentAgents, Sessions, and Transactions while ensuring strict 100% deterministic reproducibility across generation runs.
+
+### Decision
+1. Implement a centralized `SeedManager` controlling `numpy.random.Generator`, Python `random.Random`, and `Faker`. Running with the same seed guarantees 100% byte-for-byte identical generated datasets.
+2. Establish 8 legitimate simulation behavioral archetypes (`LOW_ACTIVITY`, `REGULAR`, `HIGH_ACTIVITY`, `BUSINESS`, `TRAVELER`, `NIGHT_OWL`, `SUBSCRIPTION_HEAVY`, `DIGITAL_NATIVE`) governing diurnal timing curves, merchant category selection, payment rail choices, and log-normal financial amount parameters ($\mu, \sigma$).
+3. Strictly enforce RFC 5737 documentation IPv4 address prefixes (`192.0.2.x`, `198.51.100.x`, `203.0.113.x`) for all synthetic IP attributes.
+4. Decouple memory data generation (`generate()`) from database persistence (`DatabasePersister.persist()`) and dataset exporting (`DatasetExporter.export_transactions_csv()`).
+5. Require JSON generation manifests (`data/manifests/`) containing SHA-256 configuration hashes, run seeds, timestamp bounds, entity counts, and distribution statistics.
+6. Explicitly tag all generated transactions with `dataset_type = "BENIGN"` to prevent future train/test data leakage.
+
+### Consequences
+- **Positive:** 100% reproducible benign baseline datasets, zero PII/credential exposure, referentially coherent payment event streams, instant readiness for Phase 4 Red Team attack simulation.
+- **Negative:** None.
+
+---
+
+## ADR-013: Phase 4 Red Team Attack Synthesis Engine Architecture & Immutable Baseline Pairing
+
+### Status
+**APPROVED** — 2026-08-26
+
+### Context
+Phase 4 requires building a deterministic Red Team attack synthesis engine (`backend/app/red_team/`) to compile 15-dimension Fraud Genomes and benign Digital Twin datasets into Generation 0 ($G_0$) synthetic adversarial payment scenarios while ensuring 100% baseline dataset immutability, baseline-adversarial event pairing, and strict sandbox safety validation.
+
+### Decision
+1. Implement `AttackScenarioCompiler` to translate declarative `FraudGenomePayload` contracts into structured `AttackScenario` execution plans with derived transformation intensity ($1.0 - \text{behavioral\_similarity}$).
+2. Implement non-trivial `TargetSelector` targeting users based on baseline behavioral profiles, archetype alignment, merchant diversity, and device history.
+3. Enforce **100% baseline dataset immutability**. Baseline transactions are never modified in place; targeted perturbations create derived adversarial events tagged as `dataset_type = "ADVERSARIAL"` linked via `AdversarialEventPair` (`baseline_transaction_id -> adversarial_transaction`).
+4. Implement `BehaviorMutationEngine` and `MutationConstraints` enforcing abstract parameter transformations (amount fragmentation/spikes, velocity burst/low-and-slow, merchant hopping, device mimicry, timing shifts) while guaranteeing strictly positive amounts and RFC 5737 documentation IPv4 addresses (`192.0.2.x`, `198.51.100.x`, `203.0.113.x`).
+5. Implement `AttackFidelityEvaluator` computing statistical distribution divergence (Kolmogorov-Smirnov distance, mean shift ratio, affected transaction ratio) and deriving `behavioral_fidelity_score` in $[0.0, 1.0]$ explicitly defined as a normalized measure of adversarial-vs-benign behavioral similarity. Higher values indicate greater statistical similarity to benign baseline; lower values indicate larger behavioral shifts. High fidelity score does not imply automatic attack effectiveness.
+6. Implement `RedTeamSafetyValidator` enforcing synthetic-only business references (`SYN_*`), RFC 5737 IPs, and non-negative bounds.
+7. Limit Phase 4 scope strictly to Generation 0 ($G_0$). Zero evolutionary mutation loops ($G_{1+}$), zero LLM calls, zero Blue Team detectors, zero business APIs, and zero real-world attack tooling are introduced.
+
+### Consequences
+- **Positive:** Scientifically reproducible adversarial scenario generation, 100% baseline immutability, referentially linked event pairs for delta analysis, zero security/PII risk, instant readiness for Phase 5 Blue Team detection.
+- **Negative:** None.
+
+
+
+
+
 

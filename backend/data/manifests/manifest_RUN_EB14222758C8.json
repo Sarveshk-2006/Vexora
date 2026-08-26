@@ -1,0 +1,51 @@
+{
+  "run_id": "RUN_EB14222758C8",
+  "random_seed": 42,
+  "generator_version": "1.0",
+  "schema_version": "1.0",
+  "dataset_type": "BENIGN",
+  "configuration_hash": "4d6091895210b76967a28fb18d42f3969ba02ccf10327ca185d28265ade8ce04",
+  "generation_timestamp": "2026-08-26T17:07:12.183319+00:00",
+  "configuration": {
+    "population_size": 1000,
+    "merchant_count": 300,
+    "device_count": 1500,
+    "transaction_count": 25000,
+    "payment_agent_count": 25,
+    "time_window_days": 30
+  },
+  "generated_entity_counts": {
+    "users": 1000,
+    "accounts": 1146,
+    "devices": 1500,
+    "merchants": 300,
+    "payment_agents": 25,
+    "sessions": 17581,
+    "transactions": 25000
+  },
+  "summary_statistics": {
+    "accounts_per_user_avg": 1.15,
+    "transactions_per_user_avg": 25.0,
+    "amount_mean": 3277.99,
+    "amount_min": 23.74,
+    "amount_max": 129446.91,
+    "payment_rail_distribution": {
+      "UPI": 12906,
+      "WALLET": 2621,
+      "CARD": 9473
+    },
+    "transaction_status_distribution": {
+      "APPROVED": 23788,
+      "DECLINED": 743,
+      "REFUNDED": 93,
+      "PENDING": 237,
+      "REVERSED": 139
+    },
+    "transaction_type_distribution": {
+      "PURCHASE": 17641,
+      "SUBSCRIPTION": 1201,
+      "BILL_PAYMENT": 2472,
+      "TRANSFER": 3686
+    }
+  }
+}
