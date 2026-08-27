@@ -1,0 +1,29 @@
+{
+  "feature_names": [
+    "amount",
+    "log_amount",
+    "payment_rail_encoded",
+    "user_account_age_days",
+    "user_risk_tier_encoded",
+    "user_daily_tx_rate",
+    "user_mean_amount",
+    "account_balance",
+    "device_trust_score",
+    "device_reputation_score",
+    "known_device_flag",
+    "merchant_risk_tier_encoded",
+    "merchant_category_encoded",
+    "hour",
+    "weekday",
+    "is_weekend",
+    "session_duration_minutes",
+    "session_tx_count",
+    "amount_ratio_to_user_mean",
+    "velocity_deviation",
+    "merchant_novelty_flag",
+    "device_novelty_flag",
+    "timing_off_hours_flag",
+    "payment_rail_novelty_flag"
+  ],
+  "schema_version": "1.0.0"
+}

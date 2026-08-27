@@ -8,12 +8,25 @@ from faker import Faker
 class SeedManager:
     """Centralized deterministic PRNG seeding manager for reproducible generation."""
 
+    @staticmethod
+    def reset_seed(seed: int):
+        random.seed(seed)
+        np.random.seed(seed)
+        Faker.seed(seed)
+        try:
+            from faker.generator import random as faker_random
+
+            faker_random.seed(seed)
+        except Exception:
+            pass
+
     def __init__(self, seed: int):
         self.seed = seed
         self.py_random = random.Random(seed)
         self.np_rng = np.random.default_rng(seed)
         self.faker = Faker()
         Faker.seed(seed)
+        self.faker.seed_instance(seed)
 
     def choice(self, seq: Any) -> Any:
         """Deterministic element choice from sequence."""

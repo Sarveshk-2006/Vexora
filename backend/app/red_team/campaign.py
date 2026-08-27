@@ -98,6 +98,7 @@ class AttackCampaignSimulator:
                 if end_time and mutated_tx.timestamp > end_time:
                     mutated_tx.timestamp = end_time
 
+                mutated_tx.id = uuid.uuid4()
                 adversarial_txs.append(mutated_tx)
                 event_pairs.append(
                     AdversarialEventPair(

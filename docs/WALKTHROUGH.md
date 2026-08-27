@@ -115,3 +115,75 @@ AttackGeneration (attack_generations)
 1. **`001_phase2a_domain_foundation.py`:** Creates `users`, `accounts`, `devices`, and `merchants` tables.
 2. **`002_phase2b_payment_activity.py`:** Creates `sessions`, `payment_agents`, and `transactions` tables with composite time-series indexes.
 3. **`003_phase2c_threat_genome.py`:** Creates `threats`, `attack_genomes`, `attack_campaigns`, and `attack_generations` tables with self-referential parent lineage foreign keys (`parent_generation_id`).
+
+---
+
+## 5. Phase 5 — FRAUDOSCOPE Hybrid Blue Team Defense Engine
+
+The Hybrid Blue Team Defense Engine (`backend/app/blue_team/`) is a multi-layered detection architecture evaluating synthetic payment transactions from both benign Digital Twin baselines (Phase 3) and Red Team Generation 0 attack scenarios (Phase 4).
+
+### 5.1 Architecture & Detector Layers
+1. **Deterministic Rule Engine (`rules/engine.py`):** Evaluates baseline rules R001–R007 (amount spikes, off-hours timing, session velocity, new device trust, merchant category risk, payment rail novelty, rapid behavioral change).
+2. **Transaction ML Detector (`ml/`):** Supervised classifier predicting `probability_of_adversarial` ($\in [0.0, 1.0]$) using 20+ features, probability calibration (`calibration.py`), and Tree Feature Importances. Versioned artifacts saved in `models/blue_team/v0.1.0/`.
+3. **Behavioral Anomaly Detector (`behavioral/anomaly.py`):** `IsolationForest` trained exclusively on legitimate benign baseline features to measure baseline deviation risk.
+4. **Graph Intelligence Detector (`graph/intelligence.py`):** `NetworkX` heterogeneous graph topology analyzer measuring shared device concentration, merchant user density, and ego-subgraph community size.
+5. **Adversarial Pattern Detector (`adversarial/detector.py`):** Infers observable Red Team attack signatures (fragmentation, low-and-slow velocity, timing shifts, merchant hopping, device rotation) purely from transaction behavioral features without reading attack labels or metadata.
+6. **Risk Fusion Engine (`fusion/engine.py`):** Fuses detector risk scores using configurable layer weights:
+   $$\text{Composite Risk Score} = \sum w_i \times (\text{detector\_score}_i \times 100) \quad \in [0, 100]$$
+7. **Decision Engine (`decisions.py`):** Maps composite risk score to defense actions (`APPROVE` 0–29, `MONITOR` 30–59, `STEP_UP_AUTH` 60–79, `BLOCK` 80–100) and constructs structured human-explainable evidence bundles.
+
+### 5.2 Anti-Leakage & Unseen Attack Generalization
+- **Strict Anti-Leakage (`ml/features.py`, `evaluation.py`):** Feature extraction strictly excludes `scenario_id`, `genome_reference`, `generation_number`, `mutation_dimensions`, `target_flag`, `applied_mutations`, `is_fraud`, or any Red Team metadata.
+- **Strengthened Leakage Auditor (`LeakageAuditor`):** Verifies zero transaction ID overlap, zero user ID overlap, zero account ID overlap, and zero attack-combination overlap between training and unseen test sets.
+- **Corrected Data Splits & Entity Isolation (`benchmark.py`):**
+  - `TRAIN`: 60% benign + 60% known adversarial transactions
+
+---
+
+## 6. Phase 6 — FRAUDOSCOPE Autonomous Defense Hardening Engine
+
+The FRAUDOSCOPE Auto-Hardening Engine (`backend/app/hardening/`) completes the closed-loop defensive learning flywheel:
+$$\text{Attack Scenario} \rightarrow \text{Blue Team Evaluation} \rightarrow \text{DefenseGapAnalyzer} \rightarrow \text{GapPriorityScore} \rightarrow \text{AdversarialDatasetBuilder} \rightarrow \text{LeakageAuditor Audit} \rightarrow \text{CandidateModelTrainer} \rightarrow \text{PromotionGate} \rightarrow \text{ModelRegistry} (\text{PROMOTE} \mid \text{REJECT})$$
+
+### 6.1 Defense Gap Discovery & Deterministic Taxonomy
+- **`DefenseGapAnalyzer` (`gap_analyzer.py`):** Inspects Blue Team risk fusion explanations on simulated attack transactions to identify bypasses ($ risk < 60.0 $) and maps failed/partial/successful layers.
+- **Deterministic 9-Category Taxonomy:** `RULE_BYPASS`, `ML_BLIND_SPOT`, `BEHAVIORAL_BLIND_SPOT`, `GRAPH_BLIND_SPOT`, `ADVERSARIAL_BLIND_SPOT`, `FUSION_FAILURE`, `THRESHOLD_FAILURE`, `MULTI_VECTOR_EVASION`, `UNKNOWN_GENERALIZATION_GAP`.
+- **`GapPriorityScore` Formula:**
+  $$\text{PriorityScore} = 100 \times \left[ 0.30 \cdot \text{SeverityWeight} + 0.30 \cdot \text{BypassRate} + 0.20 \cdot \min\left(1.0, \frac{\text{BypassCount}}{10}\right) + 0.10 \cdot \text{Novelty} + 0.10 \cdot \text{Confidence} \right]$$
+
+### 6.2 Adversarial Training Augmentation & Anti-Leakage Audit
+- **`AdversarialDatasetBuilder` (`dataset_builder.py`):** Synthesizes targeted adversarial feature vectors ($ y = 1 $) for prioritized gap transactions.
+- **Sample Provenance:** Attaches `AdversarialSampleProvenance` tracking `source_transaction_id`, `parent_attack_genome_id`, `mutation_lineage`, `generation_number`, `random_seed`, `reason_for_inclusion`, and `target_defense_gap_id`.
+- **Anti-Leakage Audit Abort Policy:** Passes augmented dataset to `LeakageAuditor.audit_splits`. If any transaction, user, account, device, or feature metadata leakage occurs, raises `DataLeakageError` to immediately terminate the run.
+
+### 6.3 Candidate Model Training & Immutable Versioning
+- **`CandidateModelTrainer` (`trainer.py`):** Trains candidate `RandomForestClassifier` (`n_estimators=100`, `max_depth=6`, `random_state=seed`, `n_jobs=1`) on augmented dataset. Computes dataset SHA-256 hash and model byte hash.
+- **`ModelRegistry` (`promotion.py`):** Immutable versioning (`v1.0.0`, `v1.1.0-cand-42`) managing model statuses (`ACTIVE`, `CANDIDATE`, `PROMOTED`, `REJECTED`, `ARCHIVED`) and active pointer `models/blue_team/active_model.json`.
+
+### 6.4 Strict 5-Gate Promotion Policy & Rejection Path
+- **`PromotionGate` (`promotion.py`):** Evaluates candidate models against active baseline across 5 mandatory ADR-006 criteria:
+  1. *Gate 1: Targeted Gap Improvement* (`targeted_gap_cand_recall > targeted_gap_active_recall`)
+  2. *Gate 2: Benign Non-Regression* (`benign_approval_rate_cand >= benign_approval_rate_active - 0.005`)
+  3. *Gate 3: Held-Out Unseen Stability* (`unseen_recall_cand >= unseen_recall_active - 0.001`; evaluated ONLY as evaluation gate)
+  4. *Gate 4: Calibration Stability* (`brier_score_cand <= brier_score_active + 0.02`)
+  5. *Gate 5: Feature Schema Compatibility* (`feature_schema_cand == feature_schema_active`)
+- **Promotion / Rejection Outcome:** If all 5 gates pass, candidate is promoted and active model pointer is updated; if any gate fails, candidate is marked `REJECTED` with explicit rejection reasons.
+
+### 6.5 Demonstrations, REST API & Machine-Readable Audit Artifacts
+- **CLI Demo (`python -m app.hardening.demo`):** Executes 100% deterministic closed-loop hardening cycle demonstrating gap discovery, augmentation, candidate training, multi-gate evaluation, and promotion.
+- **REST API Endpoints (`backend/app/api/v1/hardening.py`):**
+  - `POST /api/v1/hardening/analyze-gaps`
+  - `POST /api/v1/hardening/run`
+  - `GET  /api/v1/hardening/runs`
+  - `GET  /api/v1/hardening/runs/{run_id}`
+  - `GET  /api/v1/hardening/models`
+  - `GET  /api/v1/hardening/models/{model_id}`
+  - `GET  /api/v1/hardening/active-model`
+- **Machine-Readable Artifacts (`data/hardening/`):**
+  - `hardening_runs.json`
+  - `model_registry.json`
+  - `defense_gap_report.json`
+  - `promotion_history.json`
+
+
+

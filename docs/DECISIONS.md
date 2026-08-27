@@ -270,8 +270,82 @@ Phase 4 requires building a deterministic Red Team attack synthesis engine (`bac
 - **Positive:** Scientifically reproducible adversarial scenario generation, 100% baseline immutability, referentially linked event pairs for delta analysis, zero security/PII risk, instant readiness for Phase 5 Blue Team detection.
 - **Negative:** None.
 
+---
+
+## ADR-014: Phase 5 Hybrid Blue Team Defense Engine Architecture & Anti-Leakage Controls
+
+### Status
+**APPROVED** — 2026-08-27
+
+### Context
+Phase 5 requires building a multi-layered Blue Team Defense Engine (`backend/app/blue_team/`) evaluating synthetic payment transactions from both benign Digital Twin baselines (Phase 3) and Red Team Generation 0 attack scenarios (Phase 4), prioritizing high detection, low false positives, explainability, reproducibility, and strict anti-leakage evaluation integrity.
+
+### Decision
+1. Implement a 6-layer defense architecture:
+   - **Deterministic Rule Engine (`rules/engine.py`):** Baseline rules R001–R007 evaluated against user baselines with structured rule evidence.
+   - **Transaction ML Detector (`ml/`):** Supervised classifier predicting `probability_of_adversarial` ($\in [0.0, 1.0]$) using 20+ features, probability calibration (`calibration.py`), and Tree Feature Importances saved under `models/blue_team/v0.1.0/`.
+   - **Behavioral Anomaly Detector (`behavioral/anomaly.py`):** `IsolationForest` trained exclusively on legitimate benign Digital Twin baseline features.
+   - **Graph Intelligence Detector (`graph/intelligence.py`):** `NetworkX` graph topology analyzer measuring shared device density, merchant concentration, and community size.
+   - **Adversarial Pattern Detector (`adversarial/detector.py`):** Infers observable Red Team attack signatures (fragmentation, low-and-slow velocity, timing shifts, merchant hopping, device rotation) purely from transaction behavioral features without reading labels or attack metadata.
+   - **Risk Fusion Engine (`fusion/engine.py`) & Decision Engine (`decisions.py`):** Fuses detector risk scores using configurable layer weights into composite risk score ($[0, 100]$) mapped to defense decisions (`APPROVE` 0–29, `MONITOR` 30–59, `STEP_UP_AUTH` 60–79, `BLOCK` 80–100) and structured evidence explanations.
+2. Standardize all detector outputs using `DetectorEvidence` dataclass (`risk_score`, `confidence`, `triggered`, `reason_codes`, `feature_evidence`, `metadata`).
+3. Enforce **Strict Anti-Leakage Controls**: Feature extraction (`FeatureExtractor`) MUST NEVER inspect `scenario_id`, `genome_reference`, `generation_number`, `mutation_dimensions`, `target_flag`, `applied_mutations`, or labels.
+4. Implement `LeakageAuditor` to verify zero transaction ID overlap across splits (`TRAIN`, `VALIDATION`, `TEST`, `UNSEEN_ATTACK_TEST`), entity separation between training and unseen test sets, and zero metadata key leakage.
+5. Create held-out `UNSEEN_ATTACK_TEST` dataset split containing un-trained attack vector combinations to evaluate true defense generalization.
+6. Enforce zero LLM dependencies in scoring/explanations, zero auto-hardening, zero frontend UI components, and zero external payment integrations.
+
+### Consequences
+- **Positive:** Scientifically rigorous multi-detector defense architecture, 100% anti-leakage audit compliance, versioned model artifacts, human-explainable decision bundles, robust baseline FPR measurement, instant readiness for Phase 6 Auto-Hardening.
+- **Negative:** None.
+
+---
+
+## ADR-015: Phase 5 Scientific Evaluation Methodology & Anti-Leakage Audit Integrity
+
+### Status
+**APPROVED** — 2026-08-27
+
+### Context
+Phase 5 benchmark evaluation required correction to eliminate class distribution anomalies (such as an ordinary TEST split containing 0 adversarial samples), establish entity-aware user isolation across splits, strengthen anti-leakage verification, and populate non-empty per-detector, hybrid, ablation, calibration, and unseen attack metrics without fabricating data or tuning against the unseen test set.
+
+### Decision
+1. Establish **Entity-Aware Data Splitting**: Target users and non-target users in the main payment dataset (users 0–79) are split 60% Train, 20% Validation, 20% Test. Held-out users (users 80–99) are strictly reserved for `UNSEEN_ATTACK_TEST`.
+2. Ensure both `TEST` and `VALIDATION` splits contain BOTH benign baseline transactions AND known adversarial transactions from training attack scenarios, while `UNSEEN_ATTACK_TEST` remains completely isolated with zero user or attack-combination overlap (`train_unseen_user_overlap = 0`, `train_unseen_attack_combo_overlap = 0`).
+3. Strengthen `LeakageAuditor` to audit transaction ID overlap, user overlap, account overlap, device overlap, attack-combination overlap, and feature dictionary key cleanliness.
+4. Calculate real non-empty `per_detector_metrics` for all 5 detectors (`rules`, `ml`, `behavioral`, `graph`, `adversarial`) and `hybrid`.
+5. Execute 5 single-layer ablation evaluations (`without_rules`, `without_ml`, `without_behavioral`, `without_graph`, `without_adversarial`).
+6. Evaluate ML probability calibration (Brier score, ECE) on the validation population and explicitly document sample size limitations.
+7. Verify 100% deterministic reproducibility across seed-matched benchmark executions.
+8. Output all 15 top-level evaluation sections in `data/evaluations/evaluation_report.json`.
 
 
 
+---
+
+## ADR-016: Autonomous Defense Hardening Engine & Strict Model Promotion
+
+### Status
+**APPROVED** — 2026-08-27
+
+### Context
+Phase 6 requires building a closed-loop autonomous defense hardening engine (`Attack Genome -> Attack Simulation -> Blue Team Detection -> Defense Gap Identification -> Adversarial Training Set Construction -> Candidate Model Training -> Multi-Gate Evaluation -> Model Promotion OR Rejection -> Updated Active Defense -> Future Red-Team Stress Test`). The system must operate under strict safety boundaries: operate only on synthetic data, maintain zero real payment data/credentials, zero malware/exploits, zero LLMs for numerical risk decisions, and never train on or tune thresholds using held-out `UNSEEN_ATTACK_TEST`.
+
+### Decision
+1. Implement **Defense Gap Discovery & Taxonomy** (`gap_analyzer.py`): Discover Blue Team detection failures on adversarial transactions and classify gaps into a deterministic 9-category taxonomy (`RULE_BYPASS`, `ML_BLIND_SPOT`, `BEHAVIORAL_BLIND_SPOT`, `GRAPH_BLIND_SPOT`, `ADVERSARIAL_BLIND_SPOT`, `FUSION_FAILURE`, `THRESHOLD_FAILURE`, `MULTI_VECTOR_EVASION`, `UNKNOWN_GENERALIZATION_GAP`). Calculate `GapPriorityScore` ($100 \times [0.30 \cdot \text{sev} + 0.30 \cdot \text{bypass} + 0.20 \cdot \text{vol} + 0.10 \cdot \text{nov} + 0.10 \cdot \text{conf}]$).
+2. Implement **Adversarial Training Set Augmentation with Sample Provenance** (`dataset_builder.py`): Construct targeted adversarial training vectors, labels ($y=1$), and attach immutable `AdversarialSampleProvenance` metadata tracking source transaction ID, parent genome ID, mutation lineage, generation number, PRNG seed, and target gap ID.
+3. Enforce **Anti-Leakage Audit Abort Policy**: Before training, pass candidate training split to `LeakageAuditor.audit_splits`. If any transaction, user, account, device, or feature metadata leakage occurs, raise `DataLeakageError` to immediately abort the hardening run.
+4. Implement **Deterministic Candidate Model Training & Versioning** (`trainer.py`, `promotion.py`): Augment transaction-level ML detector using `RandomForestClassifier` (`n_estimators=100`, `max_depth=6`, `random_state=seed`, `n_jobs=1`). Compute dataset SHA-256 hash and model byte hash. Assign immutable version IDs (`v1.0.0`, `v1.1.0`) and manage statuses (`ACTIVE`, `CANDIDATE`, `PROMOTED`, `REJECTED`, `ARCHIVED`).
+5. Enforce **Strict 5-Gate Promotion Policy** (`PromotionGate`): Evaluate 5 mandatory gates:
+   - *Gate 1: Targeted Gap Improvement* (`targeted_gap_cand_recall > targeted_gap_active_recall`)
+   - *Gate 2: Benign Non-Regression* (`benign_approval_rate_cand >= benign_approval_rate_active - 0.005`)
+   - *Gate 3: Held-Out Unseen Stability* (`unseen_recall_cand >= unseen_recall_active - 0.001`; evaluated ONLY as evaluation gate)
+   - *Gate 4: Calibration Stability* (`brier_score_cand <= brier_score_active + 0.02`)
+   - *Gate 5: Feature Schema Compatibility* (`feature_schema_cand == feature_schema_active`)
+6. Store machine-readable audit artifacts in `data/hardening/`: `hardening_runs.json`, `model_registry.json`, `defense_gap_report.json`, `promotion_history.json`.
+7. Demonstrate both **PROMOTION SUCCESS** and **PROMOTION REJECTION** paths via CLI (`python -m app.hardening.demo`) and REST API (`/api/v1/hardening/*`).
+
+### Consequences
+- **Positive:** Scientifically rigorous closed-loop defensive learning, guaranteed protection against benign regression and data leakage, 100% reproducible model versioning and audit trail, seamless promotion/rejection governance.
+- **Negative:** None.
 
 
