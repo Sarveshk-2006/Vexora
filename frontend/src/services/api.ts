@@ -5,7 +5,9 @@ import {
 } from '../types/orchestration';
 
 const API_BASE_URL =
-  import.meta.env.VITE_API_URL || import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+  import.meta.env.VITE_API_BASE_URL ||
+  import.meta.env.VITE_API_URL ||
+  (import.meta.env.PROD ? 'https://vexora-backend-n12b.onrender.com' : 'http://localhost:8000');
 
 export async function fetchHealthStatus(): Promise<HealthResponse> {
   const response = await fetch(`${API_BASE_URL}/api/v1/health`, {

@@ -37,6 +37,7 @@ export const AttackLabPage: React.FC = () => {
 
   const activeCampaign = selectedCampaign || {
     campaign_id: 'CAMP_BEHAVIORAL_MIMICRY_01',
+    scenario_id: 'SCEN_G0_BEHAVIORAL_MIMICRY_UPI',
     seed: 42,
     intensity: 0.85,
     behavioral_fidelity_score: 0.92,
@@ -58,6 +59,7 @@ export const AttackLabPage: React.FC = () => {
       behavioral_similarity: 0.92,
       network_coordination: 'RING_TOPOLOGY',
       evasion_strategy: 'SHAP_FEATURE_PERTURBATION',
+      intended_duration: '24_HOURS',
     },
   };
 

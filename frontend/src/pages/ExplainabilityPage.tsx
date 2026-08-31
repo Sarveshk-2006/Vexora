@@ -46,24 +46,26 @@ export const ExplainabilityPage: React.FC = () => {
     why_flagged_ranking: [
       {
         evidence_id: 'EV_01',
-        category: 'ATTACK_PATTERN',
+        category: 'ADVERSARIAL',
         source_subsystem: 'RedTeamMutationEngine',
         normalized_strength: 0.95,
         summary: 'Red Team behavioral mimicry campaign pattern matched.',
         relevance_explanation: 'High behavioral similarity to synthetic evasion genome.',
+        detail: {},
       },
       {
         evidence_id: 'EV_02',
-        category: 'DETERMINISTIC_RULE',
+        category: 'RULE',
         source_subsystem: 'RulesEngine',
         normalized_strength: 0.85,
         summary: 'High-amount fragmented velocity rule triggered.',
         relevance_explanation: 'Transaction velocity exceeds 3 standard deviations.',
+        detail: {},
       },
     ],
     feature_evidences: [
-      { feature_name: 'amount', feature_value: 45000, attribution_available: false, unavailability_reason: 'ShAP non-linear boundary' },
-      { feature_name: 'device_trust_score', feature_value: 0.15, attribution_available: false, unavailability_reason: 'ShAP non-linear boundary' },
+      { feature_name: 'amount', feature_value: 45000, attribution_available: false, unavailability_reason: 'ShAP non-linear boundary', contribution: 0, direction: 'ELEVATED', model_version: 'v0.1.0', transaction_id: txQuery },
+      { feature_name: 'device_trust_score', feature_value: 0.15, attribution_available: false, unavailability_reason: 'ShAP non-linear boundary', contribution: 0, direction: 'ELEVATED', model_version: 'v0.1.0', transaction_id: txQuery },
     ],
   };
 

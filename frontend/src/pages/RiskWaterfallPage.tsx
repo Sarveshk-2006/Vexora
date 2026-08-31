@@ -34,16 +34,18 @@ export const RiskWaterfallPage: React.FC = () => {
 
   const activeExp = exp || {
     detector_evidences: {
-      rules: { normalized_score: 40.0, triggered: false, contribution_weight: 0.2 },
-      ml: { normalized_score: 76.8, triggered: true, contribution_weight: 0.25 },
-      behavioral: { normalized_score: 65.0, triggered: true, contribution_weight: 0.25 },
-      graph: { normalized_score: 25.0, triggered: false, contribution_weight: 0.15 },
-      adversarial: { normalized_score: 90.0, triggered: true, contribution_weight: 0.15 },
+      rules: { detector_name: 'RulesEngine', detector_version: '1.0', raw_score: 40.0, normalized_score: 40.0, confidence: 1.0, triggered: false, contribution_weight: 0.2, decision_relevance: 'MEDIUM' },
+      ml: { detector_name: 'TransactionML', detector_version: '1.0', raw_score: 76.8, normalized_score: 76.8, confidence: 0.9, triggered: true, contribution_weight: 0.25, decision_relevance: 'HIGH' },
+      behavioral: { detector_name: 'BehavioralAnomaly', detector_version: '1.0', raw_score: 65.0, normalized_score: 65.0, confidence: 0.85, triggered: true, contribution_weight: 0.25, decision_relevance: 'HIGH' },
+      graph: { detector_name: 'GraphIntelligence', detector_version: '1.0', raw_score: 25.0, normalized_score: 25.0, confidence: 0.7, triggered: false, contribution_weight: 0.15, decision_relevance: 'LOW' },
+      adversarial: { detector_name: 'AdversarialDetector', detector_version: '1.0', raw_score: 90.0, normalized_score: 90.0, confidence: 0.95, triggered: true, contribution_weight: 0.15, decision_relevance: 'CRITICAL' },
     },
     fusion_evidence: {
       composite_risk_score: 87.5,
       reason_codes: ['EVASION_MIMICRY_DETECTED', 'HIGH_AMOUNT_FRAGMENTED'],
       final_decision: 'BLOCK',
+      layer_scores: { rules: 40.0, ml: 76.8, behavioral: 65.0, graph: 25.0, adversarial: 90.0 },
+      layer_weights: { rules: 0.2, ml: 0.25, behavioral: 0.25, graph: 0.15, adversarial: 0.15 },
     },
   };
 
