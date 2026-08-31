@@ -7,7 +7,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     """Central Application Configuration Management via pydantic-settings."""
 
-    APP_NAME: str = "FRAUDOSCOPE"
+    APP_NAME: str = "VEXORA"
     APP_ENV: str = "development"
     DEBUG: bool = True
     API_V1_STR: str = "/api/v1"

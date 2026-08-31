@@ -1,105 +1,43 @@
-# Environment Variables
-.env
-.env.*
-!.env.example
+# Dependency directories
+node_modules/
+.pnpm-store/
+.yarn/
 
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
+# Build outputs
 dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-share/python-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
+build/
+out/
+.next/
 
-# Virtual Environments
-venv/
-.venv/
-env/
-ENV/
-env.bak/
-venv.bak/
-
-# Testing, Linting & Coverage
+# Python & pytest artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
 .pytest_cache/
 .coverage
-.coverage.*
 htmlcov/
-.noserc
-nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
-.hypothesis/
-.ruff_cache/
 .mypy_cache/
+.venv/
+env/
+venv/
 
-# Local/Generated Data & Model Artifacts
-data/raw/*
-!data/raw/.gitkeep
-data/generated/*
-!data/generated/.gitkeep
-data/splits/*
-!data/splits/.gitkeep
-models/active/*
-!models/active/.gitkeep
-models/candidates/*
-!models/candidates/.gitkeep
-models/registry/*
-!models/registry/.gitkeep
-*.joblib
-*.pkl
-*.onnx
-*.h5
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+!.env.example
 
-# Node / React / Vite Frontend
-frontend/node_modules/
-frontend/dist/
-frontend/dist-ssr/
-frontend/coverage/
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-.pnpm-debug.log*
-dist/
-.vite/
-
-# IDE & Editor Files
+# IDE & OS files
+.DS_Store
+Thumbs.db
 .vscode/
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
 .idea/
 *.swp
 *.swo
-*~
 
-# OS Metadata
-.DS_Store
-Thumbs.db
-
-# Logs & Temporary
+# Docker volume/local data artifacts
+postgres_data/
 *.log
-docker/*.log
-logs/
-tmp/
-temp/
-*.tmp

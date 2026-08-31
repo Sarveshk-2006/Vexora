@@ -30,23 +30,46 @@ export const ClosedLoopPipeline: React.FC<ClosedLoopPipelineProps> = ({
   const getStageIcon = (stage: PipelineStage) => {
     switch (stage) {
       case PipelineStage.SCENARIO_PREPARATION:
-        return <FileText className="w-4 h-4 text-cyan-400" />;
+        return <FileText className="w-3.5 h-3.5 text-[#273A91]" />;
       case PipelineStage.RED_TEAM:
-        return <Zap className="w-4 h-4 text-rose-400" />;
+        return <Zap className="w-3.5 h-3.5 text-[#F98513]" />;
       case PipelineStage.BLUE_TEAM:
-        return <Shield className="w-4 h-4 text-blue-400" />;
+        return <Shield className="w-3.5 h-3.5 text-[#273A91]" />;
       case PipelineStage.GAP_ANALYSIS:
-        return <Cpu className="w-4 h-4 text-amber-400" />;
+        return <Cpu className="w-3.5 h-3.5 text-[#F98513]" />;
       case PipelineStage.HARDENING:
-        return <Cpu className="w-4 h-4 text-emerald-400" />;
+        return <Cpu className="w-3.5 h-3.5 text-[#16A36F]" />;
       case PipelineStage.EXPLAINABILITY:
-        return <FileText className="w-4 h-4 text-purple-400" />;
+        return <FileText className="w-3.5 h-3.5 text-[#273A91]" />;
       case PipelineStage.RE_ATTACK_VALIDATION:
-        return <RotateCcw className="w-4 h-4 text-indigo-400" />;
+        return <RotateCcw className="w-3.5 h-3.5 text-indigo-600" />;
       case PipelineStage.VERDICT:
-        return <Award className="w-4 h-4 text-emerald-400" />;
+        return <Award className="w-3.5 h-3.5 text-[#16A36F]" />;
       default:
-        return <Clock className="w-4 h-4 text-slate-400" />;
+        return <Clock className="w-3.5 h-3.5 text-[#64748B]" />;
+    }
+  };
+
+  const getStageLabel = (stage: PipelineStage) => {
+    switch (stage) {
+      case PipelineStage.SCENARIO_PREPARATION:
+        return 'Scenario';
+      case PipelineStage.RED_TEAM:
+        return 'Attack';
+      case PipelineStage.BLUE_TEAM:
+        return 'Detect';
+      case PipelineStage.GAP_ANALYSIS:
+        return 'Gap';
+      case PipelineStage.HARDENING:
+        return 'Harden';
+      case PipelineStage.EXPLAINABILITY:
+        return 'Explain';
+      case PipelineStage.RE_ATTACK_VALIDATION:
+        return 'Re-attack';
+      case PipelineStage.VERDICT:
+        return 'Verdict';
+      default:
+        return stage;
     }
   };
 
@@ -54,52 +77,52 @@ export const ClosedLoopPipeline: React.FC<ClosedLoopPipelineProps> = ({
     switch (status) {
       case StageStatus.COMPLETED:
         return (
-          <span className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded bg-emerald-950/80 text-emerald-400 border border-emerald-800/60 font-mono">
-            <CheckCircle2 className="w-3 h-3" /> COMPLETED
+          <span className="inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded bg-[#E8F8F2] text-[#16A36F] border border-[#16A36F]/30 font-mono font-semibold">
+            <CheckCircle2 className="w-2.5 h-2.5" /> PASSED
           </span>
         );
       case StageStatus.IN_PROGRESS:
         return (
-          <span className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded bg-amber-950/80 text-amber-400 border border-amber-800/60 font-mono animate-pulse">
-            <Clock className="w-3 h-3 animate-spin" /> IN_PROGRESS
+          <span className="inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded bg-amber-50 text-[#F98513] border border-amber-200 font-mono font-semibold animate-pulse">
+            <Clock className="w-2.5 h-2.5 animate-spin" /> RUNNING
           </span>
         );
       case StageStatus.FAILED:
         return (
-          <span className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded bg-rose-950/80 text-rose-400 border border-rose-800/60 font-mono">
-            <XCircle className="w-3 h-3" /> FAILED
+          <span className="inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded bg-rose-50 text-[#DC3545] border border-rose-200 font-mono font-semibold">
+            <XCircle className="w-2.5 h-2.5" /> FAILED
           </span>
         );
       case StageStatus.SKIPPED:
         return (
-          <span className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded bg-slate-900/80 text-slate-400 border border-slate-700/60 font-mono">
+          <span className="inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded bg-[#F8F7F4] text-[#64748B] border border-[#D9DDE5] font-mono">
             SKIPPED
           </span>
         );
       default:
         return (
-          <span className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded bg-slate-900 text-slate-500 border border-slate-800 font-mono">
-            NOT_STARTED
+          <span className="inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded bg-[#F8F7F4] text-[#64748B] border border-[#D9DDE5] font-mono">
+            WAITING
           </span>
         );
     }
   };
 
   return (
-    <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-5 shadow-2xl">
+    <div className="bg-white border border-[#D9DDE5] rounded-xl p-5 shadow-sm">
       <div className="flex items-center justify-between mb-4">
         <div>
-          <h3 className="text-sm font-semibold text-slate-200 tracking-wide uppercase font-mono flex items-center gap-2">
-            <Zap className="w-4 h-4 text-emerald-400" />
-            Closed-Loop Pipeline Execution State Machine
+          <h3 className="text-base font-bold text-[#111827] tracking-wide font-mono flex items-center gap-2">
+            <Zap className="w-4 h-4 text-[#F98513]" />
+            Pipeline Execution State
           </h3>
-          <p className="text-xs text-slate-400">
-            Automated 8-stage synthetic attack, detection, hardening & validation flow
+          <p className="text-xs text-[#475569] font-sans">
+            Scenario → Attack → Detect → Gap Analysis → Hardening → Re-Attack → Verdict
           </p>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-8 gap-2 mb-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-2">
         {stages.map((st, idx) => {
           const isActive = activeStage === st.stage;
           const isExpanded = expandedStage === st.stage;
@@ -107,36 +130,36 @@ export const ClosedLoopPipeline: React.FC<ClosedLoopPipelineProps> = ({
           return (
             <div
               key={st.stage}
-              onClick={() =>
-                setExpandedStage(isExpanded ? null : st.stage)
-              }
-              className={`cursor-pointer transition-all duration-200 p-3 rounded-lg border flex flex-col justify-between ${
+              onClick={() => setExpandedStage(isExpanded ? null : st.stage)}
+              className={`cursor-pointer transition-all duration-200 p-3 rounded-lg border flex flex-col justify-between card-hover ${
                 isActive
-                  ? 'bg-slate-800/90 border-emerald-500 shadow-lg shadow-emerald-950/40 ring-1 ring-emerald-500'
+                  ? 'bg-[#E8EEF9] border-[#273A91] shadow-sm ring-1 ring-[#273A91]'
                   : st.status === StageStatus.COMPLETED
-                  ? 'bg-slate-900/80 border-slate-800 hover:border-slate-700 hover:bg-slate-850'
+                  ? 'bg-[#F8F7F4] border-[#D9DDE5] hover:border-[#9BACD8]'
                   : st.status === StageStatus.FAILED
-                  ? 'bg-rose-950/20 border-rose-900/60'
-                  : 'bg-slate-950/40 border-slate-900 opacity-60'
+                  ? 'bg-rose-50 border-rose-200'
+                  : 'bg-slate-50 border-slate-200 opacity-60'
               }`}
             >
               <div>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-[10px] font-mono text-slate-500 font-semibold">
+                <div className="flex items-center justify-between mb-1.5">
+                  <span className="text-[10px] font-mono text-[#273A91] font-bold">
                     0{idx + 1}
                   </span>
                   {getStageIcon(st.stage)}
                 </div>
-                <div className="text-xs font-semibold text-slate-200 font-mono truncate mb-1">
-                  {st.stage.replace(/_/g, ' ')}
+                <div className="text-xs font-bold text-[#111827] font-mono truncate">
+                  {getStageLabel(st.stage)}
                 </div>
               </div>
 
-              <div className="mt-2 pt-2 border-t border-slate-800/60 flex items-center justify-between">
-                <div>{getStatusBadge(st.status)}</div>
-                <span className="text-[10px] font-mono text-slate-400">
-                  {st.duration_ms.toFixed(1)}ms
-                </span>
+              <div className="mt-2 pt-2 border-t border-[#D9DDE5] flex items-center justify-between">
+                {getStatusBadge(st.status)}
+                {st.duration_ms > 0 && (
+                  <span className="text-[10px] font-mono text-[#64748B]">
+                    {st.duration_ms.toFixed(0)}ms
+                  </span>
+                )}
               </div>
             </div>
           );
@@ -144,41 +167,41 @@ export const ClosedLoopPipeline: React.FC<ClosedLoopPipelineProps> = ({
       </div>
 
       {expandedStage && (
-        <div className="mt-4 p-4 rounded-lg bg-slate-950 border border-slate-800 text-xs font-mono text-slate-300">
+        <div className="mt-4 p-4 rounded-lg bg-[#F8F7F4] border border-[#D9DDE5] text-xs font-mono text-[#111827]">
           {(() => {
             const detailStage = stages.find((s) => s.stage === expandedStage);
             if (!detailStage) return null;
             return (
               <div>
-                <div className="flex items-center justify-between mb-2 text-emerald-400 font-bold border-b border-slate-800 pb-2">
+                <div className="flex items-center justify-between mb-2 text-[#273A91] font-bold border-b border-[#D9DDE5] pb-2">
                   <span>STAGE DETAILS: {detailStage.stage}</span>
                   <button
                     onClick={() => setExpandedStage(null)}
-                    className="text-slate-400 hover:text-slate-200 text-xs"
+                    className="text-[#64748B] hover:text-[#111827] text-xs font-mono font-semibold"
                   >
-                    Close [X]
+                    [Close]
                   </button>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[11px]">
                   <div>
-                    <span className="text-slate-500 font-bold">STARTED AT:</span>{' '}
-                    {detailStage.started_at || 'N/A'}
+                    <span className="text-[#475569] font-bold">STATUS:</span>{' '}
+                    {detailStage.status}
                   </div>
                   <div>
-                    <span className="text-slate-500 font-bold">COMPLETED AT:</span>{' '}
-                    {detailStage.completed_at || 'N/A'}
+                    <span className="text-[#475569] font-bold">DURATION:</span>{' '}
+                    {detailStage.duration_ms.toFixed(2)} ms
                   </div>
                   <div>
-                    <span className="text-slate-500 font-bold">INPUT IDENTIFIERS:</span>{' '}
+                    <span className="text-[#475569] font-bold">INPUTS:</span>{' '}
                     {JSON.stringify(detailStage.input_identifiers)}
                   </div>
                   <div>
-                    <span className="text-slate-500 font-bold">OUTPUT IDENTIFIERS:</span>{' '}
+                    <span className="text-[#475569] font-bold">OUTPUTS:</span>{' '}
                     {JSON.stringify(detailStage.output_identifiers)}
                   </div>
                 </div>
                 {detailStage.error_message && (
-                  <div className="mt-2 text-rose-400 bg-rose-950/40 p-2 rounded border border-rose-900">
+                  <div className="mt-2 text-[#DC3545] bg-rose-50 p-2 rounded border border-rose-200">
                     ERROR: {detailStage.error_message}
                   </div>
                 )}

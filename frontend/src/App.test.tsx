@@ -2,10 +2,10 @@ import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import App from './App';
 
-describe('FRAUDOSCOPE Command Center Frontend', () => {
+describe('VEXORA Command Center Frontend', () => {
   it('renders application shell header cleanly', async () => {
     render(<App />);
-    const titleElements = await screen.findAllByText(/FRAUDOSCOPE/i);
+    const titleElements = await screen.findAllByText(/VEXORA/i);
     expect(titleElements.length).toBeGreaterThan(0);
   });
 
@@ -23,27 +23,27 @@ describe('FRAUDOSCOPE Command Center Frontend', () => {
     expect(hardElements.length).toBeGreaterThan(0);
   });
 
-  it('renders closed-loop simulation run button', async () => {
+  it('renders simulation run button', async () => {
     render(<App />);
-    const runButtons = await screen.findAllByText(/RUN CLOSED-LOOP SIMULATION/i);
+    const runButtons = await screen.findAllByText(/RUN SIMULATION/i);
     expect(runButtons.length).toBeGreaterThan(0);
   });
 
-  it('renders closed-loop pipeline execution state machine title', async () => {
+  it('renders pipeline execution state title', async () => {
     render(<App />);
-    const pipelineTitles = await screen.findAllByText(/Closed-Loop Pipeline Execution State Machine/i);
+    const pipelineTitles = await screen.findAllByText(/Pipeline Execution State/i);
     expect(pipelineTitles.length).toBeGreaterThan(0);
   });
 
   it('renders 5-gate promotion gate audit panel', async () => {
     render(<App />);
-    const gateTitles = await screen.findAllByText(/Autonomous Hardening Promotion Gate Audit/i);
+    const gateTitles = await screen.findAllByText(/Hardening Promotion Gate Audit/i);
     expect(gateTitles.length).toBeGreaterThan(0);
   });
 
   it('renders why flagged structured evidence title', async () => {
     render(<App />);
-    const whyTitles = await screen.findAllByText(/WHY WAS THIS TRANSACTION FLAGGED\?/i);
+    const whyTitles = await screen.findAllByText(/Why Flagged\?/i);
     expect(whyTitles.length).toBeGreaterThan(0);
   });
 });

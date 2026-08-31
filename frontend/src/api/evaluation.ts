@@ -11,7 +11,7 @@ export async function getEvaluationBenchmark(): Promise<EvaluationBenchmarkRepor
   try {
     return await fetchJson<EvaluationBenchmarkReport>('/evaluation/benchmark');
   } catch (err) {
-    console.warn('[FRAUDOSCOPE Sandbox API] Using fallback EvaluationBenchmarkReport demo data');
+    console.warn('[VEXORA Sandbox API] Using fallback EvaluationBenchmarkReport demo data');
     return {
       timestamp: new Date().toISOString(),
       hybrid_metrics: {

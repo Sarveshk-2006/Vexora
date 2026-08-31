@@ -1,76 +1,79 @@
 import React from 'react';
-import { Shield, Database, Cpu, Activity, Info } from 'lucide-react';
+import { Shield, Database, Cpu, Activity, ShieldCheck, Menu } from 'lucide-react';
 import { OverviewSummary } from '../../api/types';
 
 interface HeaderProps {
   overviewData: OverviewSummary | null;
   apiConnected: boolean;
+  onToggleSidebar?: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ overviewData, apiConnected }) => {
+export const Header: React.FC<HeaderProps> = ({ overviewData, apiConnected, onToggleSidebar }) => {
   return (
-    <header className="bg-slate-900 border-b border-slate-800 text-slate-100 px-6 py-3 sticky top-0 z-50 flex flex-wrap items-center justify-between gap-4 shadow-md">
+    <header className="bg-white border-b border-[#D9DEE8] text-[#0F172A] px-4 md:px-8 py-3.5 sticky top-0 z-50 flex items-center justify-between gap-4 shadow-sm">
       <div className="flex items-center space-x-3">
-        <div className="p-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg">
-          <Shield className="w-6 h-6 text-emerald-400" />
+        {onToggleSidebar && (
+          <button
+            onClick={onToggleSidebar}
+            className="lg:hidden p-2 rounded-lg bg-[#EEF3FF] text-[#172554] hover:bg-[#172554] hover:text-white transition-colors border border-[#D9DEE8]"
+            aria-label="Toggle Navigation"
+          >
+            <Menu className="w-5 h-5" />
+          </button>
+        )}
+        <div className="p-2 bg-[#EEF3FF] border border-[#D9DEE8] rounded-xl text-[#FF8A00]">
+          <Shield className="w-5 h-5" />
         </div>
         <div>
           <div className="flex items-center space-x-2">
-            <h1 className="font-bold text-lg tracking-wider text-white">FRAUDOSCOPE</h1>
-            <span className="bg-slate-800 text-slate-300 text-xs px-2 py-0.5 rounded font-mono border border-slate-700">
+            <h1 className="font-bold text-lg tracking-wider text-[#0F172A] font-mono">VEXORA</h1>
+            <span className="bg-[#EEF3FF] text-[#172554] text-[11px] px-2.5 py-0.5 rounded-full font-mono border border-[#D9DEE8] font-bold">
               v1.0.0
             </span>
           </div>
-          <p className="text-xs text-slate-400 tracking-wide font-medium">
-            AUTONOMOUS PAYMENT SECURITY RESEARCH SANDBOX
+          <p className="text-xs text-[#475569] font-medium hidden sm:block">
+            Synthetic Payment Security Sandbox
           </p>
         </div>
       </div>
 
-      <div className="flex items-center space-x-4 text-xs font-mono">
-        <div className="flex items-center space-x-1.5 bg-slate-950 px-3 py-1.5 rounded border border-slate-800">
-          <span className="text-slate-500">ENV:</span>
-          <span className="text-emerald-400 font-semibold">SYNTHETIC ONLY</span>
+      <div className="flex items-center space-x-2 md:space-x-3 text-xs font-mono">
+        <div className="hidden lg:flex items-center space-x-1.5 bg-[#F8F7F4] px-3 py-1.5 rounded-lg border border-[#D9DEE8]">
+          <ShieldCheck className="w-3.5 h-3.5 text-[#172554]" />
+          <span className="text-[#0F172A] font-bold">SYNTHETIC ONLY</span>
         </div>
 
-        <div className="flex items-center space-x-1.5 bg-slate-950 px-3 py-1.5 rounded border border-slate-800">
-          <Database className="w-3.5 h-3.5 text-blue-400" />
-          <span className="text-slate-500">SEED:</span>
-          <span className="text-blue-300 font-semibold">
+        <div className="flex items-center space-x-1.5 bg-[#F8F7F4] px-3 py-1.5 rounded-lg border border-[#D9DEE8]">
+          <Database className="w-3.5 h-3.5 text-[#172554]" />
+          <span className="text-[#475569] hidden sm:inline">SEED:</span>
+          <span className="text-[#0F172A] font-bold">
             {overviewData?.simulation_seed ?? 42}
           </span>
         </div>
 
-        <div className="flex items-center space-x-1.5 bg-slate-950 px-3 py-1.5 rounded border border-slate-800">
-          <Cpu className="w-3.5 h-3.5 text-amber-400" />
-          <span className="text-slate-500">MODEL:</span>
-          <span className="text-amber-300 font-semibold">
-            {overviewData?.active_model_id ?? 'v1.1.0-cand-42'}
+        <div className="flex items-center space-x-1.5 bg-[#F8F7F4] px-3 py-1.5 rounded-lg border border-[#D9DEE8]">
+          <Cpu className="w-3.5 h-3.5 text-[#FF8A00]" />
+          <span className="text-[#475569] hidden sm:inline">MODEL:</span>
+          <span className="text-[#FF8A00] font-bold">
+            {overviewData?.active_model_id ?? 'v0.1.0'}
           </span>
         </div>
 
-        <div className="flex items-center space-x-1.5 bg-slate-950 px-3 py-1.5 rounded border border-slate-800">
-          <Activity className="w-3.5 h-3.5 text-emerald-400" />
-          <span className="text-slate-500">API:</span>
+        <div className="flex items-center space-x-1.5 bg-[#F8F7F4] px-3 py-1.5 rounded-lg border border-[#D9DEE8]">
+          <Activity className="w-3.5 h-3.5 text-[#172554]" />
+          <span className="text-[#475569] hidden sm:inline">API:</span>
           {apiConnected ? (
-            <span className="text-emerald-400 font-semibold flex items-center gap-1">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span className="text-[#10B981] font-bold flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
               ONLINE
             </span>
           ) : (
-            <span className="text-amber-400 font-semibold flex items-center gap-1">
-              <span className="w-2 h-2 rounded-full bg-amber-400"></span>
-              SANDBOX DEMO
+            <span className="text-[#EF4444] font-bold flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-[#EF4444]"></span>
+              OFFLINE
             </span>
           )}
         </div>
-      </div>
-
-      <div className="w-full text-right text-[11px] text-slate-500 flex items-center justify-end space-x-1 font-sans">
-        <Info className="w-3 h-3 text-slate-400" />
-        <span>
-          Synthetic research environment — risk decisions produced by evaluated deterministic/ML components (no live payment rails).
-        </span>
       </div>
     </header>
   );

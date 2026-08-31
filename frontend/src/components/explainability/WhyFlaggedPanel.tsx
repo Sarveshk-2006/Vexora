@@ -50,18 +50,18 @@ export const WhyFlaggedPanel: React.FC<WhyFlaggedPanelProps> = ({
     [];
 
   return (
-    <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-5 shadow-2xl">
+    <div className="bg-white border border-[#D9DDE5] rounded-xl p-5 shadow-sm">
       <div className="flex items-center justify-between mb-4">
         <div>
-          <h3 className="text-sm font-semibold text-slate-200 tracking-wide uppercase font-mono flex items-center gap-2">
-            <FileText className="w-4 h-4 text-emerald-400" />
-            "WHY WAS THIS TRANSACTION FLAGGED?" Structured Evidence Panel
+          <h3 className="text-base font-bold text-[#111827] tracking-wide font-mono flex items-center gap-2">
+            <FileText className="w-4 h-4 text-[#273A91]" />
+            Why Was This Transaction Flagged?
           </h3>
-          <p className="text-xs text-slate-400">
-            Phase 7A Explainability Engine evidence extraction & deterministic strength ranking
+          <p className="text-xs text-[#475569] font-sans">
+            Evidence ranking and detector signal attribution
           </p>
         </div>
-        <span className="text-xs font-mono px-3 py-1 rounded bg-slate-950 text-slate-300 border border-slate-800 font-bold">
+        <span className="text-xs font-mono px-3 py-1 rounded-lg bg-[#F8F7F4] text-[#F98513] border border-[#D9DDE5] font-bold">
           {sampleExplanation.primary_decision}: {(sampleExplanation.composite_risk_score || 0).toFixed(1)} RISK SCORE
         </span>
       </div>
@@ -70,39 +70,39 @@ export const WhyFlaggedPanel: React.FC<WhyFlaggedPanelProps> = ({
         {evidenceItems.map((item: any, idx: number) => (
           <div
             key={idx}
-            className="p-3.5 rounded-lg bg-slate-950 border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-3"
+            className="p-3.5 rounded-lg bg-[#F8F7F4] border border-[#D9DDE5] flex flex-col md:flex-row md:items-center justify-between gap-3"
           >
             <div className="flex items-start gap-3">
-              <div className="p-2 rounded bg-slate-900 border border-slate-800 text-emerald-400 mt-0.5">
+              <div className="p-2 rounded bg-white border border-[#D9DDE5] text-[#F98513] mt-0.5">
                 <ShieldAlert className="w-4 h-4" />
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono font-bold text-slate-200 uppercase">
+                  <span className="text-xs font-mono font-bold text-[#111827] uppercase">
                     {item.evidence_type} EVIDENCE
                   </span>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-900 text-slate-400 border border-slate-800">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white text-[#273A91] border border-[#D9DDE5]">
                     {item.detector_name}
                   </span>
                 </div>
-                <p className="text-xs text-slate-300 font-mono mt-1">
+                <p className="text-xs text-[#111827] font-mono mt-1">
                   {item.explanation}
                 </p>
                 {!item.attribution_available && (
-                  <div className="mt-1 flex items-center gap-1 text-[10px] font-mono text-amber-400">
+                  <div className="mt-1 flex items-center gap-1 text-[10px] font-mono text-[#F98513]">
                     <Info className="w-3 h-3" />
-                    <span>Per-sample attribution unavailable: {item.invalidity_reason}</span>
+                    <span>Attribution unavailable for this model: {item.invalidity_reason}</span>
                   </div>
                 )}
               </div>
             </div>
 
             <div className="text-right font-mono">
-              <span className="text-sm font-bold text-emerald-400">
+              <span className="text-sm font-bold text-[#273A91]">
                 {(item.normalized_strength * 100).toFixed(0)}% STRENGTH
               </span>
-              <span className="text-[10px] text-slate-500 block">
-                DETERMINISTIC RANKING
+              <span className="text-[10px] text-[#475569] block font-sans">
+                RANKING SCORE
               </span>
             </div>
           </div>

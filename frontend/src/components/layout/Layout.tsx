@@ -8,6 +8,7 @@ import { OverviewSummary } from '../../api/types';
 export const Layout: React.FC = () => {
   const [overviewData, setOverviewData] = useState<OverviewSummary | null>(null);
   const [apiConnected, setApiConnected] = useState<boolean>(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
 
   useEffect(() => {
     getOverviewSummary()
@@ -21,12 +22,18 @@ export const Layout: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans antialiased selection:bg-emerald-500 selection:text-slate-950">
-      <Header overviewData={overviewData} apiConnected={apiConnected} />
-      <div className="flex flex-1 overflow-hidden">
-        <Sidebar />
-        <main className="flex-1 overflow-y-auto p-6 bg-slate-950">
-          <Outlet context={{ overviewData, apiConnected }} />
+    <div className="min-h-screen bg-[#F7F5F0] text-[#0F172A] flex flex-col font-sans antialiased">
+      <Header
+        overviewData={overviewData}
+        apiConnected={apiConnected}
+        onToggleSidebar={() => setIsSidebarOpen((prev) => !prev)}
+      />
+      <div className="flex flex-1 overflow-hidden relative">
+        <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 bg-[#F7F5F0]">
+          <div className="max-w-7xl mx-auto space-y-6">
+            <Outlet context={{ overviewData, apiConnected }} />
+          </div>
         </main>
       </div>
     </div>

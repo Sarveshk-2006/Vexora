@@ -55,25 +55,25 @@ export const HardeningGatePanel: React.FC<HardeningGatePanelProps> = ({
   ];
 
   return (
-    <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-5 shadow-2xl">
+    <div className="bg-white border border-[#D9DDE5] rounded-xl p-5 shadow-sm">
       <div className="flex items-center justify-between mb-4">
         <div>
-          <h3 className="text-sm font-semibold text-slate-200 tracking-wide uppercase font-mono flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
-            Autonomous Hardening Promotion Gate Audit (ADR-006)
+          <h3 className="text-base font-bold text-[#111827] tracking-wide font-mono flex items-center gap-2">
+            <ShieldCheck className="w-4 h-4 text-[#16A36F]" />
+            Hardening Promotion Gate Audit
           </h3>
-          <p className="text-xs text-slate-400">
-            Strict 5-gate audit evaluation determining candidate model promotion or rejection
+          <p className="text-xs text-[#475569] font-sans">
+            Automated verification determining model candidate promotion or rejection
           </p>
         </div>
 
         <div className="flex items-center gap-2">
           {promoted ? (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-emerald-950/90 text-emerald-300 border border-emerald-700 text-xs font-mono font-bold shadow-lg shadow-emerald-950/40">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#E8F8F2] text-[#16A36F] border border-[#16A36F]/30 text-xs font-mono font-bold shadow-sm">
               <Award className="w-4 h-4" /> DECISION: PROMOTE
             </span>
           ) : (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-rose-950/90 text-rose-300 border border-rose-700 text-xs font-mono font-bold">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-rose-50 text-[#DC3545] border border-rose-200 text-xs font-mono font-bold">
               <XCircle className="w-4 h-4" /> DECISION: REJECT
             </span>
           )}
@@ -86,36 +86,36 @@ export const HardeningGatePanel: React.FC<HardeningGatePanelProps> = ({
             key={g.key}
             className={`p-3 rounded-lg border flex flex-col justify-between ${
               g.passed
-                ? 'bg-slate-950 border-slate-800'
-                : 'bg-rose-950/30 border-rose-900/80'
+                ? 'bg-[#F8F7F4] border-[#D9DDE5]'
+                : 'bg-rose-50 border-rose-200'
             }`}
           >
             <div>
               <div className="flex items-center justify-between mb-1">
-                <span className="text-[10px] font-mono text-slate-500 font-semibold truncate">
+                <span className="text-[10px] font-mono text-[#475569] font-semibold truncate">
                   {g.name.split(':')[0]}
                 </span>
                 {g.passed ? (
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#16A36F]" />
                 ) : (
-                  <XCircle className="w-3.5 h-3.5 text-rose-400" />
+                  <XCircle className="w-3.5 h-3.5 text-[#DC3545]" />
                 )}
               </div>
-              <div className="text-xs font-bold font-mono text-slate-200 mt-1 truncate">
+              <div className="text-xs font-bold font-mono text-[#111827] mt-1 truncate">
                 {g.name.split(':')[1]}
               </div>
-              <div className="text-[10px] text-slate-500 mt-1 leading-tight">
+              <div className="text-[10px] text-[#475569] mt-1 leading-tight font-sans">
                 {g.desc}
               </div>
             </div>
 
-            <div className="mt-3 pt-2 border-t border-slate-800/60">
+            <div className="mt-3 pt-2 border-t border-[#D9DDE5]">
               {g.passed ? (
-                <span className="text-[10px] font-mono text-emerald-400 font-bold">
+                <span className="text-[10px] font-mono text-[#16A36F] font-bold">
                   PASS
                 </span>
               ) : (
-                <span className="text-[10px] font-mono text-rose-400 font-bold">
+                <span className="text-[10px] font-mono text-[#DC3545] font-bold">
                   FAIL
                 </span>
               )}
@@ -124,12 +124,12 @@ export const HardeningGatePanel: React.FC<HardeningGatePanelProps> = ({
         ))}
       </div>
 
-      <div className="p-3 rounded-lg bg-slate-950 border border-slate-800 flex items-center justify-between text-xs font-mono">
-        <span className="text-slate-400">
-          PROMOTED CANDIDATE ID: <strong className="text-emerald-400">{activeModelAfter}</strong>
+      <div className="p-3 rounded-lg bg-[#F8F7F4] border border-[#D9DDE5] flex items-center justify-between text-xs font-mono">
+        <span className="text-[#475569]">
+          PROMOTED MODEL: <strong className="text-[#16A36F]">{activeModelAfter}</strong>
         </span>
-        <span className="text-slate-500">
-          PREVIOUS ACTIVE: {activeModelBefore}
+        <span className="text-[#475569]">
+          BASELINE MODEL: {activeModelBefore}
         </span>
       </div>
     </div>

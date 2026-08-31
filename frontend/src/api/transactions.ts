@@ -5,7 +5,7 @@ export async function getSyntheticTransactions(): Promise<SyntheticTransaction[]
   try {
     return await fetchJson<SyntheticTransaction[]>('/digital-twin/transactions');
   } catch (err) {
-    console.warn('[FRAUDOSCOPE Sandbox API] Using fallback SyntheticTransactions demo data');
+    console.warn('[VEXORA Sandbox API] Using fallback SyntheticTransactions demo data');
     return DEMO_DATA.transactions;
   }
 }

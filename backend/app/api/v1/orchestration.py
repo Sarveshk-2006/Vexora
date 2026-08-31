@@ -6,12 +6,11 @@ from app.orchestration import (
     ClosedLoopOrchestrator,
     ClosedLoopRunRequest,
     ClosedLoopRunResult,
-    OrchestrationRunStore,
 )
 
 router = APIRouter(prefix="/orchestration", tags=["Closed-Loop Orchestrator"])
 orchestrator = ClosedLoopOrchestrator(seed=42)
-store = OrchestrationRunStore()
+store = orchestrator.store
 
 
 @router.get("/health", summary="Orchestration service health check")
@@ -37,7 +36,7 @@ def run_closed_loop(request: ClosedLoopRunRequest):
 )
 def list_runs() -> List[Dict[str, Any]]:
     """Retrieve raw list of persisted closed-loop orchestration runs."""
-    return store.list_runs_raw()
+    return orchestrator.store.list_runs_raw()
 
 
 @router.get(
@@ -46,7 +45,7 @@ def list_runs() -> List[Dict[str, Any]]:
 )
 def get_run(run_id: str) -> Dict[str, Any]:
     """Retrieve orchestration run result by run_id."""
-    run_data = store.get_run_by_id_raw(run_id)
+    run_data = orchestrator.store.get_run_by_id_raw(run_id)
     if not run_data:
         raise HTTPException(status_code=404, detail=f"Run '{run_id}' not found.")
     return run_data
@@ -58,7 +57,7 @@ def get_run(run_id: str) -> Dict[str, Any]:
 )
 def get_run_stages(run_id: str) -> List[Dict[str, Any]]:
     """Retrieve execution stage list for a specific run."""
-    run_data = store.get_run_by_id_raw(run_id)
+    run_data = orchestrator.store.get_run_by_id_raw(run_id)
     if not run_data:
         raise HTTPException(status_code=404, detail=f"Run '{run_id}' not found.")
     return run_data.get("stage_results", [])
@@ -70,7 +69,7 @@ def get_run_stages(run_id: str) -> List[Dict[str, Any]]:
 )
 def get_run_verdict(run_id: str) -> Dict[str, Any]:
     """Retrieve final immutable verdict for a run."""
-    run_data = store.get_run_by_id_raw(run_id)
+    run_data = orchestrator.store.get_run_by_id_raw(run_id)
     if not run_data:
         raise HTTPException(status_code=404, detail=f"Run '{run_id}' not found.")
     return {

@@ -2,7 +2,7 @@
   "candidate_id": "v1.1.0-cand-test",
   "parent_model_id": "v0.1.0",
   "status": "CANDIDATE",
-  "created_at": "2026-08-31T16:17:54.640494+00:00",
+  "created_at": "2026-08-31T18:35:51.349237+00:00",
   "dataset_hash": "29e5f1212554ff28",
   "model_hash": "74764fa8e2902d4c",
   "seed": 42,

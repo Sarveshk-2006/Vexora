@@ -118,3 +118,38 @@ def test_phase12_controlled_failure_isolation(tmp_path):
     # Verify downstream skipped status
     for s in failed_res.stage_results:
         assert s.status == StageStatus.SKIPPED
+
+
+def test_orchestration_run_persistence_and_audit_log_retrieval():
+    """Verify orchestration run persistence, HTTP GET /runs audit log retrieval, and model version consistency."""
+    client = TestClient(app)
+
+    # 1. Execute run via API
+    run_req = {"seed": 42}
+    res_run = client.post("/api/v1/orchestration/run", json=run_req)
+    assert res_run.status_code == 200
+    run_data = res_run.json()
+    run_id = run_data["run_id"]
+    assert run_id.startswith("RUN_LOOP_")
+    assert run_data["active_model_before"] != ""
+    assert run_data["active_model_after"] == "v1.1.0-cand-42"
+
+    # 2. Retrieve historical runs via API (audit log endpoint)
+    res_list = client.get("/api/v1/orchestration/runs")
+    assert res_list.status_code == 200
+    history = res_list.json()
+    assert isinstance(history, list)
+    assert len(history) >= 1
+
+    # 3. Confirm target run exists in audit history with exact field matching
+    saved_run = next((r for r in history if r["run_id"] == run_id), None)
+    assert saved_run is not None
+    assert saved_run["provenance"]["random_seed"] == 42
+    assert saved_run["verdict"] == "HARDENED_SUCCESSFULLY"
+    assert saved_run["active_model_before"] == run_data["active_model_before"]
+    assert saved_run["active_model_after"] == "v1.1.0-cand-42"
+
+    # 4. Verify single run lookup by ID endpoint
+    res_single = client.get(f"/api/v1/orchestration/runs/{run_id}")
+    assert res_single.status_code == 200
+    assert res_single.json()["run_id"] == run_id

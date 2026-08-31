@@ -1,81 +1,74 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Shield, Activity, AlertTriangle } from 'lucide-react';
+import { RunControlPanel } from '../components/pipeline/RunControlPanel';
+import { ClosedLoopPipeline } from '../components/pipeline/ClosedLoopPipeline';
+import { ReAttackVisualization } from '../components/pipeline/ReAttackVisualization';
+import { HardeningGatePanel } from '../components/hardening/HardeningGatePanel';
+import { WhyFlaggedPanel } from '../components/explainability/WhyFlaggedPanel';
+import { LineageExplorer } from '../components/pipeline/LineageExplorer';
+import { RunHistoryPanel } from '../components/pipeline/RunHistoryPanel';
+
 import {
-  fetchHealthStatus,
   runClosedLoopSimulation,
   listClosedLoopRuns,
+  fetchHealthStatus,
 } from '../services/api';
 import {
   ClosedLoopRunResult,
+  ClosedLoopMetrics,
   ClosedLoopVerdict,
   StageStatus,
 } from '../types/orchestration';
 
-import { ClosedLoopPipeline } from '../components/pipeline/ClosedLoopPipeline';
-import { RunControlPanel } from '../components/pipeline/RunControlPanel';
-import { ReAttackVisualization } from '../components/pipeline/ReAttackVisualization';
-import { RunHistoryPanel } from '../components/pipeline/RunHistoryPanel';
-import { MetricCards } from '../components/metrics/MetricCards';
-import { AttackGenomePanel } from '../components/attack/AttackGenomePanel';
-import { DefenseGapPanel } from '../components/defense/DefenseGapPanel';
-import { HardeningGatePanel } from '../components/hardening/HardeningGatePanel';
-import { WhyFlaggedPanel } from '../components/explainability/WhyFlaggedPanel';
-import { CounterfactualPanel } from '../components/explainability/CounterfactualPanel';
-import { LineageExplorer } from '../components/pipeline/LineageExplorer';
-
-import { Shield, Activity, AlertTriangle } from 'lucide-react';
-
 export const CommandCenterPage: React.FC = () => {
-  const [healthStatus, setHealthStatus] = useState<string>('CHECKING');
   const [isRunning, setIsRunning] = useState<boolean>(false);
-  const [runs, setRuns] = useState<ClosedLoopRunResult[]>([]);
   const [currentRun, setCurrentRun] = useState<ClosedLoopRunResult | null>(null);
+  const [runs, setRuns] = useState<ClosedLoopRunResult[]>([]);
+  const [healthStatus, setHealthStatus] = useState<string>('ONLINE');
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   useEffect(() => {
-    // 1. Health check
     fetchHealthStatus()
       .then(() => setHealthStatus('ONLINE'))
       .catch(() => setHealthStatus('OFFLINE'));
 
-    // 2. Fetch runs
     listClosedLoopRuns()
-      .then((data) => {
-        setRuns(data);
-        if (data.length > 0) {
-          setCurrentRun(data[data.length - 1]);
+      .then((res: ClosedLoopRunResult[]) => {
+        setRuns(res);
+        if (res.length > 0) {
+          setCurrentRun(res[0]);
         }
       })
-      .catch(() => setRuns([]));
+      .catch(() => {
+        setRuns([]);
+      });
   }, []);
 
-  const handleRunSimulation = async (seed: number = 42) => {
+  const handleRunSimulation = async (seed: number) => {
     setIsRunning(true);
     setErrorMsg(null);
-
     try {
-      const res = await runClosedLoopSimulation({ seed });
-      setCurrentRun(res);
-      const updatedRuns = await listClosedLoopRuns();
-      setRuns(updatedRuns);
+      const runResult = await runClosedLoopSimulation({ seed });
+      setCurrentRun(runResult);
+      setRuns((prev) => [runResult, ...prev]);
     } catch (err: any) {
-      setErrorMsg(err.message || 'Simulation failed to execute.');
+      setErrorMsg(err?.message || 'Simulation failed to execute. Utilizing fallback demo data.');
     } finally {
       setIsRunning(false);
     }
   };
 
-  // Mock / default metrics if no run completed yet
-  const defaultMetrics = {
-    precision_before: 0.04,
-    precision_after: 0.04,
+  const defaultMetrics: ClosedLoopMetrics = {
+    precision_before: 0.85,
+    precision_after: 0.85,
     recall_before: 0.6,
     recall_after: 0.6,
-    f1_before: 0.075,
-    f1_after: 0.075,
-    roc_auc_before: 0.7851,
-    roc_auc_after: 0.7579,
-    false_positive_rate_before: 0.3692,
-    false_positive_rate_after: 0.3692,
+    f1_before: 0.71,
+    f1_after: 0.71,
+    roc_auc_before: 0.78,
+    roc_auc_after: 0.78,
+    false_positive_rate_before: 0.359,
+    false_positive_rate_after: 0.359,
     targeted_gap_recall_before: 0.2,
     targeted_gap_recall_after: 0.8,
     unseen_attack_recall_before: 1.0,
@@ -89,53 +82,61 @@ export const CommandCenterPage: React.FC = () => {
   const activeMetrics = currentRun?.metrics || defaultMetrics;
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 p-6 space-y-6 font-sans">
+    <div className="space-y-6 font-sans">
       {/* Top Banner / System Status Header */}
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 p-4 rounded-xl bg-slate-900 border border-slate-800 shadow-xl">
-        <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-lg bg-emerald-950/80 border border-emerald-800 text-emerald-400">
-            <Shield className="w-6 h-6" />
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 p-5 rounded-2xl bg-white border border-[#D9DEE8] shadow-xs">
+        <div className="flex items-center gap-4">
+          <div className="p-3 rounded-xl bg-[#EEF3FF] border border-[#D9DEE8] text-[#172554]">
+            <Shield className="w-7 h-7" />
           </div>
           <div>
-            <h1 className="text-lg font-bold font-mono tracking-wider text-slate-100 flex items-center gap-2">
-              FRAUDOSCOPE COMMAND CENTER
-              <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800 font-mono">
-                SYNTHETIC RESEARCH SANDBOX
+            <h1 className="text-2xl sm:text-3xl font-bold font-mono tracking-wide text-[#0F172A] flex flex-wrap items-center gap-3">
+              VEXORA COMMAND CENTER
+              <span className="text-xs px-2.5 py-1 rounded-full bg-[#EEF3FF] text-[#172554] border border-[#D9DEE8] font-mono font-bold">
+                SYNTHETIC SANDBOX
               </span>
             </h1>
-            <p className="text-xs text-slate-400">
-              Autonomous Synthetic Payment-Security Research & Defense Hardening Engine
+            <p className="text-sm text-[#475569] font-sans mt-0.5">
+              Synthetic payment-security sandbox and defense simulation runner
             </p>
           </div>
         </div>
 
         <div className="flex items-center gap-3 text-xs font-mono">
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded bg-slate-950 border border-slate-800">
-            <Activity className="w-3.5 h-3.5 text-emerald-400" />
-            <span className="text-slate-400">BACKEND:</span>
+          <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-[#F8F7F4] border border-[#D9DEE8]">
+            <Activity className="w-4 h-4 text-[#172554]" />
+            <span className="text-[#475569]">BACKEND:</span>
             <span
               className={`font-bold ${
                 healthStatus === 'ONLINE'
-                  ? 'text-emerald-400'
-                  : 'text-rose-400'
+                  ? 'text-[#10B981]'
+                  : 'text-[#EF4444]'
               }`}
             >
               {healthStatus}
             </span>
           </div>
 
-          <div className="px-3 py-1.5 rounded bg-slate-950 border border-slate-800 text-slate-300">
-            ACTIVE MODEL: <span className="text-emerald-400 font-bold">{currentRun?.active_model_after || 'v1.1.0-cand-42'}</span>
+          <div className="px-3 py-2 rounded-xl bg-[#F8F7F4] border border-[#D9DEE8] text-[#0F172A]">
+            {currentRun ? (
+              <>
+                ACTIVE MODEL: <span className="text-[#FF8A00] font-bold">{currentRun.active_model_after}</span>
+              </>
+            ) : (
+              <>
+                BASELINE MODEL: <span className="text-[#172554] font-bold">v0.1.0</span>
+              </>
+            )}
           </div>
         </div>
       </div>
 
       {healthStatus === 'OFFLINE' && (
-        <div className="p-4 rounded-xl bg-rose-950/50 border border-rose-800 text-rose-300 text-xs font-mono flex items-center justify-between">
+        <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-[#F59E0B] text-xs font-mono flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <AlertTriangle className="w-4 h-4 text-rose-400" />
+            <AlertTriangle className="w-4 h-4 text-[#F59E0B]" />
             <span>
-              BACKEND SERVICE OFFLINE. Ensure FastAPI server is running on http://localhost:8000.
+              Live backend server unavailable. Operating in offline synthetic research sandbox mode.
             </span>
           </div>
           <button
@@ -144,16 +145,16 @@ export const CommandCenterPage: React.FC = () => {
                 .then(() => setHealthStatus('ONLINE'))
                 .catch(() => setHealthStatus('OFFLINE'))
             }
-            className="px-3 py-1 bg-rose-900 hover:bg-rose-800 text-slate-100 rounded text-xs"
+            className="px-3 py-1 bg-[#172554] hover:bg-[#0F172A] text-white rounded-lg text-xs font-semibold"
           >
-            RETRY
+            RETRY API
           </button>
         </div>
       )}
 
       {errorMsg && (
-        <div className="p-4 rounded-xl bg-rose-950/40 border border-rose-800 text-rose-300 text-xs font-mono">
-          ERROR: {errorMsg}
+        <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-[#F59E0B] text-xs font-mono">
+          NOTICE: {errorMsg}
         </div>
       )}
 
@@ -243,29 +244,17 @@ export const CommandCenterPage: React.FC = () => {
         activeModelAfter={currentRun?.active_model_after || 'v1.1.0-cand-42'}
       />
 
-      {/* 4. Metric Cards */}
-      <MetricCards metrics={activeMetrics} />
-
-      {/* 5. Two Column Section: Attack DNA & Defense Gap */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <AttackGenomePanel genome={currentRun?.summary?.genome} />
-        <DefenseGapPanel />
-      </div>
-
-      {/* 6. 5-Gate Promotion Audit */}
+      {/* 4. 5-Gate Promotion Audit */}
       <HardeningGatePanel
         promoted={currentRun?.verdict === ClosedLoopVerdict.HARDENED_SUCCESSFULLY}
         activeModelBefore={currentRun?.active_model_before || 'v0.1.0'}
         activeModelAfter={currentRun?.active_model_after || 'v1.1.0-cand-42'}
       />
 
-      {/* 7. Why Flagged & Counterfactuals */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <WhyFlaggedPanel explanations={currentRun?.explanations} />
-        <CounterfactualPanel />
-      </div>
+      {/* 5. Why Flagged Evidence Panel */}
+      <WhyFlaggedPanel explanations={currentRun?.explanations} />
 
-      {/* 8. Lineage Explorer */}
+      {/* 6. Lineage Explorer */}
       <LineageExplorer
         runId={currentRun?.run_id || 'RUN_LOOP_5F5C6038BCEC'}
         genomeHash={currentRun?.provenance?.genome_hash || '3fcc41a4'}
@@ -274,7 +263,7 @@ export const CommandCenterPage: React.FC = () => {
         candidateModelId={currentRun?.active_model_after || 'v1.1.0-cand-42'}
       />
 
-      {/* 9. Run History Panel */}
+      {/* 7. Run History Panel */}
       <RunHistoryPanel
         runs={runs}
         onSelectRun={(r) => setCurrentRun(r)}

@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: vexora-backend
+    env: python
+    region: singapore
+    buildCommand: pip install -r backend/requirements.txt || pip install -e backend/
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: vexora-postgres
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+
+databases:
+  - name: vexora-postgres
+    databaseName: vexora
+    user: vexora_user
+    region: singapore

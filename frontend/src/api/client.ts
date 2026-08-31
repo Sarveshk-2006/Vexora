@@ -7,7 +7,7 @@ import {
 } from './types';
 
 const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+  import.meta.env.VITE_API_URL || import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
 const API_BASE = `${API_BASE_URL}/api/v1`;
 
 export class ApiError extends Error {
@@ -38,7 +38,7 @@ export async function fetchJson<T>(endpoint: string, options?: RequestInit): Pro
   }
 }
 
-// Deterministic Sandbox Fallback Generator for Offline Demo Mode
+// Deterministic [VEXORA Sandbox API] Fallback Generator for Offline Demo Mode
 export const DEMO_DATA = {
   overview: {
     sandbox_status: 'ONLINE',

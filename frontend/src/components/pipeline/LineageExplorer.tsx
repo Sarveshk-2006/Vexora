@@ -25,9 +25,9 @@ export const LineageExplorer: React.FC<LineageExplorerProps> = ({
         position: { x: 50, y: 100 },
         data: { label: `FRAUD GENOME\nHash: ${genomeHash}` },
         style: {
-          background: '#0f172a',
-          color: '#c084fc',
-          border: '1px solid #a855f7',
+          background: '#FFFFFF',
+          color: '#172554',
+          border: '1px solid #9BACD8',
           fontFamily: 'monospace',
           fontSize: '11px',
           padding: '10px',
@@ -37,11 +37,11 @@ export const LineageExplorer: React.FC<LineageExplorerProps> = ({
       {
         id: '2',
         position: { x: 220, y: 100 },
-        data: { label: `RED TEAM CAMPAIGN\n${scenarioId}` },
+        data: { label: `RED TEAM ATTACK\n${scenarioId}` },
         style: {
-          background: '#0f172a',
-          color: '#fb7185',
-          border: '1px solid #f43f5e',
+          background: '#FFFFFF',
+          color: '#F98513',
+          border: '1px solid #F98513',
           fontFamily: 'monospace',
           fontSize: '11px',
           padding: '10px',
@@ -51,11 +51,11 @@ export const LineageExplorer: React.FC<LineageExplorerProps> = ({
       {
         id: '3',
         position: { x: 420, y: 100 },
-        data: { label: `BLUE TEAM EVIDENCE\nTargeted Gap: 87.5` },
+        data: { label: `DETECTOR EVIDENCE\nTargeted Gap: 87.5` },
         style: {
-          background: '#0f172a',
-          color: '#60a5fa',
-          border: '1px solid #3b82f6',
+          background: '#FFFFFF',
+          color: '#172554',
+          border: '1px solid #273A91',
           fontFamily: 'monospace',
           fontSize: '11px',
           padding: '10px',
@@ -67,9 +67,9 @@ export const LineageExplorer: React.FC<LineageExplorerProps> = ({
         position: { x: 620, y: 100 },
         data: { label: `DEFENSE GAP\nMULTI_VECTOR_EVASION` },
         style: {
-          background: '#0f172a',
-          color: '#fbbf24',
-          border: '1px solid #f59e0b',
+          background: '#FFFFFF',
+          color: '#F98513',
+          border: '1px solid #F98513',
           fontFamily: 'monospace',
           fontSize: '11px',
           padding: '10px',
@@ -81,9 +81,9 @@ export const LineageExplorer: React.FC<LineageExplorerProps> = ({
         position: { x: 820, y: 100 },
         data: { label: `HARDENING RUN\n${hardeningRunId}` },
         style: {
-          background: '#0f172a',
-          color: '#34d399',
-          border: '1px solid #10b981',
+          background: '#FFFFFF',
+          color: '#16A36F',
+          border: '1px solid #16A36F',
           fontFamily: 'monospace',
           fontSize: '11px',
           padding: '10px',
@@ -95,9 +95,9 @@ export const LineageExplorer: React.FC<LineageExplorerProps> = ({
         position: { x: 1020, y: 100 },
         data: { label: `PROMOTED MODEL\n${candidateModelId}` },
         style: {
-          background: '#0f172a',
-          color: '#34d399',
-          border: '2px solid #10b981',
+          background: '#FFFFFF',
+          color: '#16A36F',
+          border: '1px solid #16A36F',
           fontFamily: 'monospace',
           fontSize: '11px',
           padding: '10px',
@@ -110,33 +110,33 @@ export const LineageExplorer: React.FC<LineageExplorerProps> = ({
 
   const edges: Edge[] = useMemo(
     () => [
-      { id: 'e1-2', source: '1', target: '2', animated: true, style: { stroke: '#a855f7' } },
-      { id: 'e2-3', source: '2', target: '3', animated: true, style: { stroke: '#f43f5e' } },
-      { id: 'e3-4', source: '3', target: '4', animated: true, style: { stroke: '#3b82f6' } },
-      { id: 'e4-5', source: '4', target: '5', animated: true, style: { stroke: '#f59e0b' } },
-      { id: 'e5-6', source: '5', target: '6', animated: true, style: { stroke: '#10b981' } },
+      { id: 'e1-2', source: '1', target: '2', animated: true, style: { stroke: '#9BACD8', strokeWidth: 2 } },
+      { id: 'e2-3', source: '2', target: '3', animated: true, style: { stroke: '#F98513', strokeWidth: 2 } },
+      { id: 'e3-4', source: '3', target: '4', animated: true, style: { stroke: '#273A91', strokeWidth: 2 } },
+      { id: 'e4-5', source: '4', target: '5', animated: true, style: { stroke: '#F98513', strokeWidth: 2 } },
+      { id: 'e5-6', source: '5', target: '6', animated: true, style: { stroke: '#16A36F', strokeWidth: 2 } },
     ],
     []
   );
 
   return (
-    <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-5 shadow-2xl">
+    <div className="bg-white border border-[#D9DDE5] rounded-xl p-5 shadow-sm">
       <div className="flex items-center justify-between mb-4">
         <div>
-          <h3 className="text-sm font-semibold text-slate-200 tracking-wide uppercase font-mono flex items-center gap-2">
-            <GitBranch className="w-4 h-4 text-emerald-400" />
-            End-to-End Closed-Loop Provenance Lineage Explorer
+          <h3 className="text-base font-bold text-[#111827] tracking-wide font-mono flex items-center gap-2">
+            <GitBranch className="w-4 h-4 text-[#273A91]" />
+            Attack Lineage Explorer
           </h3>
-          <p className="text-xs text-slate-400">
-            Immutable lineage graph tracing Red Team attack origin to promoted candidate model version
+          <p className="text-xs text-[#475569] font-sans">
+            Provenance tracing attack origin to promoted model version
           </p>
         </div>
-        <span className="text-xs font-mono text-slate-400">RUN: {runId}</span>
+        <span className="text-xs font-mono text-[#475569]">RUN: {runId}</span>
       </div>
 
-      <div className="h-[220px] rounded-lg overflow-hidden border border-slate-800 bg-slate-950">
+      <div className="h-[220px] rounded-lg overflow-hidden border border-[#D9DDE5] bg-[#F8F7F4]">
         <ReactFlow nodes={nodes} edges={edges} fitView>
-          <Background color="#1e293b" gap={16} />
+          <Background color="#D9DDE5" gap={16} />
           <Controls />
         </ReactFlow>
       </div>

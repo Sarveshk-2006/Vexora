@@ -15,7 +15,7 @@ export async function explainTransaction(
       }),
     });
   } catch (err) {
-    console.warn('[FRAUDOSCOPE Sandbox API] Using fallback ExplanationResult demo data');
+    console.warn('[VEXORA Sandbox API] Using fallback ExplanationResult demo data');
     const txId = transactionId || 'TX_SYN_00000001';
     return {
       explanation_id: `EXP_DEMO_${txId.slice(-8)}`,
