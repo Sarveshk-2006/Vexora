@@ -1,6 +1,6 @@
 import uuid
 from datetime import datetime
-from typing import TYPE_CHECKING, List, Optional
+from typing import TYPE_CHECKING, List
 
 from sqlalchemy import DateTime, ForeignKey, String, Uuid
 from sqlalchemy import Enum as SQLEnum
@@ -37,7 +37,7 @@ class AttackCampaign(Base, UUIDPrimaryKeyMixin, TimestampMixin):
         String(128),
         nullable=False,
     )
-    description: Mapped[Optional[str]] = mapped_column(
+    description: Mapped[str] = mapped_column(
         String(512),
         nullable=True,
     )
@@ -50,11 +50,11 @@ class AttackCampaign(Base, UUIDPrimaryKeyMixin, TimestampMixin):
         String(256),
         nullable=False,
     )
-    start_time: Mapped[Optional[datetime]] = mapped_column(
+    start_time: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         nullable=True,
     )
-    end_time: Mapped[Optional[datetime]] = mapped_column(
+    end_time: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         nullable=True,
     )

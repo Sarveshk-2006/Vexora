@@ -179,11 +179,106 @@ $$\text{Attack Scenario} \rightarrow \text{Blue Team Evaluation} \rightarrow \te
   - `GET  /api/v1/hardening/models`
   - `GET  /api/v1/hardening/models/{model_id}`
   - `GET  /api/v1/hardening/active-model`
-- **Machine-Readable Artifacts (`data/hardening/`):**
-  - `hardening_runs.json`
-  - `model_registry.json`
-  - `defense_gap_report.json`
-  - `promotion_history.json`
+---
+
+## 7. Phase 7A — FRAUDOSCOPE Explainability Engine & Evidence Contract
+
+The FRAUDOSCOPE Explainability Subsystem (`backend/app/explainability/`) translates existing numerical risk decisions, detector layer evidence, Red Team attack mutations, and Phase 6 hardening metrics into structured, strongly-typed evidence contracts and reproducible explanation results.
+
+### 7.1 Architecture & Core Components
+- **Domain Schemas (`models.py`):** Strongly-typed Pydantic v2 evidence contracts (`ExplanationRequest`, `ExplanationResult`, `EvidenceItem`, `DetectorEvidenceModel`, `RuleEvidence`, `FeatureEvidence`, `GraphEvidence`, `AnomalyEvidence`, `AttackEvidence`, `HardeningEvidence`, `CounterfactualEvidence`, `BypassEvidence`).
+- **Evidence Extractor (`evidence.py`):** Translates raw detector outputs, rules, features, anomalies, graph metrics, attack genomes, and hardening runs into structured evidence objects without data fabrication. Explicitly marks unavailable per-sample attributions (`attribution_available=False`).
+- **Evidence Ranker (`attribution.py`):** Normalizes diverse evidence category signals into $[0.0, 1.0]$ strength scores and deterministically sorts items descending for `"WHY WAS THIS FLAGGED?"`.
+- **Lineage Tracker (`lineage.py`):** Assembles immutable `ExplanationProvenance` metadata (`explanation_id`, `transaction_id`, `campaign_id`, `genome_id`, `model_version`, `dataset_reference`, `random_seed`, `generated_at`, `source_subsystem`).
+- **Counterfactual Engine (`counterfactual.py`):** Safe, deterministic `"What-If"` re-computation engine for reliable features (`amount`, `device_trust_score`, `velocity_deviation`) under feature perturbations. Unsupported features explicitly return `validity_status=False`.
+- **Explainability Engine (`engine.py`):** Main orchestrator assembling top-level `ExplanationResult` bundles.
+
+### 7.2 Service Layer & Endpoints (`backend/app/api/v1/explainability.py`)
+- `GET /api/v1/explainability/health`
+- `POST /api/v1/explainability/explain`
+- `GET /api/v1/explainability/{explanation_id}`
+
+---
+
+## 8. Phase 7B — Explainability Command Center Integration & Closed-Loop Investigation UX
+
+Phase 7B connects the FRAUDOSCOPE backend intelligence (Phases 1–7A) to a state-of-the-art investigator-facing web Command Center built using React, TypeScript, Vite, Tailwind CSS, `@xyflow/react`, Recharts, and Lucide icons.
+
+### 8.1 Information Architecture & Investigation Workflow
+- **Application Shell & Sidebar (`Layout.tsx`, `Header.tsx`, `Sidebar.tsx`):** Persistent header displaying `SYNTHETIC ONLY`, seed `42`, active model `v1.1.0-cand-42`, API status, and responsible AI disclaimers.
+- **8 Primary Investigation Sections:**
+  1. *Overview (`/`):* Executive security command center KPI cards & baseline Recharts graphs.
+  2. *Attack Lab (`/attack-lab`):* Red Team campaign selector, metadata inspector & 11-group Fraud Genome matrix.
+  3. *Transaction Investigator (`/investigator`):* Transaction inspector grouped into Identity, Transaction, Risk, and Attack.
+  4. *Why Flagged? (`/explainability`):* Ranked evidence panel displaying supporting vs contextual evidence across 7 categories. Explicitly displays `"Per-sample attribution unavailable"` for non-SHAP ML models.
+  5. *Risk Waterfall (`/waterfall`):* Blue Team layered risk score evaluation & composite decision pipeline.
+  6. *Lineage Graph (`/lineage`):* Interactive React Flow graph tracing `Fraud Genome -> Campaign -> Mutation -> Transaction -> Detector -> Evidence -> Defense Gap -> Hardening Run -> Candidate Model -> Promotion Decision`.
+  7. *Defense Gaps (`/gaps`):* Defense gap dashboard supporting the 9-category taxonomy.
+  8. *Hardening (`/hardening`):* Autonomous defense hardening lifecycle and strict 5-gate promotion results.
+  9. *Counterfactual Explorer (`/counterfactual`):* Interactive `"WHAT IF?"` slider/input explorer for supported features (`amount`, `device_trust_score`, `velocity_deviation`).
+
+---
+
+## 9. Phase 7B — Closed-Loop Orchestration Engine & REST API
+
+The FRAUDOSCOPE Closed-Loop Orchestration Layer (`backend/app/orchestration/`) automates the end-to-end synthetic payment-security research pipeline without duplicating subsystem algorithms or ML training logic.
+
+### 9.1 Orchestration Pipeline Architecture & State Machine
+
+```
+   ┌──────────────────────┐
+   │ Scenario Prep (St.1) │
+   └──────────┬───────────┘
+              │
+   ┌──────────▼───────────┐
+   │   Red Team (St.2)    │
+   └──────────┬───────────┘
+              │
+   ┌──────────▼───────────┐
+   │   Blue Team (St.3)   │
+   └──────────┬───────────┘
+              │
+   ┌──────────▼───────────┐
+   │ Gap Analysis (St.4)  │
+   └──────────┬───────────┘
+              │
+   ┌──────────▼───────────┐
+   │   Hardening (St.5)   │
+   └──────────┬───────────┘
+              │
+   ┌──────────▼───────────┐
+   │ Explainability(St.6) │
+   └──────────┬───────────┘
+              │
+   ┌──────────▼───────────┐
+   │   Re-Attack (St.7)   │
+   └──────────┬───────────┘
+              │
+   ┌──────────▼───────────┐
+   │   Verdict (St.8)     │
+   └──────────────────────┘
+```
+
+- **Domain Schemas (`models.py`):** Strongly-typed Pydantic v2 schemas (`PipelineStage`, `StageStatus`, `ClosedLoopVerdict`, `ClosedLoopStageResult`, `ClosedLoopMetrics`, `ClosedLoopRunRequest`, `ClosedLoopProvenance`, `ClosedLoopRunResult`).
+- **Stage Runner (`stages.py`):** Encapsulates execution for each stage, delegating directly to existing Red Team, Blue Team, DefenseGapAnalyzer, AutonomousHardeningEngine, and ExplainabilityEngine.
+- **Closed-Loop Orchestrator (`pipeline.py`):** Orchestrates sequential 8-stage execution, manages state transitions (`NOT_STARTED` -> `IN_PROGRESS` -> `COMPLETED` / `FAILED` / `SKIPPED`), enforces error boundary isolation, and persists completed run results.
+- **Run Store (`run_store.py`):** JSON file-backed persistence store (`backend/data/orchestration/runs.json`).
+- **Service Boundaries (`backend/app/api/v1/orchestration.py`):**
+  - `POST /api/v1/orchestration/run`
+  - `GET  /api/v1/orchestration/runs`
+  - `GET  /api/v1/orchestration/runs/{run_id}`
+  - `GET  /api/v1/orchestration/runs/{run_id}/stages`
+  - `GET  /api/v1/orchestration/runs/{run_id}/verdict`
+  - `GET  /api/v1/orchestration/health`
+
+### 9.2 Quality Gates & Verification Summary
+- **Phase 7B Unit & Integration Suite (`backend/tests/unit/test_orchestration.py`, `backend/tests/integration/test_phase7b_closed_loop.py`):** **14 PASS / 0 FAIL**.
+- **Full Backend Pytest Suite (`python -m pytest backend/`):** **122 PASS / 0 FAIL**.
+- **Backend Linters (`black` & `ruff`):** **128 files left unchanged, All checks passed**.
+- **CLI Smoke Test (`seed 42`):** `RUN_ID: RUN_LOOP_5F5C6038BCEC | VERDICT: HARDENED_SUCCESSFULLY | STAGES: 8`.
+
+
+
 
 
 

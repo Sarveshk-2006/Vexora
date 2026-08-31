@@ -1,0 +1,22 @@
+{
+  "candidate_id": "v1.1.0-cand-42",
+  "parent_model_id": "v1.1.0-cand-42",
+  "status": "CANDIDATE",
+  "created_at": "2026-08-31T09:55:45.700860+00:00",
+  "dataset_hash": "4c0b1f33627edf82",
+  "model_hash": "f4c6f00b1bfa6cc6",
+  "seed": 42,
+  "target_gap_ids": [
+    "GAP_EE3E17B80928"
+  ],
+  "training_sample_count": 458,
+  "adversarial_sample_count": 16,
+  "hyperparameters": {
+    "n_estimators": 100,
+    "max_depth": 6,
+    "class_weight": "balanced",
+    "brier_score": 0.0095,
+    "ece": 0.0216
+  },
+  "feature_schema_version": "1.0.0"
+}

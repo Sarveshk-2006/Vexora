@@ -1,11 +1,11 @@
 {
   "v1.1.0-cand-42": {
     "candidate_id": "v1.1.0-cand-42",
-    "parent_model_id": "v0.1.0",
+    "parent_model_id": "v1.1.0-cand-42",
     "status": "PROMOTED",
-    "created_at": "2026-08-27T14:47:50.834628+00:00",
-    "dataset_hash": "85e07eb59a75dc77",
-    "model_hash": "5b27cd2cd831db0f",
+    "created_at": "2026-08-31T11:00:03.777773+00:00",
+    "dataset_hash": "3af667a339ded389",
+    "model_hash": "d25c2120cb67bc81",
     "seed": 42,
     "target_gap_ids": [
       "GAP_EE3E17B80928"
@@ -16,8 +16,8 @@
       "n_estimators": 100,
       "max_depth": 6,
       "class_weight": "balanced",
-      "brier_score": 0.0102,
-      "ece": 0.0175
+      "brier_score": 0.0092,
+      "ece": 0.0238
     },
     "feature_schema_version": "1.0.0"
   }

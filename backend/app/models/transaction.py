@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime
 from decimal import Decimal
-from typing import TYPE_CHECKING, Any, Dict, Optional
+from typing import TYPE_CHECKING, Any, Dict
 
 from sqlalchemy import (
     JSON,
@@ -69,7 +69,7 @@ class Transaction(Base, UUIDPrimaryKeyMixin, TimestampMixin):
         nullable=False,
         index=True,
     )
-    session_id: Mapped[Optional[uuid.UUID]] = mapped_column(
+    session_id: Mapped[uuid.UUID] = mapped_column(
         Uuid(as_uuid=True),
         ForeignKey("sessions.id", ondelete="SET NULL"),
         nullable=True,
@@ -80,7 +80,7 @@ class Transaction(Base, UUIDPrimaryKeyMixin, TimestampMixin):
         nullable=False,
         index=True,
     )
-    payment_agent_id: Mapped[Optional[uuid.UUID]] = mapped_column(
+    payment_agent_id: Mapped[uuid.UUID] = mapped_column(
         Uuid(as_uuid=True),
         ForeignKey("payment_agents.id", ondelete="SET NULL"),
         nullable=True,
@@ -132,7 +132,7 @@ class Transaction(Base, UUIDPrimaryKeyMixin, TimestampMixin):
         default="192.0.2.1",
         comment="Synthetic sandbox IP address",
     )
-    metadata_json: Mapped[Optional[Dict[str, Any]]] = mapped_column(
+    metadata_json: Mapped[Dict[str, Any]] = mapped_column(
         JSON,
         nullable=True,
         comment="Flexible JSON metadata payload for non-indexed simulation context",
@@ -143,9 +143,7 @@ class Transaction(Base, UUIDPrimaryKeyMixin, TimestampMixin):
     user: Mapped["User"] = relationship("User")
     merchant: Mapped["Merchant"] = relationship("Merchant")
     device: Mapped["Device"] = relationship("Device")
-    session: Mapped[Optional["Session"]] = relationship(
-        "Session", back_populates="transactions"
-    )
-    payment_agent: Mapped[Optional["PaymentAgent"]] = relationship(
+    session: Mapped["Session"] = relationship("Session", back_populates="transactions")
+    payment_agent: Mapped["PaymentAgent"] = relationship(
         "PaymentAgent", back_populates="transactions"
     )

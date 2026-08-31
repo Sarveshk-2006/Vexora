@@ -1,6 +1,6 @@
 import uuid
 from datetime import datetime
-from typing import TYPE_CHECKING, List, Optional
+from typing import TYPE_CHECKING, List
 
 from sqlalchemy import DateTime, ForeignKey, String, Uuid
 from sqlalchemy import Enum as SQLEnum
@@ -44,7 +44,7 @@ class Session(Base, UUIDPrimaryKeyMixin, TimestampMixin):
         default=utc_now,
         nullable=False,
     )
-    ended_at: Mapped[Optional[datetime]] = mapped_column(
+    ended_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         nullable=True,
     )

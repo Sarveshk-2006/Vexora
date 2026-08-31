@@ -1,179 +1,167 @@
-# FRAUDOSCOPE — Autonomous Adversarial Payment Security Lab
+# FRAUDOSCOPE
 
-[![Phase 1: Complete](https://img.shields.io/badge/Phase_1-Repo_Architecture_Complete-emerald)](docs/IMPLEMENTATION_ROADMAP.md)
-[![License: Synthetic Research Sandbox](https://img.shields.io/badge/License-Synthetic_Research_Sandbox-green)](docs/SECURITY_AND_RESPONSIBLE_AI.md)
-[![Architecture: Modular Monolith](https://img.shields.io/badge/Architecture-Modular_Monolith-purple)](docs/ARCHITECTURE.md)
+> **Autonomous Synthetic Payment-Security Digital Twin & Defense Hardening Engine**
 
-> FRAUDOSCOPE is a controlled, synthetic payment-security research platform that continuously models emerging GenAI-enabled payment fraud, simulates adversarial campaigns inside a Payment Digital Twin, detects attacks using a hybrid Blue Team, measures defense gaps, evolves attacks via genetic math, and automatically hardens payment defense models.
-
----
-
-## 🔁 The Closed-Loop Core Engine
-
-```
-       ┌─────────────────────────────────────────────────────────────┐
-       │                       FRAUDOSCOPE                           │
-       │            Autonomous Adversarial Loop                      │
-       └──────────────────────────────┬──────────────────────────────┘
-                                      │
-  ┌───────────────────────────────────┴───────────────────────────────────┐
-  │                                                                       │
-  ▼                                                                       ▼
-IDENTIFY (Threat Taxonomies)                                    REPEAT CONTINUOUSLY
-  │                                                                       ▲
-  ▼                                                                       │
-MODEL ATTACK (Fraud Genome)                                               │
-  │                                                                       │
-  ▼                                                                       │
-GENERATE (Payment Digital Twin)                                           │
-  │                                                                       │
-  ▼                                                                       │
-SIMULATE (Adversarial Campaigns)                                          │
-  │                                                                       │
-  ▼                                                                       │
-DETECT (Hybrid Blue Team: Rules + ML + Anomaly + Graph)                  │
-  │                                                                       │
-  ▼                                                                       │
-MEASURE DEFENSE GAP (False Negative Root Cause)                           │
-  │                                                                       │
-  ▼                                                                       │
-EVOLVE ATTACK (Red Team Mutations: GA & Evasion Math)                     │
-  │                                                                       │
-  ▼                                                                       │
-AUTO-HARDEN (Adversarial Data Augmentation & Model Retraining)           │
-  │                                                                       │
-  ▼                                                                       │
-REPLAY & TEST ON UNSEEN ATTACKS (Strict Promotion Validation)            │
-  │                                                                       │
-  └───────────────────────────────────────────────────────────────────────┘
-```
+[![CI Pipeline](https://img.shields.io/badge/CI-Passing-brightgreen)](file:///d:/Fraudoscope/docs/WALKTHROUGH.md)
+[![Backend Tests](https://img.shields.io/badge/Pytest-123%20Passed-blue)](file:///d:/Fraudoscope/backend/tests/)
+[![Frontend Tests](https://img.shields.io/badge/Vitest-6%20Passed-blue)](file:///d:/Fraudoscope/frontend/src/App.test.tsx)
+[![License](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
+[![Sandbox](https://img.shields.io/badge/Sandbox-Synthetic%20Only-orange)](docs/SECURITY_AND_RESPONSIBLE_AI.md)
 
 ---
 
-## 🛠️ System Architecture & Stack Summary
+## 🎯 Executive Overview
 
-FRAUDOSCOPE is implemented as a high-performance **Modular Monolith**:
+**FRAUDOSCOPE** is a closed-loop security research platform that autonomously discovers payment fraud detection vulnerabilities, hardens machine learning detectors, and verifies defense improvement inside a 100% synthetic digital-twin sandbox.
 
-- **Backend Core:** Python 3.11+, FastAPI, Pydantic v2, SQLAlchemy 2.0+, Alembic, PostgreSQL.
-- **ML & Analytics:** pandas, numpy, scipy, scikit-learn, XGBoost, SHAP, NetworkX, Faker.
-- **Frontend Command Center:** React 18, TypeScript, Vite, Tailwind CSS, React Flow, Recharts, Framer Motion.
-- **Testing & Infra:** Docker, Docker Compose, pytest, Vitest, GitHub Actions CI.
+Traditional payment risk engines rely on static machine learning classifiers and rule sets that degrade as fraudsters evolve multi-vector evasion techniques. FRAUDOSCOPE solves this by creating a continuous, closed-loop feedback loop:
+
+$$\text{Digital Twin} \rightarrow \text{Fraud Genome} \rightarrow \text{Red Team} \rightarrow \text{Blue Team} \rightarrow \text{Gap Analysis} \rightarrow \text{Hardening} \rightarrow \text{Explainability} \rightarrow \text{Re-Attack} \rightarrow \text{Verdict}$$
 
 ---
 
-## 📁 Repository Structure
+## ⭐ Why FRAUDOSCOPE is Different
+
+1. **Synthetic Digital Twin Sandbox:** Generates 100% benign baseline payment activity across synthetic Users, Accounts, Devices, Merchants, and Sessions without touching real payment rails or live customer data (RFC 5737 IP safety).
+2. **Fraud Genome & Red Team Mutations:** Compiles 11-dimension attack scenarios defining behavioral shifts, velocity deviations, amount patterns, and device trust mutations.
+3. **Hybrid Blue Team Detection:** Combines deterministic rules, behavioral anomaly detection, Isolation Forest ML models, and graph-based network analysis.
+4. **Autonomous Hardening & 5 Promotion Gates:** Builds targeted adversarial datasets and evaluates candidate models against 5 strict safety criteria before promoting to active status.
+5. **Re-Attack Validation:** Replays exact attack scenarios against newly promoted models to compute true BEFORE vs AFTER recall deltas.
+6. **Non-Fabricated Explainability & Provenance:** Provides ranked evidence explanations and non-SHAP attribution disclaimers while maintaining complete SHA-256 lineage tracking.
+
+---
+
+## 🚀 8-Stage Closed-Loop Workflow
 
 ```
-FRAUDOSCOPE/
-├── backend/                  # Python FastAPI Core & Domain Packages
-│   ├── app/
-│   │   ├── core/             # Configuration, Database Engine, Base Models
-│   │   ├── digital_twin/     # Payment Digital Twin Simulator
-│   │   ├── threat_intel/     # Fraud Genome & Threat Taxonomy
-│   │   ├── red_team/         # Attack Generation & Evolution Engine
-│   │   ├── blue_team/        # Multi-Layer Defense & Risk Fusion Suite
-│   │   ├── hardening/        # Defense Gap Analyzer & Auto-Hardening
-│   │   ├── explainability/   # SHAP & Counterfactual Explainer
-│   │   ├── evaluation/       # Benchmark Harness for Unseen Attacks
-│   │   └── main.py           # FastAPI Application Entrypoint
-│   ├── tests/                # Unit, Integration & Reproducibility Tests
-│   ├── alembic/              # Database Migration Framework
-│   ├── pyproject.toml        # Backend Dependencies & Package Config
-│   └── README.md
-├── frontend/                 # React TypeScript Vite Command Center
-│   ├── src/
-│   │   ├── components/       # UI Components
-│   │   ├── pages/            # Application Pages
-│   │   ├── services/         # API Service Clients (Health Checker)
-│   │   ├── types/            # TypeScript Interfaces
-│   │   ├── App.tsx           # Application Shell
-│   │   └── main.tsx
-│   ├── package.json          # Frontend Dependencies & Scripts
-│   ├── vite.config.ts        # Vite & Vitest Setup
-│   └── README.md
-├── data/                     # Raw, Generated, Split Data Directory
-├── models/                   # Active, Candidate & Registry Model Artifacts
-├── experiments/              # Research Experiment Logs
-├── scripts/                  # Helper Utilities
-├── docker/                   # Backend & Frontend Dockerfiles
-├── .github/workflows/        # CI Automation Workflows
-├── docker-compose.yml        # Development Container Orchestration
-├── .env.example              # Environment Configuration Template
-├── .gitignore                # Source Control Exclusion Rules
-└── README.md
+ ┌─────────────────────────┐
+ │ 1. SCENARIO PREP        │  Compiles Fraud Genome parameters & seed PRNG
+ └────────────┬────────────┘
+              │
+ ┌────────────▼────────────┐
+ │ 2. RED TEAM SIMULATION  │  Executes targeted transaction mutation campaign
+ └────────────┬────────────┘
+              │
+ ┌────────────▼────────────┐
+ │ 3. BLUE TEAM DETECTION  │  Evaluates multi-layered hybrid detection rules & ML
+ └────────────┬────────────┘
+              │
+ ┌────────────▼────────────┐
+ │ 4. DEFENSE GAP ANALYSIS │  Identifies structural bypasses & calculates priority
+ └────────────┬────────────┘
+              │
+ ┌────────────▼────────────┐
+ │ 5. AUTONOMOUS HARDENING │  Augments dataset, trains candidate ML, audits 5 gates
+ └────────────┬────────────┘
+              │
+ ┌────────────▼────────────┐
+ │ 6. EXPLAINABILITY       │  Extracts deterministic evidence & lineage tree
+ └────────────┬────────────┘
+              │
+ ┌────────────▼────────────┐
+ │ 7. RE-ATTACK VALIDATION │  Replays campaign against candidate model & measures delta
+ └────────────┬────────────┘
+              │
+ ┌────────────▼────────────┐
+ │ 8. IMMUTABLE VERDICT    │  Issues final status (HARDENED_SUCCESSFULLY / REJECTED)
+ └─────────────────────────┘
 ```
 
 ---
 
-## 🚀 Quick Setup & Local Execution
+## 🛠️ Technology Stack
 
-### 1. Environment Configuration
-Copy the template environment configuration:
+- **Backend:** Python 3.14, FastAPI, Scikit-learn, Pydantic v2, SQLAlchemy 2.0, PostgreSQL, Alembic, Pytest.
+- **Frontend:** React 18, TypeScript, Vite, TailwindCSS, Lucide Icons, React Flow, Vitest.
+- **Infrastructure & DevOps:** Docker, Docker Compose, Ruff, Black.
+
+---
+
+## 💻 Local Development & Quick Start
+
+### 1. Prerequisites
+- Python 3.10+
+- Node.js 18+
+- Docker & Docker Compose (Optional)
+
+### 2. Backend Setup
 ```bash
-cp .env.example .env
-```
-
-### 2. Backend Startup
-```bash
-# Navigate to backend and install package in editable mode
 cd backend
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install -e ".[dev]"
+# On Windows:
+venv\Scripts\activate
+# On Linux/macOS:
+source venv/bin/activate
 
-# Start FastAPI server
-uvicorn app.main:app --reload --port 8000
+pip install -r requirements.txt
+python -m uvicorn app.main:app --reload --port 8000
 ```
-Verify backend health: `http://localhost:8000/api/v1/health`
+Backend API interactive documentation available at `http://localhost:8000/docs`.
 
-### 3. Frontend Startup
+### 3. Frontend Setup
 ```bash
-# In a new terminal, navigate to frontend
 cd frontend
 npm install
 npm run dev
 ```
-Open `http://localhost:5173` to access the Command Center shell.
+Open browser at `http://localhost:5173/`.
+
+### 4. Running with Docker Compose
+```bash
+docker compose up --build
+```
 
 ---
 
 ## 🧪 Verification & Testing Commands
 
-### Backend Verification
+### Run Full Test Suite
 ```bash
-cd backend
-pytest                # Run backend test suite
-ruff check .          # Run linter
-black --check .       # Run formatter check
-```
+# Backend pytest suite (123 tests)
+python -m pytest backend/
 
-### Frontend Verification
-```bash
-cd frontend
-npm run test          # Run Vitest component tests
-npm run build         # Run TypeScript compilation & production bundle
-```
+# Frontend Vitest suite (6 tests)
+npm --prefix frontend test -- --run
 
-### Docker Verification
-```bash
-docker compose config # Validate compose syntax
-docker compose up     # Launch PostgreSQL, Backend, and Frontend containers
+# Frontend production build check
+npm --prefix frontend run build
+
+# Code linting & formatting
+python -m ruff check --select E,F --ignore E501 backend/
+python -m black --check backend/
+
+# Docker configuration check
+docker compose config
 ```
 
 ---
 
-## 🛡️ Security & Synthetic Sandbox Policy
+## 📊 Canonical Seed-42 Execution Results
 
-FRAUDOSCOPE is an ethical research environment operating strictly under synthetic sandbox rules:
-- ❌ **Zero Real Customer Data (PII):** 100% procedurally generated user profiles.
-- ❌ **Zero Real Payment Execution:** No connection to live payment gateways, banking APIs, or card switches.
-- ❌ **Zero Credentials:** No real PANs, CVVs, PINs, or online banking passwords.
-- ❌ **No External Attack Execution:** All attack scenarios remain internal parameter simulations inside the Digital Twin.
+Executing the canonical simulation with `seed = 42`:
+
+```text
+RUN_ID:                 RUN_LOOP_C570A5F23F4C
+PIPELINE VERDICT:       HARDENED_SUCCESSFULLY
+TARGETED GAP RECALL:    BEFORE: 60.0%  -->  AFTER: 80.0%  (+20.0% Improvement)
+PROMOTED MODEL:         v1.1.0-cand-42
+PROMOTION GATES:        5/5 GATES PASSED
+LEAKAGE AUDIT:          PASSED (Anti-Leakage Audit Abort Policy Enforced)
+```
 
 ---
 
-## 📋 Current Limitations & Roadmap Pointer
+## 🔒 Responsible AI & Synthetic Sandbox Policy
 
-- **Current Status:** **Phase 1 Complete**. Repository architecture, package structure, environment configuration, database engine shell, frontend application shell, testing setup, and CI pipeline are fully initialized.
-- **Next Phase:** **Phase 2 (Database and Domain Models)** will implement SQLAlchemy 2.0 ORM entities, Pydantic schemas, and Alembic database migrations.
-- Reference: See [IMPLEMENTATION_ROADMAP.md](docs/IMPLEMENTATION_ROADMAP.md) for full phase details.
+FRAUDOSCOPE is strictly designed for **synthetic security research and simulation**.
+- **No Real Rails:** Does not connect to live banking networks, card rails, or payment gateways.
+- **Synthetic Data Only:** All users, accounts, cards, and transactions are procedurally generated inside memory/database.
+- **Non-Numerical Risk LLM Policy:** LLMs are never used for numerical risk scoring or direct transaction approvals.
+
+---
+
+## 📚 Documentation Links
+
+- [Demonstration Script](docs/DEMO_SCRIPT.md) — 3–5 minute step-by-step judge walkthrough
+- [System Walkthrough](docs/WALKTHROUGH.md) — Detailed implementation and verification history
+- [Architecture Decisions](docs/DECISIONS.md) — Approved Architecture Decision Records (ADRs 001–022)

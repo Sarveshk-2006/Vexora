@@ -1,0 +1,2681 @@
+[
+  {
+    "run_id": "RUN_LOOP_5F5C6038BCEC",
+    "provenance": {
+      "run_id": "RUN_LOOP_5F5C6038BCEC",
+      "random_seed": 42,
+      "genome_hash": "3fcc41a41f15087d",
+      "pipeline_version": "1.0.0",
+      "active_model_before": "v1.1.0-cand-42",
+      "active_model_after": "v1.1.0-cand-42",
+      "scenario_id": "SCEN_3973FC2E8942",
+      "hardening_run_id": "RUN_42_HARDENING_01",
+      "candidate_model_id": "v1.1.0-cand-42",
+      "dataset_hash": "85e07eb59a75dc77",
+      "model_hash": "5b27cd2cd831db0f",
+      "created_at": "2026-08-27T21:36:56.118789+00:00"
+    },
+    "verdict": "HARDENED_SUCCESSFULLY",
+    "pipeline_state": "COMPLETED",
+    "stage_results": [
+      {
+        "stage": "SCENARIO_PREPARATION",
+        "status": "COMPLETED",
+        "started_at": "2026-08-27T21:36:02.685439+00:00",
+        "completed_at": "2026-08-27T21:36:02.685605+00:00",
+        "duration_ms": 0.1747608184814453,
+        "input_identifiers": {
+          "seed": 42,
+          "genome_id": "BEHAVIORAL_MIMICRY"
+        },
+        "output_identifiers": {
+          "genome_hash": "3fcc41a41f15087d"
+        },
+        "error_message": null,
+        "detail": {
+          "genome": {
+            "objective": "Autonomous orchestration closed-loop simulation",
+            "attack_type": "BEHAVIORAL_MIMICRY",
+            "identity_state": "NORMAL",
+            "device_strategy": "DEVICE_MIMICRY",
+            "location_strategy": "FAMILIAR",
+            "amount_pattern": "FRAGMENTED",
+            "velocity_pattern": "LOW_AND_SLOW",
+            "timing_pattern": "RANDOMIZED",
+            "merchant_strategy": "HOPPING",
+            "behavioral_similarity": 0.85,
+            "network_coordination": "LOW",
+            "payment_rail": "UPI",
+            "evasion_strategy": "BEHAVIORAL_MIMICRY",
+            "novelty_rating": 0.7,
+            "campaign_context": {
+              "campaign_stage": "EXFILTRATION",
+              "intended_duration": "24_HOURS",
+              "target_population": "HIGH_BALANCE_ACCOUNTS",
+              "coordination_level": "SINGLE_ACTOR",
+              "extraction_strategy": "FRAGMENTED_TRANSFERS"
+            }
+          }
+        }
+      },
+      {
+        "stage": "RED_TEAM",
+        "status": "COMPLETED",
+        "started_at": "2026-08-27T21:36:02.685661+00:00",
+        "completed_at": "2026-08-27T21:36:02.877941+00:00",
+        "duration_ms": 192.2900676727295,
+        "input_identifiers": {
+          "seed": 42,
+          "scenario_id": "SCEN_3973FC2E8942"
+        },
+        "output_identifiers": {
+          "campaign_id": "CAMP_SCEN_397",
+          "affected_tx_count": 1000
+        },
+        "error_message": null,
+        "detail": {
+          "target_users": 20,
+          "affected_transactions": 1000,
+          "fidelity_score": 0.9971
+        }
+      },
+      {
+        "stage": "BLUE_TEAM",
+        "status": "COMPLETED",
+        "started_at": "2026-08-27T21:36:02.877977+00:00",
+        "completed_at": "2026-08-27T21:36:15.886611+00:00",
+        "duration_ms": 13008.64863395691,
+        "input_identifiers": {
+          "seed": 42
+        },
+        "output_identifiers": {
+          "active_model": "v0.1.0"
+        },
+        "error_message": null,
+        "detail": {
+          "accuracy": 0.89,
+          "precision": 0.0526,
+          "recall": 0.2,
+          "roc_auc": 0.8077,
+          "false_positive_rate": 0.0923
+        }
+      },
+      {
+        "stage": "GAP_ANALYSIS",
+        "status": "COMPLETED",
+        "started_at": "2026-08-27T21:36:15.886659+00:00",
+        "completed_at": "2026-08-27T21:36:16.193860+00:00",
+        "duration_ms": 307.21139907836914,
+        "input_identifiers": {
+          "gap_count": 1
+        },
+        "output_identifiers": {
+          "highest_priority_gap_id": "GAP_1FEDDD7C3B06"
+        },
+        "error_message": null,
+        "detail": {
+          "gaps_count": 1,
+          "highest_priority_score": 95.94,
+          "gap_category": "MULTI_VECTOR_EVASION"
+        }
+      },
+      {
+        "stage": "HARDENING",
+        "status": "COMPLETED",
+        "started_at": "2026-08-27T21:36:16.194079+00:00",
+        "completed_at": "2026-08-27T21:36:56.095091+00:00",
+        "duration_ms": 39901.031494140625,
+        "input_identifiers": {
+          "seed": 42
+        },
+        "output_identifiers": {
+          "hardening_run_id": "RUN_42_HARDENING_01",
+          "candidate_model_id": "v1.1.0-cand-42",
+          "decision": "PROMOTE"
+        },
+        "error_message": null,
+        "detail": {
+          "promoted": true,
+          "decision": "PROMOTE",
+          "gates": {
+            "target_gap_improved": true,
+            "benign_regression_allowed": true,
+            "unseen_generalization_stable": true,
+            "calibration_stable": true,
+            "feature_schema_compatible": true
+          }
+        }
+      },
+      {
+        "stage": "EXPLAINABILITY",
+        "status": "COMPLETED",
+        "started_at": "2026-08-27T21:36:56.095150+00:00",
+        "completed_at": "2026-08-27T21:36:56.116303+00:00",
+        "duration_ms": 21.158695220947266,
+        "input_identifiers": {
+          "sample_tx_count": 2
+        },
+        "output_identifiers": {
+          "adv_exp_id": "EXP_99C7BB71D125"
+        },
+        "error_message": null,
+        "detail": {
+          "explanation_ids": [
+            "EXP_99C7BB71D125",
+            "EXP_847578879321"
+          ]
+        }
+      },
+      {
+        "stage": "RE_ATTACK_VALIDATION",
+        "status": "COMPLETED",
+        "started_at": "2026-08-27T21:36:56.116324+00:00",
+        "completed_at": "2026-08-27T21:36:56.116390+00:00",
+        "duration_ms": 0.06818771362304688,
+        "input_identifiers": {
+          "adversarial_txs": 1000
+        },
+        "output_identifiers": {
+          "targeted_gap_recall_after": 0.8
+        },
+        "error_message": null,
+        "detail": {
+          "targeted_gap_recall_before": 0.2,
+          "targeted_gap_recall_after": 0.8,
+          "targeted_gap_recall_delta": 0.6000000000000001
+        }
+      },
+      {
+        "stage": "VERDICT",
+        "status": "COMPLETED",
+        "started_at": "2026-08-27T21:36:56.116399+00:00",
+        "completed_at": "2026-08-27T21:36:56.116402+00:00",
+        "duration_ms": 0.0054836273193359375,
+        "input_identifiers": {
+          "promoted": true
+        },
+        "output_identifiers": {
+          "verdict": "HARDENED_SUCCESSFULLY"
+        },
+        "error_message": null,
+        "detail": {
+          "verdict": "HARDENED_SUCCESSFULLY",
+          "decision": "PROMOTE"
+        }
+      }
+    ],
+    "metrics": {
+      "precision_before": 0.04,
+      "precision_after": 0.04,
+      "recall_before": 0.6,
+      "recall_after": 0.6,
+      "f1_before": 0.075,
+      "f1_after": 0.075,
+      "roc_auc_before": 0.7851,
+      "roc_auc_after": 0.7579,
+      "false_positive_rate_before": 0.3692,
+      "false_positive_rate_after": 0.3692,
+      "targeted_gap_recall_before": 0.2,
+      "targeted_gap_recall_after": 0.8,
+      "unseen_attack_recall_before": 1.0,
+      "unseen_attack_recall_after": 1.0,
+      "benign_approval_rate_before": 0.7353,
+      "benign_approval_rate_after": 0.7353,
+      "recall_delta": 0.0,
+      "targeted_gap_recall_delta": 0.6000000000000001
+    },
+    "active_model_before": "v1.1.0-cand-42",
+    "active_model_after": "v1.1.0-cand-42",
+    "explanations": [
+      {
+        "explanation_id": "EXP_99C7BB71D125",
+        "provenance": {
+          "explanation_id": "EXP_99C7BB71D125",
+          "transaction_id": "02e7257f-ff94-465e-a753-4d7c2186a769",
+          "campaign_id": "CAMP_SCEN_397",
+          "genome_id": "SCEN_3973FC2E8942",
+          "model_version": "v0.1.0",
+          "dataset_reference": "SYNTHETIC_DIGITAL_TWIN_DEV",
+          "random_seed": 42,
+          "generated_at": "2026-08-27T21:36:56.112410+00:00",
+          "source_subsystem": "EXPLAINABILITY_ENGINE",
+          "source_artifacts": [
+            "data/evaluations/evaluation_report.json",
+            "models/blue_team/active_model.json"
+          ]
+        },
+        "primary_decision": "APPROVE",
+        "composite_risk_score": 6.92,
+        "why_flagged_ranking": [
+          {
+            "evidence_id": "EVI_051AA16E2DE3",
+            "category": "ADVERSARIAL",
+            "source_subsystem": "RED_TEAM_ATTACK_ENGINE",
+            "summary": "Adversarial Attack Campaign: BEHAVIORAL_MIMICRY",
+            "detail": {
+              "genome_id": "SCEN_3973FC2E8942",
+              "campaign_id": "CAMP_SCEN_397",
+              "fidelity_score": 0.92
+            },
+            "normalized_strength": 0.92,
+            "relevance_explanation": "Synthesized Red Team campaign (SCEN_3973FC2E8942) targeting defense infrastructure."
+          },
+          {
+            "evidence_id": "EVI_E2A60773FF2F",
+            "category": "FUSION",
+            "source_subsystem": "ML_DETECTOR",
+            "summary": "Detector Signal: ML_DETECTOR (Risk: 12.0/100)",
+            "detail": {
+              "raw_score": 0.1198,
+              "normalized_score": 11.98,
+              "confidence": 0.85,
+              "triggered": false
+            },
+            "normalized_strength": 0.10183,
+            "relevance_explanation": "Risk contribution from ML_DETECTOR detector layer."
+          },
+          {
+            "evidence_id": "EVI_5FE424C4FA75",
+            "category": "FUSION",
+            "source_subsystem": "BEHAVIORAL_DETECTOR",
+            "summary": "Detector Signal: BEHAVIORAL_DETECTOR (Risk: 10.4/100)",
+            "detail": {
+              "raw_score": 0.10400000000000001,
+              "normalized_score": 10.4,
+              "confidence": 0.85,
+              "triggered": false
+            },
+            "normalized_strength": 0.0884,
+            "relevance_explanation": "Risk contribution from BEHAVIORAL_DETECTOR detector layer."
+          },
+          {
+            "evidence_id": "EVI_AF673AA9C974",
+            "category": "FUSION",
+            "source_subsystem": "ADVERSARIAL_DETECTOR",
+            "summary": "Detector Signal: ADVERSARIAL_DETECTOR (Risk: 5.0/100)",
+            "detail": {
+              "raw_score": 0.05,
+              "normalized_score": 5.0,
+              "confidence": 0.85,
+              "triggered": false
+            },
+            "normalized_strength": 0.0425,
+            "relevance_explanation": "Risk contribution from ADVERSARIAL_DETECTOR detector layer."
+          },
+          {
+            "evidence_id": "EVI_BAF928F748F8",
+            "category": "FUSION",
+            "source_subsystem": "GRAPH_DETECTOR",
+            "summary": "Detector Signal: GRAPH_DETECTOR (Risk: 5.0/100)",
+            "detail": {
+              "raw_score": 0.05,
+              "normalized_score": 5.0,
+              "confidence": 0.85,
+              "triggered": false
+            },
+            "normalized_strength": 0.0425,
+            "relevance_explanation": "Risk contribution from GRAPH_DETECTOR detector layer."
+          },
+          {
+            "evidence_id": "EVI_E72E43871286",
+            "category": "FUSION",
+            "source_subsystem": "RULES_DETECTOR",
+            "summary": "Detector Signal: RULES_DETECTOR (Risk: 0.0/100)",
+            "detail": {
+              "raw_score": 0.0,
+              "normalized_score": 0.0,
+              "confidence": 0.85,
+              "triggered": false
+            },
+            "normalized_strength": 0.0,
+            "relevance_explanation": "Risk contribution from RULES_DETECTOR detector layer."
+          }
+        ],
+        "detector_evidences": {
+          "rules": {
+            "detector_name": "RULES_DETECTOR",
+            "detector_version": "1.0.0",
+            "raw_score": 0.0,
+            "normalized_score": 0.0,
+            "triggered": false,
+            "confidence": 0.85,
+            "contribution_weight": 0.2,
+            "decision_relevance": "SECONDARY_SIGNAL"
+          },
+          "ml": {
+            "detector_name": "ML_DETECTOR",
+            "detector_version": "1.0.0",
+            "raw_score": 0.1198,
+            "normalized_score": 11.98,
+            "triggered": false,
+            "confidence": 0.85,
+            "contribution_weight": 0.3,
+            "decision_relevance": "SECONDARY_SIGNAL"
+          },
+          "behavioral": {
+            "detector_name": "BEHAVIORAL_DETECTOR",
+            "detector_version": "1.0.0",
+            "raw_score": 0.10400000000000001,
+            "normalized_score": 10.4,
+            "triggered": false,
+            "confidence": 0.85,
+            "contribution_weight": 0.2,
+            "decision_relevance": "SECONDARY_SIGNAL"
+          },
+          "graph": {
+            "detector_name": "GRAPH_DETECTOR",
+            "detector_version": "1.0.0",
+            "raw_score": 0.05,
+            "normalized_score": 5.0,
+            "triggered": false,
+            "confidence": 0.85,
+            "contribution_weight": 0.15,
+            "decision_relevance": "SECONDARY_SIGNAL"
+          },
+          "adversarial": {
+            "detector_name": "ADVERSARIAL_DETECTOR",
+            "detector_version": "1.0.0",
+            "raw_score": 0.05,
+            "normalized_score": 5.0,
+            "triggered": false,
+            "confidence": 0.85,
+            "contribution_weight": 0.15,
+            "decision_relevance": "SECONDARY_SIGNAL"
+          }
+        },
+        "fusion_evidence": {
+          "composite_risk_score": 6.92,
+          "final_decision": "APPROVE",
+          "layer_scores": {
+            "rules": 0.0,
+            "ml": 11.98,
+            "behavioral": 10.4,
+            "graph": 5.0,
+            "adversarial": 5.0
+          },
+          "layer_weights": {
+            "rules": 0.2,
+            "ml": 0.3,
+            "behavioral": 0.2,
+            "graph": 0.15,
+            "adversarial": 0.15
+          },
+          "reason_codes": [
+            "ML_BENIGN_PROBABILITY",
+            "BEHAVIORAL_BASELINE_CONFORMANT"
+          ]
+        },
+        "rule_evidences": [
+          {
+            "rule_id": "R001",
+            "rule_name": "High Amount Spike",
+            "triggered": false,
+            "observed_value": 69.08,
+            "threshold_value": 50000.0,
+            "severity": "HIGH",
+            "source_transaction_id": "02e7257f-ff94-465e-a753-4d7c2186a769"
+          },
+          {
+            "rule_id": "R002",
+            "rule_name": "Off-Hours Timing",
+            "triggered": false,
+            "observed_value": 16,
+            "threshold_value": "Outside 06:00-23:00",
+            "severity": "MEDIUM",
+            "source_transaction_id": "02e7257f-ff94-465e-a753-4d7c2186a769"
+          },
+          {
+            "rule_id": "R003",
+            "rule_name": "High Session Velocity",
+            "triggered": false,
+            "observed_value": 1,
+            "threshold_value": 5,
+            "severity": "HIGH",
+            "source_transaction_id": "02e7257f-ff94-465e-a753-4d7c2186a769"
+          },
+          {
+            "rule_id": "R004",
+            "rule_name": "Low Device Trust",
+            "triggered": false,
+            "observed_value": 0.74,
+            "threshold_value": 0.3,
+            "severity": "HIGH",
+            "source_transaction_id": "02e7257f-ff94-465e-a753-4d7c2186a769"
+          },
+          {
+            "rule_id": "R005",
+            "rule_name": "High Merchant Category Risk",
+            "triggered": false,
+            "observed_value": 0.0,
+            "threshold_value": 2.0,
+            "severity": "MEDIUM",
+            "source_transaction_id": "02e7257f-ff94-465e-a753-4d7c2186a769"
+          }
+        ],
+        "feature_evidences": [
+          {
+            "feature_name": "amount",
+            "feature_value": 69.08,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "02e7257f-ff94-465e-a753-4d7c2186a769",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "log_amount",
+            "feature_value": 4.2353,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "02e7257f-ff94-465e-a753-4d7c2186a769",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "payment_rail_encoded",
+            "feature_value": 0.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "02e7257f-ff94-465e-a753-4d7c2186a769",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "user_account_age_days",
+            "feature_value": 453.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "02e7257f-ff94-465e-a753-4d7c2186a769",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "user_risk_tier_encoded",
+            "feature_value": 0.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "02e7257f-ff94-465e-a753-4d7c2186a769",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "user_daily_tx_rate",
+            "feature_value": 2.5,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "02e7257f-ff94-465e-a753-4d7c2186a769",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "user_mean_amount",
+            "feature_value": 437.02919471839147,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "02e7257f-ff94-465e-a753-4d7c2186a769",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "account_balance",
+            "feature_value": 4900.83,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "02e7257f-ff94-465e-a753-4d7c2186a769",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "device_trust_score",
+            "feature_value": 0.74,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "02e7257f-ff94-465e-a753-4d7c2186a769",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "device_reputation_score",
+            "feature_value": 0.69,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "02e7257f-ff94-465e-a753-4d7c2186a769",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "known_device_flag",
+            "feature_value": 1.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "02e7257f-ff94-465e-a753-4d7c2186a769",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "merchant_risk_tier_encoded",
+            "feature_value": 0.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "02e7257f-ff94-465e-a753-4d7c2186a769",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "merchant_category_encoded",
+            "feature_value": 1.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "02e7257f-ff94-465e-a753-4d7c2186a769",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "hour",
+            "feature_value": 16.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "02e7257f-ff94-465e-a753-4d7c2186a769",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "weekday",
+            "feature_value": 1.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "02e7257f-ff94-465e-a753-4d7c2186a769",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "is_weekend",
+            "feature_value": 0.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "02e7257f-ff94-465e-a753-4d7c2186a769",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "session_duration_minutes",
+            "feature_value": 43.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "02e7257f-ff94-465e-a753-4d7c2186a769",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "session_tx_count",
+            "feature_value": 1.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "02e7257f-ff94-465e-a753-4d7c2186a769",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "amount_ratio_to_user_mean",
+            "feature_value": 0.1581,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "02e7257f-ff94-465e-a753-4d7c2186a769",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "velocity_deviation",
+            "feature_value": 0.4,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "02e7257f-ff94-465e-a753-4d7c2186a769",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "merchant_novelty_flag",
+            "feature_value": 0.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "02e7257f-ff94-465e-a753-4d7c2186a769",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "device_novelty_flag",
+            "feature_value": 0.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "02e7257f-ff94-465e-a753-4d7c2186a769",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "timing_off_hours_flag",
+            "feature_value": 0.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "02e7257f-ff94-465e-a753-4d7c2186a769",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "payment_rail_novelty_flag",
+            "feature_value": 0.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "02e7257f-ff94-465e-a753-4d7c2186a769",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          }
+        ],
+        "anomaly_evidence": {
+          "anomaly_score": 0.10400000000000001,
+          "anomaly_threshold": 0.5,
+          "triggered": false,
+          "baseline_reference": "BENIGN_BASELINE_DISTRIBUTION",
+          "transaction_id": "02e7257f-ff94-465e-a753-4d7c2186a769"
+        },
+        "graph_evidence": {
+          "graph_risk_score": 0.05,
+          "triggered": false,
+          "node_identifiers": {
+            "user_id": "40940b6e-7295-4128-9922-fdfcbfa5ac66",
+            "account_id": "06460a46-52da-467f-bcee-8d586797ad09",
+            "device_id": "b8830645-f32c-42c8-8c4a-c65c9675594f"
+          },
+          "connected_component_size": 1,
+          "suspicious_network_indicators": [],
+          "transaction_id": "02e7257f-ff94-465e-a753-4d7c2186a769"
+        },
+        "attack_evidence": {
+          "genome_id": "SCEN_3973FC2E8942",
+          "genome_version": "1.0.0",
+          "attack_family": "BEHAVIORAL_MIMICRY",
+          "payment_rail": "UPI",
+          "mutation_parameters": {
+            "intensity": 0.15,
+            "target_population": "HIGH_BALANCE_ACCOUNTS"
+          },
+          "parent_genome_id": null,
+          "campaign_id": "CAMP_SCEN_397",
+          "affected_transaction_id": "02e7257f-ff94-465e-a753-4d7c2186a769",
+          "behavioral_fidelity_score": 0.92
+        },
+        "bypass_evidence": {
+          "genome_id": "SCEN_3973FC2E8942",
+          "affected_transaction_id": "02e7257f-ff94-465e-a753-4d7c2186a769",
+          "layer_bypass_status": {
+            "rules": "BYPASSED",
+            "ml": "BYPASSED",
+            "behavioral": "BYPASSED",
+            "graph": "BYPASSED",
+            "adversarial": "BYPASSED"
+          },
+          "gap_category": "MULTI_VECTOR_EVASION",
+          "priority_score": 85.0
+        },
+        "hardening_evidence": {
+          "active_model_version": "v1.1.0-cand-42",
+          "candidate_model_version": "v1.1.0-cand-42",
+          "metrics_before": {},
+          "metrics_after": {},
+          "metric_deltas": {},
+          "promotion_decision": "PROMOTE",
+          "gate_results": {
+            "target_gap_improved": true,
+            "benign_regression_allowed": true,
+            "unseen_generalization_stable": true,
+            "calibration_stable": true,
+            "feature_schema_compatible": true
+          }
+        },
+        "counterfactual_evidences": [
+          {
+            "feature_name": "amount",
+            "original_value": 69.08,
+            "proposed_value": 500.0,
+            "detector_output_before": 6.92,
+            "detector_output_after": 10.31,
+            "decision_before": "APPROVE",
+            "decision_after": "APPROVE",
+            "validity_status": true,
+            "invalidity_reason": null
+          },
+          {
+            "feature_name": "device_trust_score",
+            "original_value": 0.0,
+            "proposed_value": 0.95,
+            "detector_output_before": 6.92,
+            "detector_output_after": 6.92,
+            "decision_before": "APPROVE",
+            "decision_after": "APPROVE",
+            "validity_status": true,
+            "invalidity_reason": null
+          },
+          {
+            "feature_name": "velocity_deviation",
+            "original_value": 0.0,
+            "proposed_value": 1.0,
+            "detector_output_before": 6.92,
+            "detector_output_after": 6.92,
+            "decision_before": "APPROVE",
+            "decision_after": "APPROVE",
+            "validity_status": true,
+            "invalidity_reason": null
+          }
+        ]
+      },
+      {
+        "explanation_id": "EXP_847578879321",
+        "provenance": {
+          "explanation_id": "EXP_847578879321",
+          "transaction_id": "38e681f1-5f8a-482d-9c1e-64ffb02f5811",
+          "campaign_id": null,
+          "genome_id": null,
+          "model_version": "v0.1.0",
+          "dataset_reference": "SYNTHETIC_DIGITAL_TWIN_DEV",
+          "random_seed": 42,
+          "generated_at": "2026-08-27T21:36:56.116258+00:00",
+          "source_subsystem": "EXPLAINABILITY_ENGINE",
+          "source_artifacts": [
+            "data/evaluations/evaluation_report.json",
+            "models/blue_team/active_model.json"
+          ]
+        },
+        "primary_decision": "APPROVE",
+        "composite_risk_score": 3.87,
+        "why_flagged_ranking": [
+          {
+            "evidence_id": "EVI_168367BA5962",
+            "category": "FUSION",
+            "source_subsystem": "ML_DETECTOR",
+            "summary": "Detector Signal: ML_DETECTOR (Risk: 7.7/100)",
+            "detail": {
+              "raw_score": 0.0768,
+              "normalized_score": 7.68,
+              "confidence": 0.85,
+              "triggered": false
+            },
+            "normalized_strength": 0.06527999999999999,
+            "relevance_explanation": "Risk contribution from ML_DETECTOR detector layer."
+          },
+          {
+            "evidence_id": "EVI_694F76F8815B",
+            "category": "FUSION",
+            "source_subsystem": "ADVERSARIAL_DETECTOR",
+            "summary": "Detector Signal: ADVERSARIAL_DETECTOR (Risk: 5.0/100)",
+            "detail": {
+              "raw_score": 0.05,
+              "normalized_score": 5.0,
+              "confidence": 0.85,
+              "triggered": false
+            },
+            "normalized_strength": 0.0425,
+            "relevance_explanation": "Risk contribution from ADVERSARIAL_DETECTOR detector layer."
+          },
+          {
+            "evidence_id": "EVI_9535665CEF02",
+            "category": "FUSION",
+            "source_subsystem": "GRAPH_DETECTOR",
+            "summary": "Detector Signal: GRAPH_DETECTOR (Risk: 5.0/100)",
+            "detail": {
+              "raw_score": 0.05,
+              "normalized_score": 5.0,
+              "confidence": 0.85,
+              "triggered": false
+            },
+            "normalized_strength": 0.0425,
+            "relevance_explanation": "Risk contribution from GRAPH_DETECTOR detector layer."
+          },
+          {
+            "evidence_id": "EVI_1AA329CD831F",
+            "category": "FUSION",
+            "source_subsystem": "BEHAVIORAL_DETECTOR",
+            "summary": "Detector Signal: BEHAVIORAL_DETECTOR (Risk: 1.6/100)",
+            "detail": {
+              "raw_score": 0.016,
+              "normalized_score": 1.6,
+              "confidence": 0.85,
+              "triggered": false
+            },
+            "normalized_strength": 0.0136,
+            "relevance_explanation": "Risk contribution from BEHAVIORAL_DETECTOR detector layer."
+          },
+          {
+            "evidence_id": "EVI_47627D135DED",
+            "category": "FUSION",
+            "source_subsystem": "RULES_DETECTOR",
+            "summary": "Detector Signal: RULES_DETECTOR (Risk: 0.0/100)",
+            "detail": {
+              "raw_score": 0.0,
+              "normalized_score": 0.0,
+              "confidence": 0.85,
+              "triggered": false
+            },
+            "normalized_strength": 0.0,
+            "relevance_explanation": "Risk contribution from RULES_DETECTOR detector layer."
+          }
+        ],
+        "detector_evidences": {
+          "rules": {
+            "detector_name": "RULES_DETECTOR",
+            "detector_version": "1.0.0",
+            "raw_score": 0.0,
+            "normalized_score": 0.0,
+            "triggered": false,
+            "confidence": 0.85,
+            "contribution_weight": 0.2,
+            "decision_relevance": "SECONDARY_SIGNAL"
+          },
+          "ml": {
+            "detector_name": "ML_DETECTOR",
+            "detector_version": "1.0.0",
+            "raw_score": 0.0768,
+            "normalized_score": 7.68,
+            "triggered": false,
+            "confidence": 0.85,
+            "contribution_weight": 0.3,
+            "decision_relevance": "SECONDARY_SIGNAL"
+          },
+          "behavioral": {
+            "detector_name": "BEHAVIORAL_DETECTOR",
+            "detector_version": "1.0.0",
+            "raw_score": 0.016,
+            "normalized_score": 1.6,
+            "triggered": false,
+            "confidence": 0.85,
+            "contribution_weight": 0.2,
+            "decision_relevance": "SECONDARY_SIGNAL"
+          },
+          "graph": {
+            "detector_name": "GRAPH_DETECTOR",
+            "detector_version": "1.0.0",
+            "raw_score": 0.05,
+            "normalized_score": 5.0,
+            "triggered": false,
+            "confidence": 0.85,
+            "contribution_weight": 0.15,
+            "decision_relevance": "SECONDARY_SIGNAL"
+          },
+          "adversarial": {
+            "detector_name": "ADVERSARIAL_DETECTOR",
+            "detector_version": "1.0.0",
+            "raw_score": 0.05,
+            "normalized_score": 5.0,
+            "triggered": false,
+            "confidence": 0.85,
+            "contribution_weight": 0.15,
+            "decision_relevance": "SECONDARY_SIGNAL"
+          }
+        },
+        "fusion_evidence": {
+          "composite_risk_score": 3.87,
+          "final_decision": "APPROVE",
+          "layer_scores": {
+            "rules": 0.0,
+            "ml": 7.68,
+            "behavioral": 1.6,
+            "graph": 5.0,
+            "adversarial": 5.0
+          },
+          "layer_weights": {
+            "rules": 0.2,
+            "ml": 0.3,
+            "behavioral": 0.2,
+            "graph": 0.15,
+            "adversarial": 0.15
+          },
+          "reason_codes": [
+            "ML_BENIGN_PROBABILITY",
+            "BEHAVIORAL_BASELINE_CONFORMANT"
+          ]
+        },
+        "rule_evidences": [
+          {
+            "rule_id": "R001",
+            "rule_name": "High Amount Spike",
+            "triggered": false,
+            "observed_value": 265.68,
+            "threshold_value": 50000.0,
+            "severity": "HIGH",
+            "source_transaction_id": "38e681f1-5f8a-482d-9c1e-64ffb02f5811"
+          },
+          {
+            "rule_id": "R002",
+            "rule_name": "Off-Hours Timing",
+            "triggered": false,
+            "observed_value": 14,
+            "threshold_value": "Outside 06:00-23:00",
+            "severity": "MEDIUM",
+            "source_transaction_id": "38e681f1-5f8a-482d-9c1e-64ffb02f5811"
+          },
+          {
+            "rule_id": "R003",
+            "rule_name": "High Session Velocity",
+            "triggered": false,
+            "observed_value": 1,
+            "threshold_value": 5,
+            "severity": "HIGH",
+            "source_transaction_id": "38e681f1-5f8a-482d-9c1e-64ffb02f5811"
+          },
+          {
+            "rule_id": "R004",
+            "rule_name": "Low Device Trust",
+            "triggered": false,
+            "observed_value": 0.96,
+            "threshold_value": 0.3,
+            "severity": "HIGH",
+            "source_transaction_id": "38e681f1-5f8a-482d-9c1e-64ffb02f5811"
+          },
+          {
+            "rule_id": "R005",
+            "rule_name": "High Merchant Category Risk",
+            "triggered": false,
+            "observed_value": 0.0,
+            "threshold_value": 2.0,
+            "severity": "MEDIUM",
+            "source_transaction_id": "38e681f1-5f8a-482d-9c1e-64ffb02f5811"
+          }
+        ],
+        "feature_evidences": [
+          {
+            "feature_name": "amount",
+            "feature_value": 265.68,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "38e681f1-5f8a-482d-9c1e-64ffb02f5811",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "log_amount",
+            "feature_value": 5.5823,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "38e681f1-5f8a-482d-9c1e-64ffb02f5811",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "payment_rail_encoded",
+            "feature_value": 0.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "38e681f1-5f8a-482d-9c1e-64ffb02f5811",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "user_account_age_days",
+            "feature_value": 453.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "38e681f1-5f8a-482d-9c1e-64ffb02f5811",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "user_risk_tier_encoded",
+            "feature_value": 0.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "38e681f1-5f8a-482d-9c1e-64ffb02f5811",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "user_daily_tx_rate",
+            "feature_value": 2.5,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "38e681f1-5f8a-482d-9c1e-64ffb02f5811",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "user_mean_amount",
+            "feature_value": 437.02919471839147,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "38e681f1-5f8a-482d-9c1e-64ffb02f5811",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "account_balance",
+            "feature_value": 4900.83,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "38e681f1-5f8a-482d-9c1e-64ffb02f5811",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "device_trust_score",
+            "feature_value": 0.96,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "38e681f1-5f8a-482d-9c1e-64ffb02f5811",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "device_reputation_score",
+            "feature_value": 0.94,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "38e681f1-5f8a-482d-9c1e-64ffb02f5811",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "known_device_flag",
+            "feature_value": 1.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "38e681f1-5f8a-482d-9c1e-64ffb02f5811",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "merchant_risk_tier_encoded",
+            "feature_value": 0.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "38e681f1-5f8a-482d-9c1e-64ffb02f5811",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "merchant_category_encoded",
+            "feature_value": 9.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "38e681f1-5f8a-482d-9c1e-64ffb02f5811",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "hour",
+            "feature_value": 14.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "38e681f1-5f8a-482d-9c1e-64ffb02f5811",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "weekday",
+            "feature_value": 1.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "38e681f1-5f8a-482d-9c1e-64ffb02f5811",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "is_weekend",
+            "feature_value": 0.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "38e681f1-5f8a-482d-9c1e-64ffb02f5811",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "session_duration_minutes",
+            "feature_value": 43.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "38e681f1-5f8a-482d-9c1e-64ffb02f5811",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "session_tx_count",
+            "feature_value": 1.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "38e681f1-5f8a-482d-9c1e-64ffb02f5811",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "amount_ratio_to_user_mean",
+            "feature_value": 0.6079,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "38e681f1-5f8a-482d-9c1e-64ffb02f5811",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "velocity_deviation",
+            "feature_value": 0.4,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "38e681f1-5f8a-482d-9c1e-64ffb02f5811",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "merchant_novelty_flag",
+            "feature_value": 0.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "38e681f1-5f8a-482d-9c1e-64ffb02f5811",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "device_novelty_flag",
+            "feature_value": 0.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "38e681f1-5f8a-482d-9c1e-64ffb02f5811",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "timing_off_hours_flag",
+            "feature_value": 0.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "38e681f1-5f8a-482d-9c1e-64ffb02f5811",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "payment_rail_novelty_flag",
+            "feature_value": 0.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "38e681f1-5f8a-482d-9c1e-64ffb02f5811",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          }
+        ],
+        "anomaly_evidence": {
+          "anomaly_score": 0.016,
+          "anomaly_threshold": 0.5,
+          "triggered": false,
+          "baseline_reference": "BENIGN_BASELINE_DISTRIBUTION",
+          "transaction_id": "38e681f1-5f8a-482d-9c1e-64ffb02f5811"
+        },
+        "graph_evidence": {
+          "graph_risk_score": 0.05,
+          "triggered": false,
+          "node_identifiers": {
+            "user_id": "40940b6e-7295-4128-9922-fdfcbfa5ac66",
+            "account_id": "06460a46-52da-467f-bcee-8d586797ad09",
+            "device_id": "1798252b-ff86-4149-8fcf-8fcc03e7cb37"
+          },
+          "connected_component_size": 1,
+          "suspicious_network_indicators": [],
+          "transaction_id": "38e681f1-5f8a-482d-9c1e-64ffb02f5811"
+        },
+        "attack_evidence": null,
+        "bypass_evidence": null,
+        "hardening_evidence": {
+          "active_model_version": "v1.1.0-cand-42",
+          "candidate_model_version": "v1.1.0-cand-42",
+          "metrics_before": {},
+          "metrics_after": {},
+          "metric_deltas": {},
+          "promotion_decision": "PROMOTE",
+          "gate_results": {
+            "target_gap_improved": true,
+            "benign_regression_allowed": true,
+            "unseen_generalization_stable": true,
+            "calibration_stable": true,
+            "feature_schema_compatible": true
+          }
+        },
+        "counterfactual_evidences": [
+          {
+            "feature_name": "amount",
+            "original_value": 265.68,
+            "proposed_value": 500.0,
+            "detector_output_before": 3.87,
+            "detector_output_after": 5.91,
+            "decision_before": "APPROVE",
+            "decision_after": "APPROVE",
+            "validity_status": true,
+            "invalidity_reason": null
+          },
+          {
+            "feature_name": "device_trust_score",
+            "original_value": 0.0,
+            "proposed_value": 0.95,
+            "detector_output_before": 3.87,
+            "detector_output_after": 3.87,
+            "decision_before": "APPROVE",
+            "decision_after": "APPROVE",
+            "validity_status": true,
+            "invalidity_reason": null
+          },
+          {
+            "feature_name": "velocity_deviation",
+            "original_value": 0.0,
+            "proposed_value": 1.0,
+            "detector_output_before": 3.87,
+            "detector_output_after": 3.87,
+            "decision_before": "APPROVE",
+            "decision_after": "APPROVE",
+            "validity_status": true,
+            "invalidity_reason": null
+          }
+        ]
+      }
+    ],
+    "summary": {
+      "seed": 42,
+      "stages_completed": 8,
+      "verdict": "HARDENED_SUCCESSFULLY",
+      "active_model_promoted": false
+    }
+  },
+  {
+    "run_id": "RUN_LOOP_C570A5F23F4C",
+    "provenance": {
+      "run_id": "RUN_LOOP_C570A5F23F4C",
+      "random_seed": 42,
+      "genome_hash": "3fcc41a41f15087d",
+      "pipeline_version": "1.0.0",
+      "active_model_before": "v1.1.0-cand-42",
+      "active_model_after": "v1.1.0-cand-42",
+      "scenario_id": "SCEN_0074B1EEF936",
+      "hardening_run_id": "RUN_42_HARDENING_01",
+      "candidate_model_id": "v1.1.0-cand-42",
+      "dataset_hash": "85e07eb59a75dc77",
+      "model_hash": "5b27cd2cd831db0f",
+      "created_at": "2026-08-31T11:01:41.044389+00:00"
+    },
+    "verdict": "HARDENED_SUCCESSFULLY",
+    "pipeline_state": "COMPLETED",
+    "stage_results": [
+      {
+        "stage": "SCENARIO_PREPARATION",
+        "status": "COMPLETED",
+        "started_at": "2026-08-31T10:59:18.430901+00:00",
+        "completed_at": "2026-08-31T10:59:18.431368+00:00",
+        "duration_ms": 0.4787445068359375,
+        "input_identifiers": {
+          "seed": 42,
+          "genome_id": "BEHAVIORAL_MIMICRY"
+        },
+        "output_identifiers": {
+          "genome_hash": "3fcc41a41f15087d"
+        },
+        "error_message": null,
+        "detail": {
+          "genome": {
+            "objective": "Autonomous orchestration closed-loop simulation",
+            "attack_type": "BEHAVIORAL_MIMICRY",
+            "identity_state": "NORMAL",
+            "device_strategy": "DEVICE_MIMICRY",
+            "location_strategy": "FAMILIAR",
+            "amount_pattern": "FRAGMENTED",
+            "velocity_pattern": "LOW_AND_SLOW",
+            "timing_pattern": "RANDOMIZED",
+            "merchant_strategy": "HOPPING",
+            "behavioral_similarity": 0.85,
+            "network_coordination": "LOW",
+            "payment_rail": "UPI",
+            "evasion_strategy": "BEHAVIORAL_MIMICRY",
+            "novelty_rating": 0.7,
+            "campaign_context": {
+              "campaign_stage": "EXFILTRATION",
+              "intended_duration": "24_HOURS",
+              "target_population": "HIGH_BALANCE_ACCOUNTS",
+              "coordination_level": "SINGLE_ACTOR",
+              "extraction_strategy": "FRAGMENTED_TRANSFERS"
+            }
+          }
+        }
+      },
+      {
+        "stage": "RED_TEAM",
+        "status": "COMPLETED",
+        "started_at": "2026-08-31T10:59:18.431496+00:00",
+        "completed_at": "2026-08-31T10:59:18.716396+00:00",
+        "duration_ms": 284.9133014678955,
+        "input_identifiers": {
+          "seed": 42,
+          "scenario_id": "SCEN_0074B1EEF936"
+        },
+        "output_identifiers": {
+          "campaign_id": "CAMP_SCEN_007",
+          "affected_tx_count": 1000
+        },
+        "error_message": null,
+        "detail": {
+          "target_users": 20,
+          "affected_transactions": 1000,
+          "fidelity_score": 0.9971
+        }
+      },
+      {
+        "stage": "BLUE_TEAM",
+        "status": "COMPLETED",
+        "started_at": "2026-08-31T10:59:18.716441+00:00",
+        "completed_at": "2026-08-31T10:59:36.441256+00:00",
+        "duration_ms": 17724.8318195343,
+        "input_identifiers": {
+          "seed": 42
+        },
+        "output_identifiers": {
+          "active_model": "v0.1.0"
+        },
+        "error_message": null,
+        "detail": {
+          "accuracy": 0.67,
+          "precision": 0.0159,
+          "recall": 0.2,
+          "roc_auc": 0.6641,
+          "false_positive_rate": 0.3179
+        }
+      },
+      {
+        "stage": "GAP_ANALYSIS",
+        "status": "COMPLETED",
+        "started_at": "2026-08-31T10:59:36.441308+00:00",
+        "completed_at": "2026-08-31T10:59:36.809814+00:00",
+        "duration_ms": 368.5188293457031,
+        "input_identifiers": {
+          "gap_count": 1
+        },
+        "output_identifiers": {
+          "highest_priority_gap_id": "GAP_F29F83CCD472"
+        },
+        "error_message": null,
+        "detail": {
+          "gaps_count": 1,
+          "highest_priority_score": 95.88,
+          "gap_category": "MULTI_VECTOR_EVASION"
+        }
+      },
+      {
+        "stage": "HARDENING",
+        "status": "COMPLETED",
+        "started_at": "2026-08-31T10:59:36.810131+00:00",
+        "completed_at": "2026-08-31T11:01:40.980802+00:00",
+        "duration_ms": 124170.71008682251,
+        "input_identifiers": {
+          "seed": 42
+        },
+        "output_identifiers": {
+          "hardening_run_id": "RUN_42_HARDENING_01",
+          "candidate_model_id": "v1.1.0-cand-42",
+          "decision": "PROMOTE"
+        },
+        "error_message": null,
+        "detail": {
+          "promoted": true,
+          "decision": "PROMOTE",
+          "gates": {
+            "target_gap_improved": true,
+            "benign_regression_allowed": true,
+            "unseen_generalization_stable": true,
+            "calibration_stable": true,
+            "feature_schema_compatible": true
+          }
+        }
+      },
+      {
+        "stage": "EXPLAINABILITY",
+        "status": "COMPLETED",
+        "started_at": "2026-08-31T11:01:40.980927+00:00",
+        "completed_at": "2026-08-31T11:01:41.029390+00:00",
+        "duration_ms": 48.47860336303711,
+        "input_identifiers": {
+          "sample_tx_count": 2
+        },
+        "output_identifiers": {
+          "adv_exp_id": "EXP_B992E4986946"
+        },
+        "error_message": null,
+        "detail": {
+          "explanation_ids": [
+            "EXP_B992E4986946",
+            "EXP_F57872A310DE"
+          ]
+        }
+      },
+      {
+        "stage": "RE_ATTACK_VALIDATION",
+        "status": "COMPLETED",
+        "started_at": "2026-08-31T11:01:41.029446+00:00",
+        "completed_at": "2026-08-31T11:01:41.029563+00:00",
+        "duration_ms": 0.12636184692382812,
+        "input_identifiers": {
+          "adversarial_txs": 1000
+        },
+        "output_identifiers": {
+          "targeted_gap_recall_after": 0.8
+        },
+        "error_message": null,
+        "detail": {
+          "targeted_gap_recall_before": 0.2,
+          "targeted_gap_recall_after": 0.8,
+          "targeted_gap_recall_delta": 0.6000000000000001
+        }
+      },
+      {
+        "stage": "VERDICT",
+        "status": "COMPLETED",
+        "started_at": "2026-08-31T11:01:41.029592+00:00",
+        "completed_at": "2026-08-31T11:01:41.029603+00:00",
+        "duration_ms": 0.016927719116210938,
+        "input_identifiers": {
+          "promoted": true
+        },
+        "output_identifiers": {
+          "verdict": "HARDENED_SUCCESSFULLY"
+        },
+        "error_message": null,
+        "detail": {
+          "verdict": "HARDENED_SUCCESSFULLY",
+          "decision": "PROMOTE"
+        }
+      }
+    ],
+    "metrics": {
+      "precision_before": 0.04,
+      "precision_after": 0.04,
+      "recall_before": 0.6,
+      "recall_after": 0.6,
+      "f1_before": 0.075,
+      "f1_after": 0.075,
+      "roc_auc_before": 0.7851,
+      "roc_auc_after": 0.7579,
+      "false_positive_rate_before": 0.3692,
+      "false_positive_rate_after": 0.3692,
+      "targeted_gap_recall_before": 0.2,
+      "targeted_gap_recall_after": 0.8,
+      "unseen_attack_recall_before": 1.0,
+      "unseen_attack_recall_after": 1.0,
+      "benign_approval_rate_before": 0.7353,
+      "benign_approval_rate_after": 0.7353,
+      "recall_delta": 0.0,
+      "targeted_gap_recall_delta": 0.6000000000000001
+    },
+    "active_model_before": "v1.1.0-cand-42",
+    "active_model_after": "v1.1.0-cand-42",
+    "explanations": [
+      {
+        "explanation_id": "EXP_B992E4986946",
+        "provenance": {
+          "explanation_id": "EXP_B992E4986946",
+          "transaction_id": "5b6023a7-b235-48bc-a207-8ce6daa84f69",
+          "campaign_id": "CAMP_SCEN_007",
+          "genome_id": "SCEN_0074B1EEF936",
+          "model_version": "v0.1.0",
+          "dataset_reference": "SYNTHETIC_DIGITAL_TWIN_DEV",
+          "random_seed": 42,
+          "generated_at": "2026-08-31T11:01:41.015074+00:00",
+          "source_subsystem": "EXPLAINABILITY_ENGINE",
+          "source_artifacts": [
+            "data/evaluations/evaluation_report.json",
+            "models/blue_team/active_model.json"
+          ]
+        },
+        "primary_decision": "APPROVE",
+        "composite_risk_score": 6.92,
+        "why_flagged_ranking": [
+          {
+            "evidence_id": "EVI_537E4C0ADBE8",
+            "category": "ADVERSARIAL",
+            "source_subsystem": "RED_TEAM_ATTACK_ENGINE",
+            "summary": "Adversarial Attack Campaign: BEHAVIORAL_MIMICRY",
+            "detail": {
+              "genome_id": "SCEN_0074B1EEF936",
+              "campaign_id": "CAMP_SCEN_007",
+              "fidelity_score": 0.92
+            },
+            "normalized_strength": 0.92,
+            "relevance_explanation": "Synthesized Red Team campaign (SCEN_0074B1EEF936) targeting defense infrastructure."
+          },
+          {
+            "evidence_id": "EVI_DCBEE0095455",
+            "category": "RULE",
+            "source_subsystem": "RULE_ENGINE",
+            "summary": "Rule Triggered: Off-Hours Timing (ID: R002)",
+            "detail": {
+              "rule_id": "R002",
+              "observed": 5,
+              "threshold": "Outside 06:00-23:00"
+            },
+            "normalized_strength": 0.6,
+            "relevance_explanation": "Rule R002 exceeded deterministic threshold (5 vs Outside 06:00-23:00)."
+          },
+          {
+            "evidence_id": "EVI_FDB99278F095",
+            "category": "FUSION",
+            "source_subsystem": "ML_DETECTOR",
+            "summary": "Detector Signal: ML_DETECTOR (Risk: 12.0/100)",
+            "detail": {
+              "raw_score": 0.1198,
+              "normalized_score": 11.98,
+              "confidence": 0.85,
+              "triggered": false
+            },
+            "normalized_strength": 0.10183,
+            "relevance_explanation": "Risk contribution from ML_DETECTOR detector layer."
+          },
+          {
+            "evidence_id": "EVI_A49492B957F2",
+            "category": "FUSION",
+            "source_subsystem": "BEHAVIORAL_DETECTOR",
+            "summary": "Detector Signal: BEHAVIORAL_DETECTOR (Risk: 10.4/100)",
+            "detail": {
+              "raw_score": 0.10400000000000001,
+              "normalized_score": 10.4,
+              "confidence": 0.85,
+              "triggered": false
+            },
+            "normalized_strength": 0.0884,
+            "relevance_explanation": "Risk contribution from BEHAVIORAL_DETECTOR detector layer."
+          },
+          {
+            "evidence_id": "EVI_D82765BEE07D",
+            "category": "FUSION",
+            "source_subsystem": "ADVERSARIAL_DETECTOR",
+            "summary": "Detector Signal: ADVERSARIAL_DETECTOR (Risk: 5.0/100)",
+            "detail": {
+              "raw_score": 0.05,
+              "normalized_score": 5.0,
+              "confidence": 0.85,
+              "triggered": false
+            },
+            "normalized_strength": 0.0425,
+            "relevance_explanation": "Risk contribution from ADVERSARIAL_DETECTOR detector layer."
+          },
+          {
+            "evidence_id": "EVI_5D5AE16D56F7",
+            "category": "FUSION",
+            "source_subsystem": "GRAPH_DETECTOR",
+            "summary": "Detector Signal: GRAPH_DETECTOR (Risk: 5.0/100)",
+            "detail": {
+              "raw_score": 0.05,
+              "normalized_score": 5.0,
+              "confidence": 0.85,
+              "triggered": false
+            },
+            "normalized_strength": 0.0425,
+            "relevance_explanation": "Risk contribution from GRAPH_DETECTOR detector layer."
+          },
+          {
+            "evidence_id": "EVI_AC3CE6FC3EA4",
+            "category": "FUSION",
+            "source_subsystem": "RULES_DETECTOR",
+            "summary": "Detector Signal: RULES_DETECTOR (Risk: 0.0/100)",
+            "detail": {
+              "raw_score": 0.0,
+              "normalized_score": 0.0,
+              "confidence": 0.85,
+              "triggered": false
+            },
+            "normalized_strength": 0.0,
+            "relevance_explanation": "Risk contribution from RULES_DETECTOR detector layer."
+          }
+        ],
+        "detector_evidences": {
+          "rules": {
+            "detector_name": "RULES_DETECTOR",
+            "detector_version": "1.0.0",
+            "raw_score": 0.0,
+            "normalized_score": 0.0,
+            "triggered": false,
+            "confidence": 0.85,
+            "contribution_weight": 0.2,
+            "decision_relevance": "SECONDARY_SIGNAL"
+          },
+          "ml": {
+            "detector_name": "ML_DETECTOR",
+            "detector_version": "1.0.0",
+            "raw_score": 0.1198,
+            "normalized_score": 11.98,
+            "triggered": false,
+            "confidence": 0.85,
+            "contribution_weight": 0.3,
+            "decision_relevance": "SECONDARY_SIGNAL"
+          },
+          "behavioral": {
+            "detector_name": "BEHAVIORAL_DETECTOR",
+            "detector_version": "1.0.0",
+            "raw_score": 0.10400000000000001,
+            "normalized_score": 10.4,
+            "triggered": false,
+            "confidence": 0.85,
+            "contribution_weight": 0.2,
+            "decision_relevance": "SECONDARY_SIGNAL"
+          },
+          "graph": {
+            "detector_name": "GRAPH_DETECTOR",
+            "detector_version": "1.0.0",
+            "raw_score": 0.05,
+            "normalized_score": 5.0,
+            "triggered": false,
+            "confidence": 0.85,
+            "contribution_weight": 0.15,
+            "decision_relevance": "SECONDARY_SIGNAL"
+          },
+          "adversarial": {
+            "detector_name": "ADVERSARIAL_DETECTOR",
+            "detector_version": "1.0.0",
+            "raw_score": 0.05,
+            "normalized_score": 5.0,
+            "triggered": false,
+            "confidence": 0.85,
+            "contribution_weight": 0.15,
+            "decision_relevance": "SECONDARY_SIGNAL"
+          }
+        },
+        "fusion_evidence": {
+          "composite_risk_score": 6.92,
+          "final_decision": "APPROVE",
+          "layer_scores": {
+            "rules": 0.0,
+            "ml": 11.98,
+            "behavioral": 10.4,
+            "graph": 5.0,
+            "adversarial": 5.0
+          },
+          "layer_weights": {
+            "rules": 0.2,
+            "ml": 0.3,
+            "behavioral": 0.2,
+            "graph": 0.15,
+            "adversarial": 0.15
+          },
+          "reason_codes": [
+            "ML_BENIGN_PROBABILITY",
+            "BEHAVIORAL_BASELINE_CONFORMANT"
+          ]
+        },
+        "rule_evidences": [
+          {
+            "rule_id": "R001",
+            "rule_name": "High Amount Spike",
+            "triggered": false,
+            "observed_value": 69.08,
+            "threshold_value": 50000.0,
+            "severity": "HIGH",
+            "source_transaction_id": "5b6023a7-b235-48bc-a207-8ce6daa84f69"
+          },
+          {
+            "rule_id": "R002",
+            "rule_name": "Off-Hours Timing",
+            "triggered": true,
+            "observed_value": 5,
+            "threshold_value": "Outside 06:00-23:00",
+            "severity": "MEDIUM",
+            "source_transaction_id": "5b6023a7-b235-48bc-a207-8ce6daa84f69"
+          },
+          {
+            "rule_id": "R003",
+            "rule_name": "High Session Velocity",
+            "triggered": false,
+            "observed_value": 1,
+            "threshold_value": 5,
+            "severity": "HIGH",
+            "source_transaction_id": "5b6023a7-b235-48bc-a207-8ce6daa84f69"
+          },
+          {
+            "rule_id": "R004",
+            "rule_name": "Low Device Trust",
+            "triggered": false,
+            "observed_value": 0.74,
+            "threshold_value": 0.3,
+            "severity": "HIGH",
+            "source_transaction_id": "5b6023a7-b235-48bc-a207-8ce6daa84f69"
+          },
+          {
+            "rule_id": "R005",
+            "rule_name": "High Merchant Category Risk",
+            "triggered": false,
+            "observed_value": 0.0,
+            "threshold_value": 2.0,
+            "severity": "MEDIUM",
+            "source_transaction_id": "5b6023a7-b235-48bc-a207-8ce6daa84f69"
+          }
+        ],
+        "feature_evidences": [
+          {
+            "feature_name": "amount",
+            "feature_value": 69.08,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "5b6023a7-b235-48bc-a207-8ce6daa84f69",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "log_amount",
+            "feature_value": 4.2353,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "5b6023a7-b235-48bc-a207-8ce6daa84f69",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "payment_rail_encoded",
+            "feature_value": 0.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "5b6023a7-b235-48bc-a207-8ce6daa84f69",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "user_account_age_days",
+            "feature_value": 453.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "5b6023a7-b235-48bc-a207-8ce6daa84f69",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "user_risk_tier_encoded",
+            "feature_value": 0.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "5b6023a7-b235-48bc-a207-8ce6daa84f69",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "user_daily_tx_rate",
+            "feature_value": 2.5,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "5b6023a7-b235-48bc-a207-8ce6daa84f69",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "user_mean_amount",
+            "feature_value": 437.02919471839147,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "5b6023a7-b235-48bc-a207-8ce6daa84f69",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "account_balance",
+            "feature_value": 4900.83,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "5b6023a7-b235-48bc-a207-8ce6daa84f69",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "device_trust_score",
+            "feature_value": 0.74,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "5b6023a7-b235-48bc-a207-8ce6daa84f69",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "device_reputation_score",
+            "feature_value": 0.69,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "5b6023a7-b235-48bc-a207-8ce6daa84f69",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "known_device_flag",
+            "feature_value": 1.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "5b6023a7-b235-48bc-a207-8ce6daa84f69",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "merchant_risk_tier_encoded",
+            "feature_value": 0.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "5b6023a7-b235-48bc-a207-8ce6daa84f69",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "merchant_category_encoded",
+            "feature_value": 1.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "5b6023a7-b235-48bc-a207-8ce6daa84f69",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "hour",
+            "feature_value": 5.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "5b6023a7-b235-48bc-a207-8ce6daa84f69",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "weekday",
+            "feature_value": 5.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "5b6023a7-b235-48bc-a207-8ce6daa84f69",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "is_weekend",
+            "feature_value": 1.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "5b6023a7-b235-48bc-a207-8ce6daa84f69",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "session_duration_minutes",
+            "feature_value": 43.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "5b6023a7-b235-48bc-a207-8ce6daa84f69",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "session_tx_count",
+            "feature_value": 1.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "5b6023a7-b235-48bc-a207-8ce6daa84f69",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "amount_ratio_to_user_mean",
+            "feature_value": 0.1581,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "5b6023a7-b235-48bc-a207-8ce6daa84f69",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "velocity_deviation",
+            "feature_value": 0.4,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "5b6023a7-b235-48bc-a207-8ce6daa84f69",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "merchant_novelty_flag",
+            "feature_value": 0.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "5b6023a7-b235-48bc-a207-8ce6daa84f69",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "device_novelty_flag",
+            "feature_value": 0.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "5b6023a7-b235-48bc-a207-8ce6daa84f69",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "timing_off_hours_flag",
+            "feature_value": 0.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "5b6023a7-b235-48bc-a207-8ce6daa84f69",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "payment_rail_novelty_flag",
+            "feature_value": 0.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "5b6023a7-b235-48bc-a207-8ce6daa84f69",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          }
+        ],
+        "anomaly_evidence": {
+          "anomaly_score": 0.10400000000000001,
+          "anomaly_threshold": 0.5,
+          "triggered": false,
+          "baseline_reference": "BENIGN_BASELINE_DISTRIBUTION",
+          "transaction_id": "5b6023a7-b235-48bc-a207-8ce6daa84f69"
+        },
+        "graph_evidence": {
+          "graph_risk_score": 0.05,
+          "triggered": false,
+          "node_identifiers": {
+            "user_id": "6e4cf9d3-aa14-45c8-a646-2471b7dfc943",
+            "account_id": "5cadc7e2-cdfa-4ef9-90d8-029aae0d10dc",
+            "device_id": "83edb4fd-f731-41c1-a470-0d3d5051d7b9"
+          },
+          "connected_component_size": 1,
+          "suspicious_network_indicators": [],
+          "transaction_id": "5b6023a7-b235-48bc-a207-8ce6daa84f69"
+        },
+        "attack_evidence": {
+          "genome_id": "SCEN_0074B1EEF936",
+          "genome_version": "1.0.0",
+          "attack_family": "BEHAVIORAL_MIMICRY",
+          "payment_rail": "UPI",
+          "mutation_parameters": {
+            "intensity": 0.15,
+            "target_population": "HIGH_BALANCE_ACCOUNTS"
+          },
+          "parent_genome_id": null,
+          "campaign_id": "CAMP_SCEN_007",
+          "affected_transaction_id": "5b6023a7-b235-48bc-a207-8ce6daa84f69",
+          "behavioral_fidelity_score": 0.92
+        },
+        "bypass_evidence": {
+          "genome_id": "SCEN_0074B1EEF936",
+          "affected_transaction_id": "5b6023a7-b235-48bc-a207-8ce6daa84f69",
+          "layer_bypass_status": {
+            "rules": "BYPASSED",
+            "ml": "BYPASSED",
+            "behavioral": "BYPASSED",
+            "graph": "BYPASSED",
+            "adversarial": "BYPASSED"
+          },
+          "gap_category": "MULTI_VECTOR_EVASION",
+          "priority_score": 85.0
+        },
+        "hardening_evidence": {
+          "active_model_version": "v1.1.0-cand-42",
+          "candidate_model_version": "v1.1.0-cand-42",
+          "metrics_before": {},
+          "metrics_after": {},
+          "metric_deltas": {},
+          "promotion_decision": "PROMOTE",
+          "gate_results": {
+            "target_gap_improved": true,
+            "benign_regression_allowed": true,
+            "unseen_generalization_stable": true,
+            "calibration_stable": true,
+            "feature_schema_compatible": true
+          }
+        },
+        "counterfactual_evidences": [
+          {
+            "feature_name": "amount",
+            "original_value": 69.08,
+            "proposed_value": 500.0,
+            "detector_output_before": 6.92,
+            "detector_output_after": 10.31,
+            "decision_before": "APPROVE",
+            "decision_after": "APPROVE",
+            "validity_status": true,
+            "invalidity_reason": null
+          },
+          {
+            "feature_name": "device_trust_score",
+            "original_value": 0.0,
+            "proposed_value": 0.95,
+            "detector_output_before": 6.92,
+            "detector_output_after": 6.92,
+            "decision_before": "APPROVE",
+            "decision_after": "APPROVE",
+            "validity_status": true,
+            "invalidity_reason": null
+          },
+          {
+            "feature_name": "velocity_deviation",
+            "original_value": 0.0,
+            "proposed_value": 1.0,
+            "detector_output_before": 6.92,
+            "detector_output_after": 6.92,
+            "decision_before": "APPROVE",
+            "decision_after": "APPROVE",
+            "validity_status": true,
+            "invalidity_reason": null
+          }
+        ]
+      },
+      {
+        "explanation_id": "EXP_F57872A310DE",
+        "provenance": {
+          "explanation_id": "EXP_F57872A310DE",
+          "transaction_id": "7e9bf2d5-7dc2-4819-8627-01cbe372e11e",
+          "campaign_id": null,
+          "genome_id": null,
+          "model_version": "v0.1.0",
+          "dataset_reference": "SYNTHETIC_DIGITAL_TWIN_DEV",
+          "random_seed": 42,
+          "generated_at": "2026-08-31T11:01:41.029292+00:00",
+          "source_subsystem": "EXPLAINABILITY_ENGINE",
+          "source_artifacts": [
+            "data/evaluations/evaluation_report.json",
+            "models/blue_team/active_model.json"
+          ]
+        },
+        "primary_decision": "APPROVE",
+        "composite_risk_score": 20.37,
+        "why_flagged_ranking": [
+          {
+            "evidence_id": "EVI_C68EEE97F22D",
+            "category": "RULE",
+            "source_subsystem": "RULE_ENGINE",
+            "summary": "Rule Triggered: Off-Hours Timing (ID: R002)",
+            "detail": {
+              "rule_id": "R002",
+              "observed": 3,
+              "threshold": "Outside 06:00-23:00"
+            },
+            "normalized_strength": 0.6,
+            "relevance_explanation": "Rule R002 exceeded deterministic threshold (3 vs Outside 06:00-23:00)."
+          },
+          {
+            "evidence_id": "EVI_17F35AD927AB",
+            "category": "FUSION",
+            "source_subsystem": "RULES_DETECTOR",
+            "summary": "Detector Triggered: RULES_DETECTOR (Risk: 50.0/100)",
+            "detail": {
+              "raw_score": 0.5,
+              "normalized_score": 50.0,
+              "confidence": 0.85,
+              "triggered": true
+            },
+            "normalized_strength": 0.425,
+            "relevance_explanation": "Risk contribution from RULES_DETECTOR detector layer."
+          },
+          {
+            "evidence_id": "EVI_8C2B09CB18C1",
+            "category": "FUSION",
+            "source_subsystem": "BEHAVIORAL_DETECTOR",
+            "summary": "Detector Signal: BEHAVIORAL_DETECTOR (Risk: 21.6/100)",
+            "detail": {
+              "raw_score": 0.21600000000000003,
+              "normalized_score": 21.6,
+              "confidence": 0.85,
+              "triggered": false
+            },
+            "normalized_strength": 0.1836,
+            "relevance_explanation": "Risk contribution from BEHAVIORAL_DETECTOR detector layer."
+          },
+          {
+            "evidence_id": "EVI_38212E5AFF08",
+            "category": "FUSION",
+            "source_subsystem": "ML_DETECTOR",
+            "summary": "Detector Signal: ML_DETECTOR (Risk: 7.7/100)",
+            "detail": {
+              "raw_score": 0.0768,
+              "normalized_score": 7.68,
+              "confidence": 0.85,
+              "triggered": false
+            },
+            "normalized_strength": 0.06527999999999999,
+            "relevance_explanation": "Risk contribution from ML_DETECTOR detector layer."
+          },
+          {
+            "evidence_id": "EVI_81C23C1A06EE",
+            "category": "FUSION",
+            "source_subsystem": "ADVERSARIAL_DETECTOR",
+            "summary": "Detector Signal: ADVERSARIAL_DETECTOR (Risk: 5.0/100)",
+            "detail": {
+              "raw_score": 0.05,
+              "normalized_score": 5.0,
+              "confidence": 0.85,
+              "triggered": false
+            },
+            "normalized_strength": 0.0425,
+            "relevance_explanation": "Risk contribution from ADVERSARIAL_DETECTOR detector layer."
+          },
+          {
+            "evidence_id": "EVI_995CAF864B68",
+            "category": "FUSION",
+            "source_subsystem": "GRAPH_DETECTOR",
+            "summary": "Detector Signal: GRAPH_DETECTOR (Risk: 5.0/100)",
+            "detail": {
+              "raw_score": 0.05,
+              "normalized_score": 5.0,
+              "confidence": 0.85,
+              "triggered": false
+            },
+            "normalized_strength": 0.0425,
+            "relevance_explanation": "Risk contribution from GRAPH_DETECTOR detector layer."
+          }
+        ],
+        "detector_evidences": {
+          "rules": {
+            "detector_name": "RULES_DETECTOR",
+            "detector_version": "1.0.0",
+            "raw_score": 0.5,
+            "normalized_score": 50.0,
+            "triggered": true,
+            "confidence": 0.85,
+            "contribution_weight": 0.2,
+            "decision_relevance": "SECONDARY_SIGNAL"
+          },
+          "ml": {
+            "detector_name": "ML_DETECTOR",
+            "detector_version": "1.0.0",
+            "raw_score": 0.0768,
+            "normalized_score": 7.68,
+            "triggered": false,
+            "confidence": 0.85,
+            "contribution_weight": 0.3,
+            "decision_relevance": "SECONDARY_SIGNAL"
+          },
+          "behavioral": {
+            "detector_name": "BEHAVIORAL_DETECTOR",
+            "detector_version": "1.0.0",
+            "raw_score": 0.21600000000000003,
+            "normalized_score": 21.6,
+            "triggered": false,
+            "confidence": 0.85,
+            "contribution_weight": 0.2,
+            "decision_relevance": "SECONDARY_SIGNAL"
+          },
+          "graph": {
+            "detector_name": "GRAPH_DETECTOR",
+            "detector_version": "1.0.0",
+            "raw_score": 0.05,
+            "normalized_score": 5.0,
+            "triggered": false,
+            "confidence": 0.85,
+            "contribution_weight": 0.15,
+            "decision_relevance": "SECONDARY_SIGNAL"
+          },
+          "adversarial": {
+            "detector_name": "ADVERSARIAL_DETECTOR",
+            "detector_version": "1.0.0",
+            "raw_score": 0.05,
+            "normalized_score": 5.0,
+            "triggered": false,
+            "confidence": 0.85,
+            "contribution_weight": 0.15,
+            "decision_relevance": "SECONDARY_SIGNAL"
+          }
+        },
+        "fusion_evidence": {
+          "composite_risk_score": 20.37,
+          "final_decision": "APPROVE",
+          "layer_scores": {
+            "rules": 50.0,
+            "ml": 7.68,
+            "behavioral": 21.6,
+            "graph": 5.0,
+            "adversarial": 5.0
+          },
+          "layer_weights": {
+            "rules": 0.2,
+            "ml": 0.3,
+            "behavioral": 0.2,
+            "graph": 0.15,
+            "adversarial": 0.15
+          },
+          "reason_codes": [
+            "R002_UNUSUAL_TRANSACTION_TIMING",
+            "ML_BENIGN_PROBABILITY",
+            "BEHAVIORAL_BASELINE_CONFORMANT"
+          ]
+        },
+        "rule_evidences": [
+          {
+            "rule_id": "R001",
+            "rule_name": "High Amount Spike",
+            "triggered": false,
+            "observed_value": 265.68,
+            "threshold_value": 50000.0,
+            "severity": "HIGH",
+            "source_transaction_id": "7e9bf2d5-7dc2-4819-8627-01cbe372e11e"
+          },
+          {
+            "rule_id": "R002",
+            "rule_name": "Off-Hours Timing",
+            "triggered": true,
+            "observed_value": 3,
+            "threshold_value": "Outside 06:00-23:00",
+            "severity": "MEDIUM",
+            "source_transaction_id": "7e9bf2d5-7dc2-4819-8627-01cbe372e11e"
+          },
+          {
+            "rule_id": "R003",
+            "rule_name": "High Session Velocity",
+            "triggered": false,
+            "observed_value": 1,
+            "threshold_value": 5,
+            "severity": "HIGH",
+            "source_transaction_id": "7e9bf2d5-7dc2-4819-8627-01cbe372e11e"
+          },
+          {
+            "rule_id": "R004",
+            "rule_name": "Low Device Trust",
+            "triggered": false,
+            "observed_value": 0.96,
+            "threshold_value": 0.3,
+            "severity": "HIGH",
+            "source_transaction_id": "7e9bf2d5-7dc2-4819-8627-01cbe372e11e"
+          },
+          {
+            "rule_id": "R005",
+            "rule_name": "High Merchant Category Risk",
+            "triggered": false,
+            "observed_value": 0.0,
+            "threshold_value": 2.0,
+            "severity": "MEDIUM",
+            "source_transaction_id": "7e9bf2d5-7dc2-4819-8627-01cbe372e11e"
+          }
+        ],
+        "feature_evidences": [
+          {
+            "feature_name": "amount",
+            "feature_value": 265.68,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "7e9bf2d5-7dc2-4819-8627-01cbe372e11e",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "log_amount",
+            "feature_value": 5.5823,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "7e9bf2d5-7dc2-4819-8627-01cbe372e11e",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "payment_rail_encoded",
+            "feature_value": 0.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "7e9bf2d5-7dc2-4819-8627-01cbe372e11e",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "user_account_age_days",
+            "feature_value": 453.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "7e9bf2d5-7dc2-4819-8627-01cbe372e11e",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "user_risk_tier_encoded",
+            "feature_value": 0.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "7e9bf2d5-7dc2-4819-8627-01cbe372e11e",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "user_daily_tx_rate",
+            "feature_value": 2.5,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "7e9bf2d5-7dc2-4819-8627-01cbe372e11e",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "user_mean_amount",
+            "feature_value": 437.02919471839147,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "7e9bf2d5-7dc2-4819-8627-01cbe372e11e",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "account_balance",
+            "feature_value": 4900.83,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "7e9bf2d5-7dc2-4819-8627-01cbe372e11e",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "device_trust_score",
+            "feature_value": 0.96,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "7e9bf2d5-7dc2-4819-8627-01cbe372e11e",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "device_reputation_score",
+            "feature_value": 0.94,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "7e9bf2d5-7dc2-4819-8627-01cbe372e11e",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "known_device_flag",
+            "feature_value": 1.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "7e9bf2d5-7dc2-4819-8627-01cbe372e11e",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "merchant_risk_tier_encoded",
+            "feature_value": 0.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "7e9bf2d5-7dc2-4819-8627-01cbe372e11e",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "merchant_category_encoded",
+            "feature_value": 9.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "7e9bf2d5-7dc2-4819-8627-01cbe372e11e",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "hour",
+            "feature_value": 3.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "7e9bf2d5-7dc2-4819-8627-01cbe372e11e",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "weekday",
+            "feature_value": 5.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "7e9bf2d5-7dc2-4819-8627-01cbe372e11e",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "is_weekend",
+            "feature_value": 1.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "7e9bf2d5-7dc2-4819-8627-01cbe372e11e",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "session_duration_minutes",
+            "feature_value": 43.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "7e9bf2d5-7dc2-4819-8627-01cbe372e11e",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "session_tx_count",
+            "feature_value": 1.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "7e9bf2d5-7dc2-4819-8627-01cbe372e11e",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "amount_ratio_to_user_mean",
+            "feature_value": 0.6079,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "7e9bf2d5-7dc2-4819-8627-01cbe372e11e",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "velocity_deviation",
+            "feature_value": 0.4,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "7e9bf2d5-7dc2-4819-8627-01cbe372e11e",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "merchant_novelty_flag",
+            "feature_value": 0.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "7e9bf2d5-7dc2-4819-8627-01cbe372e11e",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "device_novelty_flag",
+            "feature_value": 0.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "7e9bf2d5-7dc2-4819-8627-01cbe372e11e",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "timing_off_hours_flag",
+            "feature_value": 1.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "7e9bf2d5-7dc2-4819-8627-01cbe372e11e",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          },
+          {
+            "feature_name": "payment_rail_novelty_flag",
+            "feature_value": 0.0,
+            "contribution": null,
+            "direction": null,
+            "model_version": "v0.1.0",
+            "transaction_id": "7e9bf2d5-7dc2-4819-8627-01cbe372e11e",
+            "attribution_available": false,
+            "unavailability_reason": "Per-sample SHAP tree attribution not configured for lightweight RandomForest"
+          }
+        ],
+        "anomaly_evidence": {
+          "anomaly_score": 0.21600000000000003,
+          "anomaly_threshold": 0.5,
+          "triggered": false,
+          "baseline_reference": "BENIGN_BASELINE_DISTRIBUTION",
+          "transaction_id": "7e9bf2d5-7dc2-4819-8627-01cbe372e11e"
+        },
+        "graph_evidence": {
+          "graph_risk_score": 0.05,
+          "triggered": false,
+          "node_identifiers": {
+            "user_id": "6e4cf9d3-aa14-45c8-a646-2471b7dfc943",
+            "account_id": "5cadc7e2-cdfa-4ef9-90d8-029aae0d10dc",
+            "device_id": "5b8d441f-3c84-443f-b439-89778936294b"
+          },
+          "connected_component_size": 1,
+          "suspicious_network_indicators": [],
+          "transaction_id": "7e9bf2d5-7dc2-4819-8627-01cbe372e11e"
+        },
+        "attack_evidence": null,
+        "bypass_evidence": null,
+        "hardening_evidence": {
+          "active_model_version": "v1.1.0-cand-42",
+          "candidate_model_version": "v1.1.0-cand-42",
+          "metrics_before": {},
+          "metrics_after": {},
+          "metric_deltas": {},
+          "promotion_decision": "PROMOTE",
+          "gate_results": {
+            "target_gap_improved": true,
+            "benign_regression_allowed": true,
+            "unseen_generalization_stable": true,
+            "calibration_stable": true,
+            "feature_schema_compatible": true
+          }
+        },
+        "counterfactual_evidences": [
+          {
+            "feature_name": "amount",
+            "original_value": 265.68,
+            "proposed_value": 500.0,
+            "detector_output_before": 20.37,
+            "detector_output_after": 22.41,
+            "decision_before": "APPROVE",
+            "decision_after": "APPROVE",
+            "validity_status": true,
+            "invalidity_reason": null
+          },
+          {
+            "feature_name": "device_trust_score",
+            "original_value": 0.0,
+            "proposed_value": 0.95,
+            "detector_output_before": 20.37,
+            "detector_output_after": 20.37,
+            "decision_before": "APPROVE",
+            "decision_after": "APPROVE",
+            "validity_status": true,
+            "invalidity_reason": null
+          },
+          {
+            "feature_name": "velocity_deviation",
+            "original_value": 0.0,
+            "proposed_value": 1.0,
+            "detector_output_before": 20.37,
+            "detector_output_after": 20.37,
+            "decision_before": "APPROVE",
+            "decision_after": "APPROVE",
+            "validity_status": true,
+            "invalidity_reason": null
+          }
+        ]
+      }
+    ],
+    "summary": {
+      "seed": 42,
+      "stages_completed": 8,
+      "verdict": "HARDENED_SUCCESSFULLY",
+      "active_model_promoted": false
+    }
+  }
+]

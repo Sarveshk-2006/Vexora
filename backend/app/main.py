@@ -49,9 +49,15 @@ def create_application() -> FastAPI:
         """API v1 health check endpoint."""
         return {"status": "ok"}
 
+    from app.api.v1.explainability import router as explainability_router
     from app.api.v1.hardening import router as hardening_router
+    from app.api.v1.orchestration import router as orchestration_router
+    from app.api.v1.overview import router as overview_router
 
+    app.include_router(overview_router, prefix=settings.API_V1_STR)
     app.include_router(hardening_router, prefix=settings.API_V1_STR)
+    app.include_router(explainability_router, prefix=settings.API_V1_STR)
+    app.include_router(orchestration_router, prefix=settings.API_V1_STR)
 
     return app
 

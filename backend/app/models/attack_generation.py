@@ -1,6 +1,6 @@
 import uuid
 from datetime import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Optional
+from typing import TYPE_CHECKING, Any, Dict, List
 
 from sqlalchemy import JSON, DateTime, Float, ForeignKey, Integer, String, Uuid
 from sqlalchemy import Enum as SQLEnum
@@ -38,7 +38,7 @@ class AttackGeneration(Base, UUIDPrimaryKeyMixin):
         nullable=False,
         index=True,
     )
-    parent_generation_id: Mapped[Optional[uuid.UUID]] = mapped_column(
+    parent_generation_id: Mapped[uuid.UUID] = mapped_column(
         Uuid(as_uuid=True),
         ForeignKey("attack_generations.id", ondelete="RESTRICT"),
         nullable=True,
@@ -51,22 +51,22 @@ class AttackGeneration(Base, UUIDPrimaryKeyMixin):
         default=0,
         comment="Generation index (0 for seed, 1+ for evolved mutations)",
     )
-    mutation_summary: Mapped[Optional[Dict[str, Any]]] = mapped_column(
+    mutation_summary: Mapped[Dict[str, Any]] = mapped_column(
         JSON,
         nullable=True,
         comment="Structured summary of mutated dimensions and mutation operators",
     )
-    attack_difficulty: Mapped[Optional[float]] = mapped_column(
+    attack_difficulty: Mapped[float] = mapped_column(
         Float,
         nullable=True,
         comment="Normalized attack difficulty score [0.0, 1.0]",
     )
-    detection_rate: Mapped[Optional[float]] = mapped_column(
+    detection_rate: Mapped[float] = mapped_column(
         Float,
         nullable=True,
         comment="Evaluation detection rate metric [0.0, 1.0]",
     )
-    attack_success_rate: Mapped[Optional[float]] = mapped_column(
+    attack_success_rate: Mapped[float] = mapped_column(
         Float,
         nullable=True,
         comment="Evaluation bypass/success rate metric [0.0, 1.0]",
@@ -87,7 +87,7 @@ class AttackGeneration(Base, UUIDPrimaryKeyMixin):
         "AttackCampaign", back_populates="generations"
     )
     genome: Mapped["AttackGenome"] = relationship("AttackGenome")
-    parent_generation: Mapped[Optional["AttackGeneration"]] = relationship(
+    parent_generation: Mapped["AttackGeneration"] = relationship(
         "AttackGeneration",
         remote_side="[AttackGeneration.id]",
         back_populates="child_generations",

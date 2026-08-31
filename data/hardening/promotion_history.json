@@ -1,0 +1,260 @@
+[
+  {
+    "run_id": "RUN_42_HARDENING_01",
+    "timestamp": "2026-08-27T18:57:30.044584+00:00",
+    "parent_model_id": "v0.1.0",
+    "selected_gap_ids": [
+      "GAP_EE3E17B80928"
+    ],
+    "adversarial_sample_count": 8,
+    "candidate_model_id": "v1.1.0-cand-42",
+    "promotion_decision": {
+      "candidate_model_id": "v1.1.0-cand-42",
+      "parent_model_id": "v0.1.0",
+      "promoted": true,
+      "decision": "PROMOTE",
+      "gates": {
+        "target_gap_improved": true,
+        "benign_regression_allowed": true,
+        "unseen_generalization_stable": true,
+        "calibration_stable": true,
+        "feature_schema_compatible": true
+      },
+      "metrics_before": {
+        "accuracy": 0.795,
+        "precision": 0.0263,
+        "recall": 0.2,
+        "f1": 0.0465,
+        "roc_auc": 0.7451,
+        "pr_auc": 0.0613,
+        "false_positive_rate": 0.1897,
+        "false_negative_rate": 0.8,
+        "confusion_matrix": {
+          "true_negatives": 158,
+          "false_positives": 37,
+          "false_negatives": 4,
+          "true_positives": 1
+        },
+        "unseen_recall": 1.0,
+        "brier_score": 0.0099,
+        "benign_approval_rate": 0.8103
+      },
+      "metrics_after": {
+        "accuracy": 0.795,
+        "precision": 0.0263,
+        "recall": 0.2,
+        "f1": 0.0465,
+        "roc_auc": 0.7441,
+        "pr_auc": 0.0579,
+        "false_positive_rate": 0.1897,
+        "false_negative_rate": 0.8,
+        "confusion_matrix": {
+          "true_negatives": 158,
+          "false_positives": 37,
+          "false_negatives": 4,
+          "true_positives": 1
+        },
+        "unseen_recall": 1.0,
+        "brier_score": 0.0102,
+        "benign_approval_rate": 0.8103
+      },
+      "rejection_reasons": [],
+      "evaluated_at": "2026-08-27T18:57:30.043863+00:00"
+    },
+    "reproducibility_seed": 42
+  },
+  {
+    "run_id": "RUN_42_HARDENING_01",
+    "timestamp": "2026-08-27T19:06:02.385704+00:00",
+    "parent_model_id": "v1.1.0-cand-42",
+    "selected_gap_ids": [
+      "GAP_EE3E17B80928"
+    ],
+    "adversarial_sample_count": 8,
+    "candidate_model_id": "v1.1.0-cand-42",
+    "promotion_decision": {
+      "candidate_model_id": "v1.1.0-cand-42",
+      "parent_model_id": "v1.1.0-cand-42",
+      "promoted": true,
+      "decision": "PROMOTE",
+      "gates": {
+        "target_gap_improved": true,
+        "benign_regression_allowed": true,
+        "unseen_generalization_stable": true,
+        "calibration_stable": true,
+        "feature_schema_compatible": true
+      },
+      "metrics_before": {
+        "accuracy": 0.79,
+        "precision": 0.0256,
+        "recall": 0.2,
+        "f1": 0.0455,
+        "roc_auc": 0.7344,
+        "pr_auc": 0.0609,
+        "false_positive_rate": 0.1949,
+        "false_negative_rate": 0.8,
+        "confusion_matrix": {
+          "true_negatives": 157,
+          "false_positives": 38,
+          "false_negatives": 4,
+          "true_positives": 1
+        },
+        "unseen_recall": 1.0,
+        "brier_score": 0.0101,
+        "benign_approval_rate": 0.8051
+      },
+      "metrics_after": {
+        "accuracy": 0.79,
+        "precision": 0.0256,
+        "recall": 0.2,
+        "f1": 0.0455,
+        "roc_auc": 0.7374,
+        "pr_auc": 0.0609,
+        "false_positive_rate": 0.1949,
+        "false_negative_rate": 0.8,
+        "confusion_matrix": {
+          "true_negatives": 157,
+          "false_positives": 38,
+          "false_negatives": 4,
+          "true_positives": 1
+        },
+        "unseen_recall": 1.0,
+        "brier_score": 0.01,
+        "benign_approval_rate": 0.8051
+      },
+      "rejection_reasons": [],
+      "evaluated_at": "2026-08-27T19:06:02.384927+00:00"
+    },
+    "reproducibility_seed": 42
+  },
+  {
+    "run_id": "RUN_42_HARDENING_01",
+    "timestamp": "2026-08-27T20:02:36.883526+00:00",
+    "parent_model_id": "v1.1.0-cand-42",
+    "selected_gap_ids": [
+      "GAP_EE3E17B80928"
+    ],
+    "adversarial_sample_count": 8,
+    "candidate_model_id": "v1.1.0-cand-42",
+    "promotion_decision": {
+      "candidate_model_id": "v1.1.0-cand-42",
+      "parent_model_id": "v1.1.0-cand-42",
+      "promoted": true,
+      "decision": "PROMOTE",
+      "gates": {
+        "target_gap_improved": true,
+        "benign_regression_allowed": true,
+        "unseen_generalization_stable": true,
+        "calibration_stable": true,
+        "feature_schema_compatible": true
+      },
+      "metrics_before": {
+        "accuracy": 0.855,
+        "precision": 0.0385,
+        "recall": 0.2,
+        "f1": 0.0645,
+        "roc_auc": 0.7692,
+        "pr_auc": 0.0738,
+        "false_positive_rate": 0.1282,
+        "false_negative_rate": 0.8,
+        "confusion_matrix": {
+          "true_negatives": 170,
+          "false_positives": 25,
+          "false_negatives": 4,
+          "true_positives": 1
+        },
+        "unseen_recall": 1.0,
+        "brier_score": 0.0099,
+        "benign_approval_rate": 0.8718
+      },
+      "metrics_after": {
+        "accuracy": 0.855,
+        "precision": 0.0385,
+        "recall": 0.2,
+        "f1": 0.0645,
+        "roc_auc": 0.7918,
+        "pr_auc": 0.0743,
+        "false_positive_rate": 0.1282,
+        "false_negative_rate": 0.8,
+        "confusion_matrix": {
+          "true_negatives": 170,
+          "false_positives": 25,
+          "false_negatives": 4,
+          "true_positives": 1
+        },
+        "unseen_recall": 1.0,
+        "brier_score": 0.0101,
+        "benign_approval_rate": 0.8718
+      },
+      "rejection_reasons": [],
+      "evaluated_at": "2026-08-27T20:02:36.882264+00:00"
+    },
+    "reproducibility_seed": 42
+  },
+  {
+    "run_id": "RUN_42_HARDENING_01",
+    "timestamp": "2026-08-31T09:56:33.966649+00:00",
+    "parent_model_id": "v1.1.0-cand-42",
+    "selected_gap_ids": [
+      "GAP_EE3E17B80928"
+    ],
+    "adversarial_sample_count": 8,
+    "candidate_model_id": "v1.1.0-cand-42",
+    "promotion_decision": {
+      "candidate_model_id": "v1.1.0-cand-42",
+      "parent_model_id": "v1.1.0-cand-42",
+      "promoted": false,
+      "decision": "REJECT",
+      "gates": {
+        "target_gap_improved": false,
+        "benign_regression_allowed": true,
+        "unseen_generalization_stable": true,
+        "calibration_stable": true,
+        "feature_schema_compatible": true
+      },
+      "metrics_before": {
+        "accuracy": 0.68,
+        "precision": 0.0317,
+        "recall": 0.4,
+        "f1": 0.0588,
+        "roc_auc": 0.6938,
+        "pr_auc": 0.0825,
+        "false_positive_rate": 0.3128,
+        "false_negative_rate": 0.6,
+        "confusion_matrix": {
+          "true_negatives": 134,
+          "false_positives": 61,
+          "false_negatives": 3,
+          "true_positives": 2
+        },
+        "unseen_recall": 1.0,
+        "brier_score": 0.01,
+        "benign_approval_rate": 0.6872
+      },
+      "metrics_after": {
+        "accuracy": 0.68,
+        "precision": 0.0317,
+        "recall": 0.4,
+        "f1": 0.0588,
+        "roc_auc": 0.719,
+        "pr_auc": 0.0832,
+        "false_positive_rate": 0.3128,
+        "false_negative_rate": 0.6,
+        "confusion_matrix": {
+          "true_negatives": 134,
+          "false_positives": 61,
+          "false_negatives": 3,
+          "true_positives": 2
+        },
+        "unseen_recall": 1.0,
+        "brier_score": 0.0095,
+        "benign_approval_rate": 0.6872
+      },
+      "rejection_reasons": [
+        "Gate 1 Failed: Targeted gap detection recall did not strictly improve (candidate: 0.36, active: 0.361)."
+      ],
+      "evaluated_at": "2026-08-31T09:56:33.965967+00:00"
+    },
+    "reproducibility_seed": 42
+  }
+]
